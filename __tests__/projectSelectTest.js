@@ -1,13 +1,13 @@
 import 'react-native';
 import React from 'react';
-import Index from '../index.ios.js';
+import ProjectSelectScreen from '../app/components/SignUp/ProjectSelectScreen/index';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <Index />
+    <ProjectSelectScreen projects={['abc', 'def', 'ghi']}/>
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
