@@ -1,0 +1,118 @@
+exports[`test renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "justifyContent": "space-between",
+      "margin": 16,
+    }
+  }>
+  <View
+    style={
+      Object {
+        "padding": 10,
+      }
+    }>
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Search for a class here!"
+      style={
+        Object {
+          "height": 40,
+        }
+      } />
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "teal",
+        "borderRadius": 6,
+        "flex": 1,
+        "marginBottom": 10,
+        "padding": 10,
+      }
+    }>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontSize": 18,
+          "marginBottom": 5,
+        }
+      }>
+      Avaliable Classes
+    </Text>
+    <ScrollView />
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "teal",
+        "borderRadius": 6,
+        "flex": 1,
+        "marginBottom": 10,
+        "padding": 10,
+      }
+    }>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontSize": 18,
+          "marginBottom": 5,
+        }
+      }>
+      Added Classes
+    </Text>
+    <ScrollView />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+      }
+    }>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      hitSlop={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
+            "backgroundColor": "blue",
+          },
+        ]
+      }
+      testID={undefined}>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "white",
+          }
+        }>
+         Next 
+      </Text>
+    </View>
+  </View>
+</View>
+`;

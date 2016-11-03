@@ -9,24 +9,30 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator
 } from 'react-native';
 
+import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
+import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
+
 export default class SLTracker extends Component {
+
+  renderScene(route, navigator) {
+     if(route.title == 'SelectClass') {
+       return <ClassSelectScreen navigator={navigator} />
+     }
+     if(route.title == 'SelectProject') {
+       return <ProjectSelectScreen navigator={navigator} {...route.extras} />
+     }
+   }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Navigator
+        initialRoute={{ title: 'SelectClass'}}
+        renderScene={this.renderScene}
+      />
     );
   }
 }
