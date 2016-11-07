@@ -2,6 +2,7 @@ exports[`test renders correctly 1`] = `
 <View
   style={
     Object {
+      "borderRadius": 64,
       "flex": 1,
       "justifyContent": "space-between",
       "margin": 16,
@@ -12,7 +13,7 @@ exports[`test renders correctly 1`] = `
     style={
       Object {
         "backgroundColor": "teal",
-        "borderRadius": 6,
+        "borderRadius": 24,
         "flex": 1,
         "marginBottom": 10,
         "padding": 10,
@@ -24,7 +25,9 @@ exports[`test renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
+          "color": "white",
           "fontSize": 18,
+          "fontWeight": "bold",
           "marginBottom": 5,
         }
       }>
@@ -39,14 +42,17 @@ exports[`test renders correctly 1`] = `
             "flexDirection": "row",
             "height": 50,
             "marginBottom": 5,
+            "marginTop": 5,
             "padding": 4,
           }
         }>
         <View
           style={
             Object {
+              "color": "teal",
               "flex": 1,
               "flexDirection": "column",
+              "fontWeight": "bold",
             }
           }>
           <Text
@@ -55,8 +61,10 @@ exports[`test renders correctly 1`] = `
             ellipsizeMode="tail"
             style={
               Object {
+                "color": "teal",
                 "flex": 2,
                 "fontSize": 14,
+                "fontWeight": "bold",
               }
             }>
             abc
@@ -67,8 +75,10 @@ exports[`test renders correctly 1`] = `
             ellipsizeMode="tail"
             style={
               Object {
+                "color": "teal",
                 "flex": 1,
                 "fontSize": 13,
+                "fontWeight": "bold",
               }
             } />
         </View>
@@ -107,14 +117,17 @@ exports[`test renders correctly 1`] = `
             "flexDirection": "row",
             "height": 50,
             "marginBottom": 5,
+            "marginTop": 5,
             "padding": 4,
           }
         }>
         <View
           style={
             Object {
+              "color": "teal",
               "flex": 1,
               "flexDirection": "column",
+              "fontWeight": "bold",
             }
           }>
           <Text
@@ -123,8 +136,10 @@ exports[`test renders correctly 1`] = `
             ellipsizeMode="tail"
             style={
               Object {
+                "color": "teal",
                 "flex": 2,
                 "fontSize": 14,
+                "fontWeight": "bold",
               }
             }>
             def
@@ -135,8 +150,10 @@ exports[`test renders correctly 1`] = `
             ellipsizeMode="tail"
             style={
               Object {
+                "color": "teal",
                 "flex": 1,
                 "fontSize": 13,
+                "fontWeight": "bold",
               }
             } />
         </View>
@@ -175,14 +192,17 @@ exports[`test renders correctly 1`] = `
             "flexDirection": "row",
             "height": 50,
             "marginBottom": 5,
+            "marginTop": 5,
             "padding": 4,
           }
         }>
         <View
           style={
             Object {
+              "color": "teal",
               "flex": 1,
               "flexDirection": "column",
+              "fontWeight": "bold",
             }
           }>
           <Text
@@ -191,8 +211,10 @@ exports[`test renders correctly 1`] = `
             ellipsizeMode="tail"
             style={
               Object {
+                "color": "teal",
                 "flex": 2,
                 "fontSize": 14,
+                "fontWeight": "bold",
               }
             }>
             ghi
@@ -203,8 +225,10 @@ exports[`test renders correctly 1`] = `
             ellipsizeMode="tail"
             style={
               Object {
+                "color": "teal",
                 "flex": 1,
                 "fontSize": 13,
+                "fontWeight": "bold",
               }
             } />
         </View>
@@ -241,7 +265,7 @@ exports[`test renders correctly 1`] = `
     style={
       Object {
         "backgroundColor": "teal",
-        "borderRadius": 6,
+        "borderRadius": 24,
         "flex": 1,
         "marginBottom": 10,
         "padding": 10,
@@ -253,7 +277,9 @@ exports[`test renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
+          "color": "white",
           "fontSize": 18,
+          "fontWeight": "bold",
           "marginBottom": 5,
         }
       }>
@@ -287,7 +313,12 @@ exports[`test renders correctly 1`] = `
             "backgroundColor": "transparent",
           },
           Object {
-            "backgroundColor": "blue",
+            "alignItems": "center",
+            "backgroundColor": "#ADD8E6",
+            "borderRadius": 64,
+            "height": 40,
+            "justifyContent": "center",
+            "width": 100,
           },
         ]
       }
@@ -299,6 +330,7 @@ exports[`test renders correctly 1`] = `
         style={
           Object {
             "color": "white",
+            "fontWeight": "bold",
           }
         }>
          Finish 

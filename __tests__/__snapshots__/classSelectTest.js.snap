@@ -26,7 +26,7 @@ exports[`test renders correctly 1`] = `
     style={
       Object {
         "backgroundColor": "teal",
-        "borderRadius": 6,
+        "borderRadius": 24,
         "flex": 1,
         "marginBottom": 10,
         "padding": 10,
@@ -38,7 +38,9 @@ exports[`test renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
+          "color": "white",
           "fontSize": 18,
+          "fontWeight": "bold",
           "marginBottom": 5,
         }
       }>
@@ -50,7 +52,7 @@ exports[`test renders correctly 1`] = `
     style={
       Object {
         "backgroundColor": "teal",
-        "borderRadius": 6,
+        "borderRadius": 24,
         "flex": 1,
         "marginBottom": 10,
         "padding": 10,
@@ -62,7 +64,9 @@ exports[`test renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
+          "color": "white",
           "fontSize": 18,
+          "fontWeight": "bold",
           "marginBottom": 5,
         }
       }>
@@ -96,7 +100,12 @@ exports[`test renders correctly 1`] = `
             "backgroundColor": "transparent",
           },
           Object {
-            "backgroundColor": "blue",
+            "alignItems": "center",
+            "backgroundColor": "#ADD8E6",
+            "borderRadius": 64,
+            "height": 40,
+            "justifyContent": "center",
+            "width": 100,
           },
         ]
       }
@@ -108,6 +117,7 @@ exports[`test renders correctly 1`] = `
         style={
           Object {
             "color": "white",
+            "fontWeight": "bold",
           }
         }>
          Next 

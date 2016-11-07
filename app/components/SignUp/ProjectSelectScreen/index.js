@@ -39,12 +39,11 @@ export default class ProjectSelectScreen extends Component {
       }
     }
 
-  // For now just goes back to the previous screen
+  // For now just goes to Dashboard
   navigate() {
-    // this.props.navigator.push({
-    //   title: 'Dashboard'
-    // })
-    this.props.navigator.pop();
+   this.props.navigator.push({
+     title: 'Dashboard'
+   })
   }
 
   render() {
@@ -63,27 +62,31 @@ export default class ProjectSelectScreen extends Component {
           row={this.renderRow(false, this.onRemoveProject.bind(this))} />
         <View style={styles.next} >
           <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
-            <Text style={{color: 'white'}}> Finish </Text>
+            <Text style={{color: 'white', fontWeight: 'bold'}}> Finish </Text>
           </TouchableHighlight>
         </View>
       </View>
-    )
-  }
-
+    )}
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin:16,
+    margin: 16,
     paddingTop: 24,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    borderRadius: 64
   },
   next: {
     flexDirection: 'row',
     justifyContent:'flex-end',
   },
   button: {
-    backgroundColor: 'blue'
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ADD8E6',
+    borderRadius: 64,
+    width: 100,
+    height: 40
   }
 });
