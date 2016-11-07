@@ -68,7 +68,7 @@ export default class Dashboard extends Component {
       </Card>
       </View>
       </View>
-    )
+    );
   }
 }
 

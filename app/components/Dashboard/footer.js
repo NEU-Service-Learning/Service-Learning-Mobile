@@ -59,7 +59,8 @@ export default class Footer extends Component {
       </TabBarIOS.Item>
 
       </TabBarIOS>
-    )}
+    );
+  }
 }
 
 const styles = StyleSheet.create({
