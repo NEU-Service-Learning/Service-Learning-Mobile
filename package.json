@@ -11,13 +11,15 @@
     "react": "15.3.2",
     "react-native": "^0.36.0",
     "react-native-button-component": "0.0.5",
+    "react-native-tabs": "^1.0.9",
     "react-native-vector-icons": "^3.0.0"
   },
   "jest": {
-   "preset": "jest-react-native",
-   "preprocessorIgnorePatterns": ["/node_modules/(?!)"]
-
- },
+    "preset": "jest-react-native",
+    "preprocessorIgnorePatterns": [
+      "/node_modules/(?!)"
+    ]
+  },
   "devDependencies": {
     "babel-jest": "16.0.0",
     "babel-preset-react-native": "1.9.0",
