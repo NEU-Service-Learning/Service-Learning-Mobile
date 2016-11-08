@@ -66,7 +66,8 @@ export default class ProjectSelectScreen extends Component {
           </TouchableHighlight>
         </View>
       </View>
-    )}
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -75,7 +76,6 @@ const styles = StyleSheet.create({
     margin: 16,
     paddingTop: 24,
     justifyContent: 'space-between',
-    borderRadius: 64
   },
   next: {
     flexDirection: 'row',

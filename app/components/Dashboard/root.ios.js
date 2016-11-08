@@ -12,6 +12,7 @@ import {
 
 import Dashboard from './dashboard';
 import Summary from './summary';
+import ClockIn from './clockin';
 
 
 export default class Root extends Component {
@@ -37,14 +38,14 @@ export default class Root extends Component {
       </TabBarIOS.Item>
 
       <TabBarIOS.Item
-      title='Clock-In'
+      title='Clock In'
       selected={this.state.selectedTab === 'clockin'}
       onPress={() => {
       this.setState({
         selectedTab: 'clockin'
       })
       }}>
-      <Clock-In View />
+      <ClockIn View />
       </TabBarIOS.Item>
 
       <TabBarIOS.Item
