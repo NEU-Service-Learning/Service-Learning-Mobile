@@ -15,8 +15,7 @@ import {
   TabBarIOS
 } from 'react-native';
 
-import Dashboard from './app/components/Dashboard/dashboard';
-import Footer from './app/components/Dashboard/footer';
+import Root from './app/components/Dashboard/root';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
 
@@ -24,9 +23,6 @@ import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/ind
 export default class SLTracker extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      selectedTab: 'dashboard'
-    };
   }
 
   renderScene(route, navigator) {
@@ -37,7 +33,7 @@ export default class SLTracker extends Component {
        return <ProjectSelectScreen navigator={navigator} {...route.extras} />
      }
      if(route.title == 'Dashboard') {
-       return <Footer navigator={navigator} />
+       return <Root navigator={navigator} />
      }
    }
 

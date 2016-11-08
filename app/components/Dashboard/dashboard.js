@@ -6,17 +6,15 @@ import {
   View,
   Text,
   ScrollView,
-  TouchableHighlight,
-  TabBarIOS
-
+  TouchableHighlight
 } from 'react-native';
 
-import { Title, Button, Icon, Header, Container, Card, CardItem } from 'native-base';
+import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    flex: 1,
+    alignItems: 'center'
   },
   button: {
     flexDirection: 'row',
@@ -42,31 +40,24 @@ export default class Dashboard extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <Header>
-          <Button transparent>
-          <Icon name='ios-menu' />
-      </Button>
-      <Title style={{color: '#008080', fontWeight: 'bold'}}>Dashboard</Title>
-      </Header>
-      <View style={styles.container}>
-      <TouchableHighlight style={styles.button} onPress={() => this.navigate()}>
-      <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}> Clock In
-      </Text>
-      </TouchableHighlight>
-      </View>
-      <View style={styles.card}>
-      <Card>
-      <CardItem button style={styles.card} onPress={() => this.navigate()}>
-      <Text style={{color: 'white', fontWeight: 'bold'}}>Time Tracker</Text>
-      </CardItem>
-      <CardItem button style={styles.card} onPress={() => this.navigate()}>
-      <Text style={{color: 'white', fontWeight: 'bold'}}>Project 1</Text>
-      </CardItem>
-      <CardItem button style={styles.card} onPress={() => this.navigate()}>
-      <Text style={{color: 'white', fontWeight: 'bold'}}>Project 2</Text>
-      </CardItem>
-      </Card>
-      </View>
+        <View>
+          <TouchableHighlight style={styles.button} onPress={() => this.navigate()}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}> Clock In </Text>
+          </TouchableHighlight>
+        </View>
+        <View style={styles.card}>
+          <Card>
+          <CardItem button style={styles.card} onPress={() => this.navigate()}>
+          <Text style={{color: 'white', fontWeight: 'bold'}}>Time Tracker</Text>
+          </CardItem>
+          <CardItem button style={styles.card} onPress={() => this.navigate()}>
+          <Text style={{color: 'white', fontWeight: 'bold'}}>Project 1</Text>
+          </CardItem>
+          <CardItem button style={styles.card} onPress={() => this.navigate()}>
+          <Text style={{color: 'white', fontWeight: 'bold'}}>Project 2</Text>
+          </CardItem>
+          </Card>
+        </View>
       </View>
     );
   }
