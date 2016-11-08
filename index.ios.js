@@ -3,6 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
+'use strict';
 
 import React, { Component } from 'react';
 import {
@@ -10,13 +11,19 @@ import {
   StyleSheet,
   Text,
   View,
-  Navigator
+  Navigator,
+  TabBarIOS
 } from 'react-native';
 
+import Root from './app/components/Dashboard/root';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
 
+
 export default class SLTracker extends Component {
+  constructor(props) {
+    super(props)
+  }
 
   renderScene(route, navigator) {
      if(route.title == 'SelectClass') {
@@ -25,35 +32,19 @@ export default class SLTracker extends Component {
      if(route.title == 'SelectProject') {
        return <ProjectSelectScreen navigator={navigator} {...route.extras} />
      }
+     if(route.title == 'Dashboard') {
+       return <Root navigator={navigator} />
+     }
    }
 
   render() {
     return (
       <Navigator
         initialRoute={{ title: 'SelectClass'}}
-        renderScene={this.renderScene}
+        renderScene={this.renderScene.bind(this)}
       />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('SLTracker', () => SLTracker);

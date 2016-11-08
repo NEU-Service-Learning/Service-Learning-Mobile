@@ -111,7 +111,7 @@ export default class ClassSelectScreen extends Component {
             />
           <View style={styles.next} >
             <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
-              <Text style={{color: 'white'}}> Next </Text>
+              <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
             </TouchableHighlight>
           </View>
       </View>
@@ -131,6 +131,11 @@ const styles = StyleSheet.create({
     justifyContent:'flex-end',
   },
   button: {
-    backgroundColor: 'blue'
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ADD8E6',
+    borderRadius: 64,
+    width: 100,
+    height: 40
   }
 });
