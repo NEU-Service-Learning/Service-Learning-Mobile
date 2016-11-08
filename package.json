@@ -11,20 +11,28 @@
     "react": "15.3.2",
     "react-native": "^0.36.0",
     "react-native-button-component": "0.0.5",
+<<<<<<< HEAD
     "react-native-tabs": "^1.0.9",
+=======
+    "react-native-scrollable-tab-view": "^0.6.0",
+>>>>>>> 446bd2ce4793d0b065171e2e72ba93217e43b628
     "react-native-vector-icons": "^3.0.0"
   },
   "jest": {
     "preset": "jest-react-native",
     "preprocessorIgnorePatterns": [
+<<<<<<< HEAD
       "/node_modules/(?!)"
+=======
+      "/node_modules/(?!react-native|native-base|react-native-button-component|react-native-scrollable-tab-view|react-native-button|react-native-vector-icons)"
+>>>>>>> 446bd2ce4793d0b065171e2e72ba93217e43b628
     ]
   },
   "devDependencies": {
-    "babel-jest": "16.0.0",
-    "babel-preset-react-native": "1.9.0",
-    "jest": "^16.1.0-alpha.691b0e22",
-    "jest-react-native": "^16.1.0-alpha.691b0e22",
-    "react-test-renderer": "15.3.2"
+    "babel-jest": "^16.0.0",
+    "babel-preset-react-native": "^1.9.0",
+    "jest": "test",
+    "jest-react-native": "test",
+    "react-test-renderer": "^15.3.2"
   }
 }

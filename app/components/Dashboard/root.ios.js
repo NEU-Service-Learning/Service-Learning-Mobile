@@ -14,7 +14,7 @@ import Dashboard from './dashboard';
 import Summary from './summary';
 
 
-export default class Footer extends Component {
+export default class Root extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -81,5 +81,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-
-module.exports = Footer;

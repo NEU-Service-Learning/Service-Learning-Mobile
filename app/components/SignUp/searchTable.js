@@ -31,7 +31,7 @@ export class SearchRow extends Component {
     var type = this.props.type ? 'Add' : 'Remove'
     return(
       <View style={styles.row}>
-        <View style={styles.rowHeaderText}>
+        <View style={styles.rowHeader}>
           <Text style={styles.headerText}>{this.props.header}</Text>
           <Text style={styles.subHeaderText}>{this.props.subHeader}</Text>
         </View>
@@ -66,11 +66,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     height: 50
   },
-  rowHeaderText: {
+  rowHeader: {
     flexDirection: 'column',
-    flex: 1,
-    color: 'teal',
-    fontWeight: 'bold'
+    flex: 1
   },
   headerText: {
     flex: 2,

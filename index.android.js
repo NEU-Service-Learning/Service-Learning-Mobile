@@ -15,7 +15,7 @@ import {
 
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
-import Footer from './app/components/Dashboard/footer';
+import Root from './app/components/Dashboard/root';
 
 export default class SLTracker extends Component {
 
@@ -28,7 +28,7 @@ export default class SLTracker extends Component {
        return <ProjectSelectScreen navigator={navigator} {...route.extras} />
      }
      if(route.title == 'Dashboard') {
-       return <Footer navigator={navigator} />
+       return <Root navigator={navigator} />
      }
    }
 

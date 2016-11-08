@@ -49,10 +49,8 @@ exports[`test renders correctly 1`] = `
         <View
           style={
             Object {
-              "color": "teal",
               "flex": 1,
               "flexDirection": "column",
-              "fontWeight": "bold",
             }
           }>
           <Text
@@ -124,10 +122,8 @@ exports[`test renders correctly 1`] = `
         <View
           style={
             Object {
-              "color": "teal",
               "flex": 1,
               "flexDirection": "column",
-              "fontWeight": "bold",
             }
           }>
           <Text
@@ -199,10 +195,8 @@ exports[`test renders correctly 1`] = `
         <View
           style={
             Object {
-              "color": "teal",
               "flex": 1,
               "flexDirection": "column",
-              "fontWeight": "bold",
             }
           }>
           <Text
