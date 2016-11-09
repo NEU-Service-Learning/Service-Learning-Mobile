@@ -8,51 +8,82 @@ import {
   ScrollView,
   Navigator,
   TouchableHighlight,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+  DatePickerIOS,
   Picker,
 } from 'react-native';
 
 import { Title, Icon, Header, Container, Card, CardItem, Button } from 'native-base';
 
+import DatePicker from './picker';
+
 export default class ManualTracking extends Component {
 
-	constructor(props) {
-    super(props)
+	constructor(props){
+    super(props);
+    
     this.state = {
-      language: 'Java',
-      mode: Picker.MODE_DIALOG,
-    };
+      project: 'TimeTracker',
+    }
   }
+
+  _onPressButton() {
+  	this.setState({project: 'Project1'});
+  }
+
 
 	render() {
 		return (
-			<Container>
+			<View>
 			<Header>
 			  <Button transparent>
           <Icon name='ios-arrow-back' />
         </Button>
         <Title>Log Hours</Title>
       </Header>
+
+      <Text style={{padding: 20}}>Project</Text>
+
       <Picker
-        style={{width: 100}}
-        selectedValue={this.state.language}
-        onValueChange={this.onValueChange.bind(this, 'language')}>
-        <Picker.Item label="Java" value="Java" />
-        <Picker.Item label="Js" value="Js" />
+        selectedValue={this.state.project}
+        onValueChange={(proj) => this.setState({project: proj})}>
+        <Picker.Item label="Time Tracker" value="TimeTracker" />
+        <Picker.Item label="Project 1" value="Project1" />
+        <Picker.Item label="Project 2" value="Project2" />
       </Picker>
-      </Container>
+
+      <DatePicker style={{flex: 1}}
+        text = {"Date"}
+        mode = {"date"}
+      />
+
+      <DatePicker style={{flex: 1}}
+        text = {"Start Time"}
+        mode = {"time"}
+      />
+
+      <DatePicker style={{flex: 1}}
+        text = {"End Time"}
+        mode = {"time"}
+      />
+
+      <Button
+        style={styles.button}
+        onPress={this._onPressButton.bind(this)}>
+        <Text style={{fontSize: 20}}>Log Hours</Text>
+      </Button>
+
+     </View>
 		)
 	}
-
-  changeMode = () => {
-    const newMode = this.state.mode === Picker.MODE_DIALOG
-        ? Picker.MODE_DROPDOWN
-        : Picker.MODE_DIALOG;
-    this.setState({mode: newMode});
-  };
-
-	onValueChange = (key: string, value: string) => {
-    const newState = {};
-    newState[key] = value;
-    this.setState(newState);
-  };
 }
+
+const styles = StyleSheet.create({
+	button: {
+		backgroundColor: '#2ab9f7',
+		alignSelf: 'center',
+		width: 200,
+		height: 50,
+	}
+})
