@@ -19,7 +19,7 @@ import Root from './app/components/Dashboard/root';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
 
-import ManualTracking from './app/components/Tracking/manual_tracking';
+import ManualTracking from './app/components/Tracking/manual';
 
 
 export default class SLTracker extends Component {
