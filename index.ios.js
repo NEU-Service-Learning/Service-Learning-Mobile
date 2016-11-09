@@ -19,7 +19,7 @@ import Root from './app/components/Dashboard/root';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
 
-import ManualTracking from './app/components/Tracking/manual';
+import ManualTracking from './app/components/Tracking/manual.ios';
 import AutoTracking from './app/components/Tracking/auto';
 
 
@@ -49,7 +49,7 @@ export default class SLTracker extends Component {
   render() {
     return (
       <Navigator
-        initialRoute={{ title: 'AutoTracking'}} //change back later
+        initialRoute={{ title: 'ManualTracking'}} //change back later
         renderScene={this.renderScene.bind(this)}
       />
     );

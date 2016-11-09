@@ -12,8 +12,6 @@ import {
 import { Title, Icon, Header, Button } from 'native-base';
 import MapView from 'react-native-maps';
 
-import DatePicker from './picker';
-
 export default class AutoTracking extends Component {
 
 	constructor(props){

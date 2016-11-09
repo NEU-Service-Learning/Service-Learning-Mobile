@@ -11,7 +11,7 @@ import {
 
 import { Title, Icon, Header, Button } from 'native-base';
 
-import DatePicker from './picker';
+import DatePicker from './picker.ios';
 
 export default class ManualTracking extends Component {
 
@@ -24,16 +24,15 @@ export default class ManualTracking extends Component {
   }
 
   _onPressButton() {
-  	this.setState({project: 'Project1'});
+    this.props.navigator.push({title: 'Dashboard'});
   }
-
 
 	render() {
 		return (
 			<View>
 			<Header>
 			  <Button transparent>
-          <Icon name='ios-arrow-back' />
+          <Icon name='ios-arrow-back' onPress={() => this.props.navigator.pop()}/>
         </Button>
         <Title>Log Hours</Title>
       </Header>
