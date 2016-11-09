@@ -8,10 +8,26 @@ export default class LogInScreen extends Component {
     this.state = {username: '', password: ''};
   }
 
+  // Used to move to the next screen
+  // Passes the list of projects from the classes to the next screen
+  navigateLogIn() {
+    this.props.navigator.push({
+      title: 'Dashboard'
+    })
+  }
+
+  // Used to move to the next screen
+  // Passes the list of projects from the classes to the next screen
+  navigateSignUp() {
+    this.props.navigator.push({
+      title: 'EnterInfo'
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.group}>
+        <View style={styles.inputContainer}>
           <Text style={styles.text}>Username</Text>
           <TextInput
           style={styles.input}
@@ -19,13 +35,23 @@ export default class LogInScreen extends Component {
           value={this.state.username}
           />
         </View>
-        <View style={styles.group}>
+        <View style={styles.inputContainer}>
           <Text style={styles.text}>Password</Text>
           <TextInput
           style={styles.text}
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
           />
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight style={styles.button}  onPress={() => this.navigateLogIn()}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}> Log In </Text>
+          </TouchableHighlight>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight style={styles.button}  onPress={() => this.navigateSignUp()}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}> Sign Up </Text>
+          </TouchableHighlight>
         </View>
       </View>
     );
@@ -38,13 +64,27 @@ const styles = StyleSheet.create({
     margin: 16,
     justifyContent : 'center'
   },
-  group: {
-    margin: 30
+  inputContainer: {
+    margin: 30,
+    justifyContent : 'center',
+  },
+  buttonContainer: {
+    margin: 30,
+    justifyContent : 'center',
+    alignItems: 'center'
   },
   input: {
     textAlign : 'center'
   },
   text: {
     textAlign : 'center'
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ADD8E6',
+    borderRadius: 64,
+    width: 100,
+    height: 40
   }
 });
