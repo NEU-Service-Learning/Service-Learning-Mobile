@@ -48,17 +48,17 @@ export default class ManualTracking extends Component {
         <Picker.Item label="Project 2" value="Project2" />
       </Picker>
 
-      <DatePicker style={{flex: 1}}
+      <DatePicker
         text = {"Date"}
         mode = {"date"}
       />
 
-      <DatePicker style={{flex: 1}}
+      <DatePicker
         text = {"Start Time"}
         mode = {"time"}
       />
 
-      <DatePicker style={{flex: 1}}
+      <DatePicker
         text = {"End Time"}
         mode = {"time"}
       />
