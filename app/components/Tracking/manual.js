@@ -5,16 +5,11 @@ import {
   StyleSheet,
   View,
   Text,
-  ScrollView,
   Navigator,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  DatePickerIOS,
   Picker,
 } from 'react-native';
 
-import { Title, Icon, Header, Container, Card, CardItem, Button } from 'native-base';
+import { Title, Icon, Header, Button } from 'native-base';
 
 import DatePicker from './picker';
 
