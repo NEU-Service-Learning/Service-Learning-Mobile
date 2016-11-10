@@ -12,7 +12,7 @@ import {
 
 import Dashboard from './dashboard';
 import Summary from './summary';
-import ClockIn from './clockin';
+import DatePicker from '../Tracking/manual';
 
 
 export default class Root extends Component {
@@ -45,7 +45,7 @@ export default class Root extends Component {
         selectedTab: 'clockin'
       })
       }}>
-      <ClockIn View />
+      <DatePicker />
       </TabBarIOS.Item>
 
       <TabBarIOS.Item

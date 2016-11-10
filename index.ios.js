@@ -19,7 +19,7 @@ import Root from './app/components/Dashboard/root';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
 
-import ManualTracking from './app/components/Tracking/manual.ios';
+import ManualTracking from './app/components/Tracking/manual';
 import AutoTracking from './app/components/Tracking/auto';
 
 

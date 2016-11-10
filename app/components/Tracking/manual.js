@@ -6,21 +6,17 @@ import {
   View,
   Text,
   Navigator,
-  Picker,
 } from 'react-native';
 
 import { Title, Icon, Header, Button } from 'native-base';
 
-import DatePicker from './picker.ios';
+import Dropmenu from './dropmenu';
 
 export default class ManualTracking extends Component {
 
 	constructor(props){
     super(props);
-    
-    this.state = {
-      project: 'TimeTracker',
-    }
+
   }
 
   _onPressButton() {
@@ -36,28 +32,23 @@ export default class ManualTracking extends Component {
         </Button>
         <Title>Log Hours</Title>
       </Header>
+            
+      <Dropmenu
+        text = {"Project"}
+        mode = {"project"}
+      />
 
-      <Text style={{padding: 20}}>Project</Text>
-
-      <Picker
-        selectedValue={this.state.project}
-        onValueChange={(proj) => this.setState({project: proj})}>
-        <Picker.Item label="Time Tracker" value="TimeTracker" />
-        <Picker.Item label="Project 1" value="Project1" />
-        <Picker.Item label="Project 2" value="Project2" />
-      </Picker>
-
-      <DatePicker
+      <Dropmenu
         text = {"Date"}
         mode = {"date"}
       />
 
-      <DatePicker
+      <Dropmenu
         text = {"Start Time"}
         mode = {"time"}
       />
 
-      <DatePicker
+      <Dropmenu
         text = {"End Time"}
         mode = {"time"}
       />
@@ -74,10 +65,11 @@ export default class ManualTracking extends Component {
 }
 
 const styles = StyleSheet.create({
-	button: {
-		backgroundColor: '#2ab9f7',
-		alignSelf: 'center',
-		width: 200,
-		height: 50,
-	}
+  button: {
+    backgroundColor: '#2ab9f7',
+    alignSelf: 'center',
+    width: 200,
+    height: 50,
+    marginTop: 30,
+  }
 })

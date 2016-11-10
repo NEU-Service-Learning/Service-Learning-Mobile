@@ -5,23 +5,26 @@ import {
   StyleSheet,
   View,
   Text,
-  ScrollView,
   Navigator,
-  TouchableHighlight,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  Picker,
+  Platform,
   DatePickerIOS,
 } from 'react-native';
 
-import { Title, Icon, Header, Container, Card, CardItem, Button } from 'native-base';
+import AndroidDatePicker from './picker.android';
 
-export default class DatePicker extends Component {
+const DatePicker = (Platform.OS === 'ios') ? DatePickerIOS : AndroidDatePicker;
+
+export default class Dropmenu extends Component {
 
 	constructor(props){
     super(props);
     
     this.state = {
-    	date: new Date(),
+      date: new Date(),
+      project: 'TimeTracker',
       visibility: 'hidden',
     }
   }
@@ -30,33 +33,51 @@ export default class DatePicker extends Component {
     this.setState({date: date});
   };
 
-	toggleVisible() {
+  toggleVisible() {
     var mode = this.state.visibility == 'hidden' ? 'visible' : 'hidden';
     this.setState({visibility: mode});
   }
 
   output(mode) {
-  	return mode == "date" ? (this.state.date.getMonth() + 1) + "/" + this.state.date.getDate() + "/" + this.state.date.getFullYear()
-  	: this.state.date.toLocaleTimeString();
+    if (mode == "date") {
+      return (this.state.date.getMonth() + 1) + "/" + this.state.date.getDate() + "/" + this.state.date.getFullYear()
+    }
+    else if (mode == "time") {
+      return this.state.date.toLocaleTimeString();
+    }
+  	else return this.state.project;
   }
 
   render() {
-  	var picker = (
-		  <View style={ styles.datePicker }>
+  	var menu = this.props.mode == "project" ? (
+      <Picker
+        selectedValue={this.state.project}
+        onValueChange={(proj) => this.setState({project: proj})}>
+        <Picker.Item label="Time Tracker" value="TimeTracker" />
+        <Picker.Item label="Project 1" value="Project1" />
+        <Picker.Item label="Project 2" value="Project2" />
+      </Picker>
+      ) : (
+      <DatePicker
+        style={{zIndex: 0}}
+        date={this.state.date}
+        mode={this.props.mode}
+        timeZoneOffsetInMinutes={this.props.timeZoneOffsetInHours * 60}
+        onDateChange={this.onDateChange.bind(this)}
+      />
+    )
+    
+    var picker = (
+      <View>
         <TouchableOpacity onPress={ this.toggleVisible.bind(this) } style={{ padding: 5, alignItems: 'flex-end' }}>
           <Text>Done</Text>
         </TouchableOpacity>
-        <DatePickerIOS
-          date={this.state.date}
-          mode={this.props.mode}
-          timeZoneOffsetInMinutes={this.props.timeZoneOffsetInHours * 60}
-          onDateChange={this.onDateChange.bind(this)}
-        />
-        </View>
-    )
-
-		return (
-			<View>
+        { menu }
+      </View>
+     )
+    
+	return (
+	  <View>
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
         <Text>{this.props.text}</Text>
           <TouchableWithoutFeedback onPress={ this.toggleVisible.bind(this) }>
@@ -68,10 +89,8 @@ export default class DatePicker extends Component {
         { this.state.visibility == 'visible' ? picker : <View/> }
       </View>
     )
-
 	}
 }
-
 
 var styles = StyleSheet.create({
 	datePicker: {
