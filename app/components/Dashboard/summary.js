@@ -8,6 +8,18 @@ import {
 
 } from 'react-native';
 
+export default class Summary extends Component {
+  render() {
+    return(
+      <View style={styles.container}>
+      <Text style={styles.description}>
+      Summary View
+      </Text>
+      </View>
+    )
+  }
+}
+
 const styles = StyleSheet.create({
   description: {
     fontSize: 20,
@@ -21,17 +33,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'teal'
   }
 });
-
-export default class Summary extends Component {
-  render() {
-    return(
-      <View style={styles.container}>
-      <Text style={styles.description}>
-      Summary View
-      </Text>
-      </View>
-    )
-  }
-}
-
 module.exports = Summary;
