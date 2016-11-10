@@ -48,12 +48,15 @@ export default class AndroidDatePicker extends Component {
   render() {
   	return (
   		<View>
-	    <TouchableWithoutFeedback
-        onPress={this.showPicker.bind(this, 'simple', {date: this.state.simpleDate})}>
-        <Text>{this.state.simpleText}</Text>
-      </TouchableWithoutFeedback>
+        {this.showPicker.bind(this, 'simple', {date: this.props.date})}
+
       </View>
       )
   	
   }
 }
+
+/* 	    <TouchableWithoutFeedback
+        onPress={this.showPicker.bind(this, 'simple', {date: this.props.date})}>
+          <View><Text>{this.state.simpleText}</Text></View>
+      </TouchableWithoutFeedback>*/

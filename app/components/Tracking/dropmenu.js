@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react';
 import {
+  Animated,
+  Dimensions,
   StyleSheet,
   View,
   Text,
@@ -16,22 +18,33 @@ import {
 import AndroidDatePicker from './picker.android';
 
 const DatePicker = (Platform.OS === 'ios') ? DatePickerIOS : AndroidDatePicker;
+var deviceWidth = Dimensions.get('window').width;
+var deviceHeight = Dimensions.get('window').height;
+
+var projects = [{label:'Time Tracker', key:'0'},
+                {label:'Project 1', key:'1'},
+                {label:'Project 2', key:'2'}]
+const categories = [{label:"Trainings & Orientations", key:"1"},
+                    {label:"Direct Service", key:"2"},
+                    {label:"Individual Research & Planning", key:"3"},
+                    {label:"Team Research & Planning", key:"4"}]
 
 export default class Dropmenu extends Component {
 
-	constructor(props){
+  constructor(props){
     super(props);
     
     this.state = {
       date: new Date(),
-      project: 'TimeTracker',
+      project: 'Select a project',
       visibility: 'hidden',
+      category: 'Select a category',
     }
   }
 
   onDateChange(date){
     this.setState({date: date});
-  };
+  }
 
   toggleVisible() {
     var mode = this.state.visibility == 'hidden' ? 'visible' : 'hidden';
@@ -45,34 +58,43 @@ export default class Dropmenu extends Component {
     else if (mode == "time") {
       return this.state.date.toLocaleTimeString();
     }
-  	else return this.state.project;
+  	else if (mode == "project") {
+      return this.state.project;
+    }
+    else return this.state.category;
   }
 
   render() {
-  	var menu = this.props.mode == "project" ? (
-      <Picker
+  	var menu;
+    if (this.props.mode == "project") {
+      menu = ( <Picker
         selectedValue={this.state.project}
         onValueChange={(proj) => this.setState({project: proj})}>
-        <Picker.Item label="Time Tracker" value="TimeTracker" />
-        <Picker.Item label="Project 1" value="Project1" />
-        <Picker.Item label="Project 2" value="Project2" />
-      </Picker>
-      ) : (
-      <DatePicker
-        style={{zIndex: 0}}
+        { projects.map((proj) => (
+          <Picker.Item key={proj.key} label={proj.label} value={proj.key}/>)) }
+      </Picker> ) }
+    else if (this.props.mode == "category") {
+      menu = ( <Picker
+        selectedValue={this.state.category}
+        onValueChange={(cat) => this.setState({category: cat})}>
+        { categories.map((cat) => (
+          <Picker.Item key={cat.key} label={cat.label} value={cat.key}/>)) }
+      </Picker> ) }
+    else {
+      menu = ( <DatePicker
+        style={styles.datepicker}
         date={this.state.date}
         mode={this.props.mode}
         timeZoneOffsetInMinutes={this.props.timeZoneOffsetInHours * 60}
         onDateChange={this.onDateChange.bind(this)}
-      />
-    )
+      /> ) }
     
     var picker = (
-      <View>
-        <TouchableOpacity onPress={ this.toggleVisible.bind(this) } style={{ padding: 5, alignItems: 'flex-end' }}>
+     <View>
+        <TouchableOpacity onPress={ this.toggleVisible.bind(this)} style={{marginRight: 20, alignItems: 'flex-end'}}>
           <Text>Done</Text>
         </TouchableOpacity>
-        { menu }
+            {menu} 
       </View>
      )
     
@@ -86,7 +108,7 @@ export default class Dropmenu extends Component {
             </View>
           </TouchableWithoutFeedback>
       </View>
-        { this.state.visibility == 'visible' ? picker : <View/> }
+          { this.state.visibility == 'visible' ? picker : <View/> }
       </View>
     )
 	}
@@ -99,7 +121,7 @@ var styles = StyleSheet.create({
     bottom: 0, 
     right: 0, 
     left: 0, 
-    height: 200, 
+    height: 100, 
     borderColor: '#CCC', 
     backgroundColor: '#FFF',    
   },
@@ -110,5 +132,6 @@ var styles = StyleSheet.create({
     borderColor: 'gray', 
     borderWidth: 1,
     marginVertical: 10,
+    backgroundColor: '#EEE'
   },
 });

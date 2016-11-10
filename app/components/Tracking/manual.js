@@ -32,7 +32,7 @@ export default class ManualTracking extends Component {
         </Button>
         <Title>Log Hours</Title>
       </Header>
-            
+            <View style={{padding:10}} />
       <Dropmenu
         text = {"Project"}
         mode = {"project"}
@@ -51,6 +51,11 @@ export default class ManualTracking extends Component {
       <Dropmenu
         text = {"End Time"}
         mode = {"time"}
+      />
+        
+      <Dropmenu
+        text = {"Category"}
+        mode = {"category"}
       />
 
       <Button

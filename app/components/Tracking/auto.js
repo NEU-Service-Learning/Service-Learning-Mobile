@@ -1,3 +1,4 @@
+import Lightbox from 'react-native-lightbox'
 'use strict';
 
 import React, { Component } from 'react';
@@ -7,7 +8,8 @@ import {
   Text,
   Navigator,
   Picker,
-} from 'react-native';
+  Image,
+} from 'react-native'
 
 import { Title, Icon, Header, Button } from 'native-base';
 import MapView from 'react-native-maps';
