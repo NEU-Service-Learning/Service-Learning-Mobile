@@ -70,7 +70,15 @@ export default class Summary extends Component {
                     'Oct 17: 1hr Direct Work','Oct 18: 2hr Group','Oct 19: 3hr Individual',
               ])
     };
-  }
+  };
+    navigate(rowData) {
+     this.props.navigator.push({
+       title: 'Details',
+       extras: {
+         work: rowData
+       }
+     })
+  };
   render() {
     return(
       <View style={styles.container}>
@@ -88,12 +96,10 @@ export default class Summary extends Component {
         <Text style={{color: 'black', fontSize: 20}}>Class Average: 7.2</Text>
         <ListView
           dataSource={this.state.work}
-          renderRow={(rowData) => <TouchableHighlight style={styles.work}><Text>{rowData}</Text></TouchableHighlight>}
+          renderRow={(rowData) => <TouchableHighlight style={styles.work} onPress={()=> this.navigate(rowData)}><Text>{rowData}</Text></TouchableHighlight>}
         />
       </View>
     )
-  }
+  };
 }
 module.exports = Summary;
-//TODO Calculate Hours Completed
-      //TODO Get progress bar
