@@ -60,8 +60,8 @@ const Progress = Platform.select({
 export default class Summary extends Component {
   constructor(props) {
     super(props);
-    const dsTeam = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    const dsWork = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    var dsTeam = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    var dsWork = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       team: dsTeam.cloneWithRows([
               'Ross Frank', 'Jagroop Hothi', 'Mustafa Camurcu', 'Charles Zheng', 'Joana  Vukatana'
@@ -69,16 +69,13 @@ export default class Summary extends Component {
        work: dsWork.cloneWithRows([
                     'Oct 17: 1hr Direct Work','Oct 18: 2hr Group','Oct 19: 3hr Individual',
               ])
-    };
-  };
+    }
+  }
     navigate(rowData) {
      this.props.navigator.push({
-       title: 'Details',
-       extras: {
-         work: rowData
-       }
+       title: 'Details'
      })
-  };
+  }
   render() {
     return(
       <View style={styles.container}>
@@ -98,12 +95,12 @@ export default class Summary extends Component {
           dataSource={this.state.work}
           renderRow={(rowData) =>
             <TouchableHighlight style={styles.work}
-              onPress={()=> this.props.navigator.push({title: 'Details', extras: {work: rowData}})}>
+              onPress={()=> this.navigate(rowData)}>
               <Text>{rowData}</Text>
             </TouchableHighlight>}
         />
       </View>
     )
-  };
+  }
 }
 module.exports = Summary;

@@ -5,25 +5,29 @@ import {
   StyleSheet,
   View,
   Text
+
 } from 'react-native';
 
 const styles = StyleSheet.create({
+  description: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#FFFFFF'
+  },
   container: {
     flex: 1,
-    alignItems: 'center'
-  },
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'teal'
+  }
 });
 
 export default class Details extends Component {
-  constructor(props) {
-    super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-  };
   render() {
     return(
-      <View>
       <View style={styles.container}>
-        <Text style={{fontWeight: 'bold', fontSize: 25}}>Map</Text>
+      <View style={styles.container}>
+        <Text style={{backgroundColor: 'red', fontWeight: 'bold', fontSize: 25}}>Map</Text>
       </View>
       <View style={styles.container}>
         <Text style={{fontWeight: 'bold', fontSize: 15}}>Notes:</Text>
