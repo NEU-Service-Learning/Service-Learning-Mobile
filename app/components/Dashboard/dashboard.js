@@ -11,30 +11,6 @@ import {
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center'
-  },
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 64,
-    width: 250,
-    marginTop: 50,
-    marginBottom: 50,
-    height: 60,
-  },
-  card: {
-    flexDirection: 'row',
-    backgroundColor: '#008080',
-    borderRadius: 64,
-    width: 300,
-  }
-});
-
 export default class Dashboard extends Component {
 
   render() {
@@ -62,5 +38,29 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ADD8E6',
+    borderRadius: 64,
+    width: 250,
+    marginTop: 50,
+    marginBottom: 50,
+    height: 60,
+  },
+  card: {
+    flexDirection: 'row',
+    backgroundColor: '#008080',
+    borderRadius: 64,
+    width: 300,
+  }
+});
 
 module.exports = Dashboard;
