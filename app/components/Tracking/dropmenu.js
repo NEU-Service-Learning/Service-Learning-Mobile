@@ -36,9 +36,9 @@ export default class Dropmenu extends Component {
     
     this.state = {
       date: new Date(),
-      project: 'Select a project',
+      project: 'Time Tracker',
       visibility: 'hidden',
-      category: 'Select a category',
+      category: 'Trainings & Orientations',
     }
   }
 
@@ -46,11 +46,13 @@ export default class Dropmenu extends Component {
     this.setState({date: date});
   }
 
+  // Makes the dropdown menu visible
   toggleVisible() {
     var mode = this.state.visibility == 'hidden' ? 'visible' : 'hidden';
     this.setState({visibility: mode});
   }
 
+  // The text to be displayed
   output(mode) {
     if (mode == "date") {
       return (this.state.date.getMonth() + 1) + "/" + this.state.date.getDate() + "/" + this.state.date.getFullYear()
@@ -71,14 +73,14 @@ export default class Dropmenu extends Component {
         selectedValue={this.state.project}
         onValueChange={(proj) => this.setState({project: proj})}>
         { projects.map((proj) => (
-          <Picker.Item key={proj.key} label={proj.label} value={proj.key}/>)) }
+          <Picker.Item key={proj.key} label={proj.label} value={proj.label}/>)) }
       </Picker> ) }
     else if (this.props.mode == "category") {
       menu = ( <Picker
         selectedValue={this.state.category}
         onValueChange={(cat) => this.setState({category: cat})}>
         { categories.map((cat) => (
-          <Picker.Item key={cat.key} label={cat.label} value={cat.key}/>)) }
+          <Picker.Item key={cat.key} label={cat.label} value={cat.label}/>)) }
       </Picker> ) }
     else {
       menu = ( <DatePicker

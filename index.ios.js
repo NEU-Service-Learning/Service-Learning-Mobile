@@ -18,10 +18,7 @@ import {
 import Root from './app/components/Dashboard/root';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
-
 import ManualTracking from './app/components/Tracking/manual';
-import AutoTracking from './app/components/Tracking/auto';
-
 
 export default class SLTracker extends Component {
   constructor(props) {
@@ -41,15 +38,12 @@ export default class SLTracker extends Component {
      if(route.title == 'ManualTracking') {
       return <ManualTracking navigator={navigator} />
      }
-     if(route.title == 'AutoTracking') {
-      return <AutoTracking navigator={navigator} />
-     }
    }
 
   render() {
     return (
       <Navigator
-        initialRoute={{ title: 'ManualTracking'}} //change back later
+        initialRoute={{ title: 'ManualTracking'}}
         renderScene={this.renderScene.bind(this)}
       />
     );
