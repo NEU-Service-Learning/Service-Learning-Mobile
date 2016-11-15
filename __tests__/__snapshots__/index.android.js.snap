@@ -174,7 +174,7 @@ exports[`test renders correctly 1`] = `
                   "fontWeight": "bold",
                 }
               }>
-               Next 
+               Next
             </Text>
           </View>
         </View>

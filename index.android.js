@@ -13,12 +13,12 @@ import {
   Navigator
 } from 'react-native';
 
+import LogInScreen from './app/components/LogIn/LogInScreen/index';
+import InfoScreen from './app/components/SignUp/InfoScreen/index';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
 import Root from './app/components/Dashboard/root';
-
 import ManualTracking from './app/components/Tracking/manual';
-import AutoTracking from './app/components/Tracking/auto';
 
 export default class SLTracker extends Component {
 
@@ -36,8 +36,11 @@ export default class SLTracker extends Component {
      if(route.title == 'ManualTracking') {
       return <ManualTracking navigator={navigator} />
      }
-     if(route.title == 'AutoTracking') {
-      return <AutoTracking navigator={navigator} />
+     if(route.title == 'LogIn') {
+       return <LogInScreen navigator={navigator} />
+     }
+     if(route.title == 'EnterInfo') {
+       return <InfoScreen navigator={navigator} />
      }
    }
 
@@ -46,7 +49,7 @@ export default class SLTracker extends Component {
     // Add a case for your screen in the 'renderScene' function
     return (
       <Navigator
-        initialRoute={{ title: 'ManualTracking'}}
+        initialRoute={{ title: 'LogIn'}}
         renderScene={this.renderScene}
       />
     );
