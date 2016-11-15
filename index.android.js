@@ -18,6 +18,7 @@ import InfoScreen from './app/components/SignUp/InfoScreen/index';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
 import Root from './app/components/Dashboard/root';
+import Details from './app/components/Details/details';
 
 export default class SLTracker extends Component {
 
@@ -32,12 +33,18 @@ export default class SLTracker extends Component {
      if(route.title == 'Dashboard') {
        return <Root navigator={navigator} />
      }
+<<<<<<< HEAD
+     if(route.title == 'Details') {
+       return <Details navigator={navigator} />
+    }
+=======
      if(route.title == 'LogIn') {
        return <LogInScreen navigator={navigator} />
      }
      if(route.title == 'EnterInfo') {
        return <InfoScreen navigator={navigator} />
      }
+>>>>>>> master
    }
 
   render() {
