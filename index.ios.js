@@ -18,8 +18,12 @@ import {
 import Root from './app/components/Dashboard/root';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
+<<<<<<< HEAD
+import ManualTracking from './app/components/Tracking/manual';
+=======
 import LogInScreen from './app/components/LogIn/LogInScreen/index';
 import InfoScreen from './app/components/SignUp/InfoScreen/index';
+>>>>>>> ad44c5171210249d40324f59ec579354590b571c
 
 export default class SLTracker extends Component {
   constructor(props) {
@@ -36,6 +40,8 @@ export default class SLTracker extends Component {
      if(route.title == 'Dashboard') {
        return <Root navigator={navigator} />
      }
+     if(route.title == 'ManualTracking') {
+      return <ManualTracking navigator={navigator} />
      if(route.title == 'LogIn') {
        return <LogInScreen navigator={navigator} />
      }

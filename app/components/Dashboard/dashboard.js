@@ -13,11 +13,15 @@ import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
 
 export default class Dashboard extends Component {
 
+  navigate() {
+    this.props.navigator.push({title: 'ManualTracking'});
+  }
+
   render() {
     return(
       <View style={styles.container}>
         <View>
-          <TouchableHighlight style={styles.button} onPress={() => this.navigate()}>
+          <TouchableHighlight style={styles.button} onPress={this.navigate.bind(this)}>
           <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}> Clock In </Text>
           </TouchableHighlight>
         </View>
