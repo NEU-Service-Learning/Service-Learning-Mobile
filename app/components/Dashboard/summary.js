@@ -96,7 +96,11 @@ export default class Summary extends Component {
         <Text style={{color: 'black', fontSize: 20}}>Class Average: 7.2</Text>
         <ListView
           dataSource={this.state.work}
-          renderRow={(rowData) => <TouchableHighlight style={styles.work} onPress={()=> this.navigate(rowData)}><Text>{rowData}</Text></TouchableHighlight>}
+          renderRow={(rowData) =>
+            <TouchableHighlight style={styles.work}
+              onPress={()=> this.props.navigator.push({title: 'Details', extras: {work: rowData}})}>
+              <Text>{rowData}</Text>
+            </TouchableHighlight>}
         />
       </View>
     )
