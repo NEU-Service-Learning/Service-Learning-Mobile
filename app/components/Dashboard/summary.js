@@ -8,7 +8,7 @@ import {
   ListView,
   TouchableHighlight,
   ProgressBarAndroid,
-  ProgressView,
+  ProgressViewIOS,
 } from 'react-native';
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
@@ -52,10 +52,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const Progress = Platform.select({
-  ios: () => require('ProgressView'),
-  android: () => require('ProgressBarAndroid'),
-})();
+const Progress = (Platform.OS == 'ios') ? ProgressViewIOS : ProgressBarAndroid;
 
 export default class Summary extends Component {
   constructor(props) {
