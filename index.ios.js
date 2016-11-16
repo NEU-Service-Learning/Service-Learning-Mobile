@@ -3,7 +3,6 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-'use strict';
 
 import React, { Component } from 'react';
 import {
@@ -11,25 +10,21 @@ import {
   StyleSheet,
   Text,
   View,
-  Navigator,
-  TabBarIOS
+  Navigator
 } from 'react-native';
 
-import Root from './app/components/Dashboard/root';
-import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
-import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
-<<<<<<< HEAD
-import ManualTracking from './app/components/Tracking/manual';
-=======
 import LogInScreen from './app/components/LogIn/LogInScreen/index';
 import InfoScreen from './app/components/SignUp/InfoScreen/index';
->>>>>>> ad44c5171210249d40324f59ec579354590b571c
+import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
+import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
+import Root from './app/components/Dashboard/root';
+import Summary from './app/components/Dashboard/summary';
+import Details from './app/components/Details/details';
+import ManualTracking from './app/components/Tracking/manual';
 
 export default class SLTracker extends Component {
-  constructor(props) {
-    super(props)
-  }
 
+  // Renders a particular scene depending on the route title
   renderScene(route, navigator) {
      if(route.title == 'SelectClass') {
        return <ClassSelectScreen navigator={navigator} />
@@ -40,8 +35,15 @@ export default class SLTracker extends Component {
      if(route.title == 'Dashboard') {
        return <Root navigator={navigator} />
      }
+     if(route.title == 'Summary') {
+       return <Summary navigator={navigator} />
+     }
+     if(route.title == 'Details') {
+       return <Details navigator={navigator} />
+    }
      if(route.title == 'ManualTracking') {
       return <ManualTracking navigator={navigator} />
+     }
      if(route.title == 'LogIn') {
        return <LogInScreen navigator={navigator} />
      }
@@ -51,13 +53,34 @@ export default class SLTracker extends Component {
    }
 
   render() {
+    // Change the 'initialRoute' to see your screen
+    // Add a case for your screen in the 'renderScene' function
     return (
       <Navigator
         initialRoute={{ title: 'LogIn'}}
-        renderScene={this.renderScene.bind(this)}
+        renderScene={this.renderScene}
       />
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+});
 
 AppRegistry.registerComponent('SLTracker', () => SLTracker);

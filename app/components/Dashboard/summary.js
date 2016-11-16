@@ -52,10 +52,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const Progress = Platform.select({
-  ios: () => require('ProgressView'),
-  android: () => require('ProgressBarAndroid'),
-})();
+const Progress = (Platform.OS === 'ios') ? ProgressView : ProgressBarAndroid;
 
 export default class Summary extends Component {
   constructor(props) {
