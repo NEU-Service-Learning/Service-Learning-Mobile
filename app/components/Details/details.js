@@ -47,7 +47,9 @@ export default class Details extends Component {
       </View>
       <View style={styles.container}>
         <Text style={{fontWeight: 'bold', fontSize: 15}}>Notes:</Text>
-        <Text>This is where notes go.</Text>
+        <Text>Field for where the hours go</Text>
+        <Text>Bucket</Text>
+        <Text>This is where notes go</Text>
         <Text>Place for extra fields</Text>
       </View>
       </View>
