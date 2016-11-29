@@ -5,7 +5,6 @@ import {
   StyleSheet,
   View,
   Text
-
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -41,7 +40,6 @@ export default class Details extends Component {
   render() {
     return(
       <View style={styles.container}>
-      <Navigator/>
       <View style={styles.map}>
         <Text style={styles.text} onPress={() => this.props.navigator.push({title: 'Dashboard'})}>Map</Text>
       </View>

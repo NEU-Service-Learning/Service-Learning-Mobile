@@ -32,7 +32,7 @@ export default class Root extends Component {
             <Button transparent>
               <Icon name='ios-menu' />
             </Button>
-            <Title style={{color: '#008080', fontWeight: 'bold'}}>Service-Learning</Title>
+            <Title style={{color: '#FFFFFF', fontWeight: 'bold'}}>Service-Learning</Title>
         </Header>
               <ScrollableTabView>
                   <Dashboard tabLabel='Dashboard' navigator={this.props.navigator}/>

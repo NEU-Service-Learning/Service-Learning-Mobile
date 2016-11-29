@@ -12,6 +12,8 @@ import { Title, Icon, Header, Button } from 'native-base';
 
 import Dropmenu from './dropmenu';
 
+var style = require('../../Styles/styles');
+
 export default class ManualTracking extends Component {
 
 	constructor(props){
@@ -37,29 +39,24 @@ export default class ManualTracking extends Component {
         text = {"Project"}
         mode = {"project"}
       />
-
       <Dropmenu
         text = {"Date"}
         mode = {"date"}
       />
-
       <Dropmenu
         text = {"Start Time"}
         mode = {"time"}
       />
-
       <Dropmenu
         text = {"End Time"}
         mode = {"time"}
       />
-        
       <Dropmenu
         text = {"Category"}
         mode = {"category"}
       />
-
       <Button
-        style={styles.button}
+        style={StyleSheet.flatten([style.button, style.alignCenter, style.height50])}
         onPress={this._onPressButton.bind(this)}>
         <Text style={{fontSize: 20}}>Log Hours</Text>
       </Button>
@@ -68,13 +65,3 @@ export default class ManualTracking extends Component {
 		)
 	}
 }
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#2ab9f7',
-    alignSelf: 'center',
-    width: 200,
-    height: 50,
-    marginTop: 30,
-  }
-})
