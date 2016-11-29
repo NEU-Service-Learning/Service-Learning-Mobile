@@ -13,7 +13,10 @@ import {
 import Dashboard from './dashboard';
 import Summary from './summary';
 import DatePicker from '../Tracking/manual';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Title, Button, Header, Container, Card, CardItem } from 'native-base';
 
+var style = require('../../Styles/styles');
 
 export default class Root extends Component {
   constructor(props) {
@@ -25,41 +28,39 @@ export default class Root extends Component {
 
   render() {
     return (
+      <View style={{flex: 1}}>
+      <Header>
+      <Button transparent>
+        <Icon name='ios-menu' />
+      </Button>
+      <Title>Dashboard</Title>
+      </Header>
       <TabBarIOS selectedTab={this.state.selectedTab}>
-      <TabBarIOS.Item
-        title='Dashboard'
+      <Icon.TabBarItem
+        title="Dashboard"
+        iconName="tachometer"
+        selectedIconName="tachometer"
         selected={this.state.selectedTab === 'Dashboard'}
         onPress={() => {
             this.setState({
               selectedTab: 'Dashboard'
-      })
-      }}>
+      })}}>
       <Dashboard navigator={this.props.navigator} />
-      </TabBarIOS.Item>
-
-      <TabBarIOS.Item
-        title='Clock In'
-        selected={this.state.selectedTab === 'ManualTracking'}
-        onPress={() => {
-            this.setState({
-              selectedTab: 'ManualTracking'
-      })
-      }}>
-      <DatePicker navigator={this.props.navigator}/>
-      </TabBarIOS.Item>
-
-      <TabBarIOS.Item
+      </Icon.TabBarItem>
+      <Icon.TabBarItem
         title='Summary'
+        iconName="server"
+        selectedIconName="server"
         selected={this.state.selectedTab === 'Summary'}
         onPress={() => {
             this.setState({
               selectedTab: 'Summary'
-      })
-      }}>
+      })}}>
       <Summary navigator={this.props.navigator} />
-      </TabBarIOS.Item>
-
+      </Icon.TabBarItem>
       </TabBarIOS>
+      </View>
+
     );
   }
 }

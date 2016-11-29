@@ -27,7 +27,6 @@ export default class Dashboard extends Component {
   navigate() {
     this.props.navigator.push({title: 'ManualTracking'});
   }
-
   render() {
     return(
       <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
