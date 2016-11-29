@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
 
+var style = require('../../../Styles/styles');
+
 export default class LogInScreen extends Component {
 
   constructor(props) {
@@ -26,7 +28,7 @@ export default class LogInScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={style.container}>
         <View style={styles.inputContainer}>
           <Text style={styles.text}>Email</Text>
           <TextInput
@@ -34,8 +36,6 @@ export default class LogInScreen extends Component {
           onChangeText={(username) => this.setState({username})}
           value={this.state.username}
           />
-        </View>
-        <View style={styles.inputContainer}>
           <Text style={styles.text}>Password</Text>
           <TextInput
           style={styles.text}
@@ -44,13 +44,14 @@ export default class LogInScreen extends Component {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableHighlight style={styles.button}  onPress={() => this.navigateLogIn()}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}> Log In </Text>
+          <TouchableHighlight style={style.button}  onPress={() => this.navigateLogIn()}>
+            <Text style={{fontSize: 30, fontWeight: 'bold'}}> Log In </Text>
           </TouchableHighlight>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableHighlight style={styles.button}  onPress={() => this.navigateSignUp()}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}> Sign Up </Text>
+          <TouchableHighlight style={style.button}  onPress={() => this.navigateSignUp()}>
+            <Text style={{fontSize: 30, fontWeight: 'bold'}}> Sign Up </Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={style.margin16}  onPress={() => this.navigateSignUp()}>
+            <Text style={{color: 'blue', textDecorationLine: 'underline'}}> Forgot Password </Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -74,17 +75,10 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   input: {
-    textAlign : 'center'
+    textAlign : 'center',
+    marginBottom: 30
   },
   text: {
     textAlign : 'center'
   },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 64,
-    width: 100,
-    height: 40
-  }
 });
