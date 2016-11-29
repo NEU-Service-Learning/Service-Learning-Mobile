@@ -28,7 +28,7 @@ export default class LogInScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
-          <Text style={styles.text}>Username</Text>
+          <Text style={styles.text}>Email</Text>
           <TextInput
           style={styles.input}
           onChangeText={(username) => this.setState({username})}

@@ -11,6 +11,38 @@ import {
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
 
+export default class Dashboard extends Component {
+
+  navigate() {
+    this.props.navigator.push({title: 'ManualTracking'});
+  }
+
+  render() {
+    return(
+      <View style={styles.container}>
+        <View>
+          <TouchableHighlight style={styles.button} onPress={this.navigate.bind(this)}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}> Clock In </Text>
+          </TouchableHighlight>
+        </View>
+        <View style={styles.card}>
+          <Card>
+          <CardItem button style={styles.card} onPress={() => this.navigate()}>
+          <Text style={{color: 'white', fontWeight: 'bold'}}>Time Tracker</Text>
+          </CardItem>
+          <CardItem button style={styles.card} onPress={() => this.navigate()}>
+          <Text style={{color: 'white', fontWeight: 'bold'}}>Project 1</Text>
+          </CardItem>
+          <CardItem button style={styles.card} onPress={() => this.navigate()}>
+          <Text style={{color: 'white', fontWeight: 'bold'}}>Project 2</Text>
+          </CardItem>
+          </Card>
+        </View>
+      </View>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -34,33 +66,5 @@ const styles = StyleSheet.create({
     width: 300,
   }
 });
-
-export default class Dashboard extends Component {
-
-  render() {
-    return(
-      <View style={styles.container}>
-        <View>
-          <TouchableHighlight style={styles.button} onPress={() => this.navigate()}>
-          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}> Clock In </Text>
-          </TouchableHighlight>
-        </View>
-        <View style={styles.card}>
-          <Card>
-          <CardItem button style={styles.card} onPress={() => this.navigate()}>
-          <Text style={{color: 'white', fontWeight: 'bold'}}>Time Tracker</Text>
-          </CardItem>
-          <CardItem button style={styles.card} onPress={() => this.navigate()}>
-          <Text style={{color: 'white', fontWeight: 'bold'}}>Project 1</Text>
-          </CardItem>
-          <CardItem button style={styles.card} onPress={() => this.navigate()}>
-          <Text style={{color: 'white', fontWeight: 'bold'}}>Project 2</Text>
-          </CardItem>
-          </Card>
-        </View>
-      </View>
-    );
-  }
-}
 
 module.exports = Dashboard;

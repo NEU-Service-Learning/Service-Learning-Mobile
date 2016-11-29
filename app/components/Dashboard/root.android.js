@@ -35,8 +35,8 @@ export default class Root extends Component {
             <Title style={{color: '#008080', fontWeight: 'bold'}}>Service-Learning</Title>
         </Header>
               <ScrollableTabView>
-                  <Dashboard tabLabel='Dashboard'/>
-                  <Summary tabLabel='Summary' />
+                  <Dashboard tabLabel='Dashboard' navigator={this.props.navigator}/>
+                  <Summary tabLabel='Summary' navigator={this.props.navigator}/>
               </ScrollableTabView>
       </View>
     );

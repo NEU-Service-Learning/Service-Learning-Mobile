@@ -12,14 +12,14 @@ import {
 
 import Dashboard from './dashboard';
 import Summary from './summary';
-import ClockIn from './clockin';
+import DatePicker from '../Tracking/manual';
 
 
 export default class Root extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: 'dashboard'
+      selectedTab: 'Dashboard'
     };
   }
 
@@ -27,36 +27,36 @@ export default class Root extends Component {
     return (
       <TabBarIOS selectedTab={this.state.selectedTab}>
       <TabBarIOS.Item
-      title='Dashboard'
-      selected={this.state.selectedTab === 'dashboard'}
-      onPress={() => {
-      this.setState({
-        selectedTab: 'dashboard'
+        title='Dashboard'
+        selected={this.state.selectedTab === 'Dashboard'}
+        onPress={() => {
+            this.setState({
+              selectedTab: 'Dashboard'
       })
       }}>
-      <Dashboard View />
+      <Dashboard navigator={this.props.navigator} />
       </TabBarIOS.Item>
 
       <TabBarIOS.Item
-      title='Clock In'
-      selected={this.state.selectedTab === 'clockin'}
-      onPress={() => {
-      this.setState({
-        selectedTab: 'clockin'
+        title='Clock In'
+        selected={this.state.selectedTab === 'ManualTracking'}
+        onPress={() => {
+            this.setState({
+              selectedTab: 'ManualTracking'
       })
       }}>
-      <ClockIn View />
+      <DatePicker navigator={this.props.navigator}/>
       </TabBarIOS.Item>
 
       <TabBarIOS.Item
-      title='Summary'
-      selected={this.state.selectedTab === 'summary'}
-      onPress={() => {
-      this.setState({
-        selectedTab: 'summary'
+        title='Summary'
+        selected={this.state.selectedTab === 'Summary'}
+        onPress={() => {
+            this.setState({
+              selectedTab: 'Summary'
       })
       }}>
-      <Summary View />
+      <Summary navigator={this.props.navigator} />
       </TabBarIOS.Item>
 
       </TabBarIOS>
