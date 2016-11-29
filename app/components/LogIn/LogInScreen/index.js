@@ -27,10 +27,7 @@ export default class LogInScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <Image
-            source={require('../../../assets/img/Logo.png')}
-          />
+        <View style={styles.emptyContainer}>
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.text}>Email</Text>
@@ -58,6 +55,8 @@ export default class LogInScreen extends Component {
             <Text style={{color: 'white', fontWeight: 'bold'}}> Sign Up </Text>
           </TouchableHighlight>
         </View>
+        <View style={styles.emptyContainer}>
+        </View>
       </View>
     );
   }
@@ -65,16 +64,24 @@ export default class LogInScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 10,
     margin: 16,
     justifyContent : 'center'
   },
+  emptyContainer: {
+    flex: 2
+  },
+  imageContainer: {
+    flex: 2,
+    justifyContent : 'center',
+    alignItems: 'center'
+  },
   inputContainer: {
-    margin: 20,
+    flex: 2,
     justifyContent : 'center',
   },
   buttonContainer: {
-    margin: 30,
+    flex: 1,
     justifyContent : 'center',
     alignItems: 'center'
   },
