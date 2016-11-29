@@ -19,12 +19,12 @@ import { Title, Icon, Header, Container, Card, CardItem, Button } from 'native-b
 export default class AndroidDatePicker extends Component {
 
   state = {
-    presetDate: new Date(2020, 4, 5),
+    presetDate: new Date(),
     allDate: new Date(2020, 4, 5),
     simpleText: 'pick a date',
     minText: 'pick a date, no earlier than today',
     maxText: 'pick a date, no later than today',
-    presetText: 'pick a date, preset to 2020/5/5',
+    presetText: 'Pick a date',
     allText: 'pick a date between 2020/5/1 and 2020/5/10',
   };
 
@@ -48,7 +48,12 @@ export default class AndroidDatePicker extends Component {
   render() {
   	return (
   		<View>
-        {this.showPicker.bind(this, 'simple', {date: this.props.date})}
+          <TouchableWithoutFeedback
+            onPress={this.showPicker.bind(this, 'preset', {date: this.state.presetDate})}>
+            <View style={styles.input}>
+            <Text>{this.state.presetDate.toLocaleDateString()}</Text>
+            </View>
+          </TouchableWithoutFeedback>
 
       </View>
       )
@@ -56,7 +61,24 @@ export default class AndroidDatePicker extends Component {
   }
 }
 
-/* 	    <TouchableWithoutFeedback
-        onPress={this.showPicker.bind(this, 'simple', {date: this.props.date})}>
-          <View><Text>{this.state.simpleText}</Text></View>
-      </TouchableWithoutFeedback>*/
+var styles = StyleSheet.create({
+  datePicker: {
+    borderTopWidth: 1, 
+    position: 'absolute', 
+    bottom: 0, 
+    right: 0, 
+    left: 0, 
+    height: 100, 
+    borderColor: '#CCC', 
+    backgroundColor: '#FFF',    
+  },
+  input: {
+    height: 40, 
+    justifyContent: 'center', 
+    padding: 5, 
+    borderColor: 'gray', 
+    borderWidth: 1,
+    marginVertical: 10,
+    backgroundColor: '#EEE'
+  },
+});

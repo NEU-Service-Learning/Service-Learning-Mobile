@@ -2,8 +2,6 @@
 
 import React, { Component } from 'react';
 import {
-  Animated,
-  Dimensions,
   StyleSheet,
   View,
   Text,
@@ -14,12 +12,6 @@ import {
   Platform,
   DatePickerIOS,
 } from 'react-native';
-
-import AndroidDatePicker from './picker.android';
-
-const DatePicker = (Platform.OS === 'ios') ? DatePickerIOS : AndroidDatePicker;
-var deviceWidth = Dimensions.get('window').width;
-var deviceHeight = Dimensions.get('window').height;
 
 var projects = [{label:'Time Tracker', key:'0'},
                 {label:'Project 1', key:'1'},
@@ -83,7 +75,7 @@ export default class Dropmenu extends Component {
           <Picker.Item key={cat.key} label={cat.label} value={cat.label}/>)) }
       </Picker> ) }
     else {
-      menu = ( <DatePicker
+      menu = ( <DatePickerIOS
         style={styles.datepicker}
         date={this.state.date}
         mode={this.props.mode}
@@ -128,12 +120,12 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFF',    
   },
   input: {
-    height: 40, 
+    height: 30, 
     justifyContent: 'center', 
     padding: 5, 
     borderColor: 'gray', 
     borderWidth: 1,
     marginVertical: 10,
-    backgroundColor: '#EEE'
+    backgroundColor: '#F0F0F0'
   },
 });
