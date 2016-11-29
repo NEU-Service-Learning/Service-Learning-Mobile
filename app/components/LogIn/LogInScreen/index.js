@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
 export default class LogInScreen extends Component {
 
@@ -27,6 +27,11 @@ export default class LogInScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <Image
+            source={require('../../../assets/img/Logo.png')}
+          />
+        </View>
         <View style={styles.inputContainer}>
           <Text style={styles.text}>Email</Text>
           <TextInput
@@ -65,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent : 'center'
   },
   inputContainer: {
-    margin: 30,
+    margin: 20,
     justifyContent : 'center',
   },
   buttonContainer: {
