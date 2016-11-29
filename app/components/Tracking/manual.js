@@ -33,7 +33,7 @@ export default class ManualTracking extends Component {
 
 	render() {
 		return (
-			<ScrollView>
+			<View>
 			<Header>
 			  <Button transparent>
           <Icon name='ios-arrow-back' onPress={() => this.props.navigator.pop()}/>
@@ -41,6 +41,7 @@ export default class ManualTracking extends Component {
         <Title>Log Hours</Title>
         <View style={{padding:10}} />
       </Header>
+      <ScrollView>
       <Dropmenu
         text = {"Project"}
         mode = {"project"}
@@ -83,7 +84,6 @@ export default class ManualTracking extends Component {
       </View> 
 
       </View>}
-
     
       <Dropmenu
         text = {"Category"}
@@ -107,6 +107,7 @@ export default class ManualTracking extends Component {
       <View style={{padding:10}} />
 
      </ScrollView>
+     </View>
 		)
 	}
 }
