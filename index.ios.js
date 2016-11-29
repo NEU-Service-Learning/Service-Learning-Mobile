@@ -18,12 +18,9 @@ import InfoScreen from './app/components/SignUp/InfoScreen/index';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
 import Root from './app/components/Dashboard/root';
-<<<<<<< HEAD
-=======
 import Summary from './app/components/Dashboard/summary';
 import Details from './app/components/Details/details';
 import ManualTracking from './app/components/Tracking/manual';
->>>>>>> 37f796ee0a52706bd9d8c75c6202129659d8df99
 
 export default class SLTracker extends Component {
 
