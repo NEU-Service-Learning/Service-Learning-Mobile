@@ -31,7 +31,10 @@ export default class Root extends Component {
       <View style={{flex: 1}}>
       <Header>
       <Button transparent>
-        <Icon name='ios-menu' />
+      <Icon name='bars' size={30} />
+      </Button>
+      <Button transparent>
+      <Icon name='cog' size={30} />
       </Button>
       <Title>Dashboard</Title>
       </Header>
