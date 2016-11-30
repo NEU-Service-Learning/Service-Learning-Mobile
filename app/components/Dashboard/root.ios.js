@@ -32,12 +32,12 @@ export default class Root extends Component {
       <View style={{flex: 1}}>
       <Header>
       <Button transparent>
-      <Icon name='bars' size={30} />
+      <Icon name='bars' size={25} />
       </Button>
       <Button transparent onPress={() => {this.props.navigator.push({ title: 'Settings' })}}>
-      <Icon name='cog' size={30} />
+      <Icon name='cog' size={25} />
       </Button>
-      <Title>Dashboard</Title>
+      <Title> Service-Learning </Title>
       </Header>
       <TabBarIOS selectedTab={this.state.selectedTab}>
       <Icon.TabBarItem
@@ -80,22 +80,3 @@ export default class Root extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
