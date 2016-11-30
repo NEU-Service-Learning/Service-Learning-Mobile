@@ -53,10 +53,17 @@ export default class InfoScreen extends Component {
           value={this.state.username}
           />
         </View>
-        <View style={styles.buttonContainer}>
-          <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
-          </TouchableHighlight>
+        <View style={styles.nav}>
+          <View style={styles.back}>
+            <TouchableHighlight style={styles.button}  onPress={() => this.props.navigator.pop()}>
+              <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
+            </TouchableHighlight>
+          </View>
+          <View style={styles.next}>
+            <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
+              <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
+            </TouchableHighlight>
+          </View>
         </View>
       </View>
     );
@@ -91,5 +98,20 @@ const styles = StyleSheet.create({
     borderRadius: 64,
     width: 100,
     height: 40
-  }
+  },
+  nav: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  back: {
+    justifyContent:'flex-start',
+    flexDirection: 'row',
+    flex: 1
+  },
+  next: {
+    justifyContent:'flex-end',
+    flexDirection: 'row',
+    flex: 1
+  },
 });

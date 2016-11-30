@@ -87,6 +87,10 @@ export default class ClassSelectScreen extends Component {
     })
   }
 
+  back() {
+    this.props.navigator.pop();
+  }
+
   render() {
     const shownClasses = classes.filter((classData) => {
       var show = this.state.searchText.length != 0 &&
@@ -109,10 +113,17 @@ export default class ClassSelectScreen extends Component {
             header="Added Classes"
             row={this.renderRow(false, this.onRemoveClass.bind(this))}
             />
-          <View style={styles.next} >
-            <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
-              <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
-            </TouchableHighlight>
+          <View style={styles.nav} >
+            <View style={styles.back}>
+              <TouchableHighlight style={styles.button}  onPress={() => this.back()}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
+              </TouchableHighlight>
+            </View>
+            <View style={styles.next}>
+              <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
+              </TouchableHighlight>
+            </View>
           </View>
       </View>
     );
@@ -126,9 +137,19 @@ const styles = StyleSheet.create({
     margin: 16,
     justifyContent: 'space-between'
   },
-  next: {
+  nav: {
     flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  back: {
+    justifyContent:'flex-start',
+    flexDirection: 'row',
+    flex: 1
+  },
+  next: {
     justifyContent:'flex-end',
+    flexDirection: 'row',
+    flex: 1
   },
   button: {
     alignItems: 'center',
