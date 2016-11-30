@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import { Title, Icon, Header, Button } from 'native-base';
+import Checkbox from 'react-native-checkbox';
 
 import Dropmenu from './dropmenu';
 import AndroidDatePicker from './datepicker.android';
@@ -24,6 +25,7 @@ export default class ManualTracking extends Component {
 
     this.state = {
     	notes: "Enter notes here",
+    	group_log: false,
     }
   }
 
@@ -97,6 +99,14 @@ export default class ManualTracking extends Component {
         onChangeText={(text) => this.setState({notes: text})}
         value = {this.state.notes} />
       </View>
+
+      <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
+      <Checkbox
+        label='Log hours for entire group'
+  			checked={this.state.group_log}
+  			onChange={(checked) => this.setState({group_log: checked})}
+  	  />
+  	  </View>
 
       <Button
         style={styles.button}
