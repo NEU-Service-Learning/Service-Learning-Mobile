@@ -61,7 +61,7 @@ export default class SLTracker extends Component {
     // Add a case for your screen in the 'renderScene' function
     return (
       <Navigator
-        initialRoute={{ title: 'ManualTracking'}}
+        initialRoute={{ title: 'LogIn'}}
         renderScene={this.renderScene}
       />
     );

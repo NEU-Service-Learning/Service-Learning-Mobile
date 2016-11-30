@@ -43,7 +43,7 @@ export default class ProjectSelectScreen extends Component {
   navigate() {
    this.props.navigator.push({
      title: 'Dashboard'
-   })
+   });
   }
 
   render() {
@@ -53,6 +53,7 @@ export default class ProjectSelectScreen extends Component {
     return(
       <View style={styles.container}>
         <SearchTable
+          style={{marginTop: 38}}
           data={shownProjects}
           header="Avaliable Projects"
           row={this.renderRow(true, this.onAddProject.bind(this))} />
@@ -60,11 +61,18 @@ export default class ProjectSelectScreen extends Component {
           data={this.state.selectedProjects}
           header="Added Projects"
           row={this.renderRow(false, this.onRemoveProject.bind(this))} />
-        <View style={styles.next} >
-          <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}> Finish </Text>
-          </TouchableHighlight>
-        </View>
+        <View style={styles.nav} >
+            <View style={styles.back}>
+              <TouchableHighlight style={styles.button}  onPress={() => this.props.navigator.pop()}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
+              </TouchableHighlight>
+            </View>
+            <View style={styles.next}>
+              <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}> Finish </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
       </View>
     )
   }
@@ -77,9 +85,19 @@ const styles = StyleSheet.create({
     paddingTop: 24,
     justifyContent: 'space-between',
   },
-  next: {
+  nav: {
     flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  back: {
+    justifyContent:'flex-start',
+    flexDirection: 'row',
+    flex: 1
+  },
+  next: {
     justifyContent:'flex-end',
+    flexDirection: 'row',
+    flex: 1
   },
   button: {
     alignItems: 'center',
