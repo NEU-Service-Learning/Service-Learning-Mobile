@@ -11,12 +11,13 @@ import {
   Platform,
 } from 'react-native';
 
-import { Title, Icon, Header, Button } from 'native-base';
+import { Title, Header, Button } from 'native-base';
 import Checkbox from 'react-native-checkbox';
 
 import Dropmenu from './dropmenu';
 import AndroidDatePicker from './datepicker.android';
 import AndroidTimePicker from './timepicker.android';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class ManualTracking extends Component {
 
@@ -33,12 +34,16 @@ export default class ManualTracking extends Component {
     this.props.navigator.push({title: 'Dashboard'});
   }
 
+  back() {
+    this.props.navigator.pop();
+  }
+
 	render() {
 		return (
 			<View>
 			<Header>
-			  <Button transparent>
-          <Icon name='ios-arrow-back' onPress={() => this.props.navigator.pop()}/>
+			  <Button transparent onPress={() => this.back()}>
+          <Icon name='arrow-left' size={30}/>
         </Button>
         <Title>Log Hours</Title>
         <View style={{padding:10}} />
@@ -49,7 +54,7 @@ export default class ManualTracking extends Component {
         mode = {"project"}
       />
 
-      {Platform.OS === 'ios' ? 
+      {Platform.OS === 'ios' ?
 
       // IOS DATE PICKING
       <View>
@@ -67,26 +72,26 @@ export default class ManualTracking extends Component {
         text = {"End Time"}
         mode = {"time"}
       /></View> :
-        
+
       // ANDROID DATE PICKING
       <View>
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
     	  <Text>Date</Text>
     	  <AndroidDatePicker />
-      </View> 
+      </View>
 
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
     	  <Text>Start Time</Text>
     	  <AndroidTimePicker />
-      </View> 
+      </View>
 
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
     	  <Text>End Time</Text>
     	  <AndroidTimePicker />
-      </View> 
+      </View>
 
       </View>}
-    
+
       <Dropmenu
         text = {"Category"}
         mode = {"category"}
@@ -131,10 +136,10 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   input: {
-    height: 30, 
-    justifyContent: 'center', 
-    padding: 5, 
-    borderColor: 'gray', 
+    height: 30,
+    justifyContent: 'center',
+    padding: 5,
+    borderColor: 'gray',
     borderWidth: 1,
     marginVertical: 10,
     backgroundColor: '#F0F0F0'
