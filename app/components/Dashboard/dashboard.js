@@ -50,18 +50,4 @@ export default class Dashboard extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 64,
-    width: 250,
-    marginTop: 50,
-    marginBottom: 50,
-    height: 60,
-  }
-});
-
 module.exports = Dashboard;
