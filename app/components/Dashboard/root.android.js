@@ -9,7 +9,7 @@ import {
   Navigator
 } from 'react-native';
 
-import { Title, Button, Icon, Header, Container, Content } from 'native-base';
+import { Title, Button, Header, Container, Content } from 'native-base';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
