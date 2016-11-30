@@ -10,16 +10,16 @@ import {
 
 var style = require('../../Styles/styles');
 
-export default class ClockIn extends Component {
+export default class Settings extends Component {
   render() {
     return(
       <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
       <Text>
-      Clock In View
+    Settings
       </Text>
       </View>
     )
   }
 }
 
-module.exports = ClockIn;
+module.exports = Settings;

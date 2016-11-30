@@ -6,37 +6,44 @@ import {
   View,
   Text,
   ScrollView,
-  TouchableHighlight
+  TouchableHighlight,
+  ListView
 } from 'react-native';
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
 
-export default class Dashboard extends Component {
+var style = require('../../Styles/styles');
 
+export default class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    var dsProj = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+       projects: dsProj.cloneWithRows([
+                    'Time Tracker', 'Project 1', 'Project 2',
+              ]),
+    }
+  }
   navigate() {
     this.props.navigator.push({title: 'ManualTracking'});
   }
-
   render() {
     return(
-      <View style={styles.container}>
-        <View>
-          <TouchableHighlight style={styles.button} onPress={this.navigate.bind(this)}>
-          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}> Clock In </Text>
+      <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
+        <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
+          <TouchableHighlight style={StyleSheet.flatten([style.button, style.height55])} onPress={this.navigate.bind(this)}>
+          <Text style={{fontWeight: 'bold', fontSize: 30}}> Clock In </Text>
           </TouchableHighlight>
         </View>
-        <View style={styles.card}>
-          <Card>
-          <CardItem button style={styles.card} onPress={() => this.navigate()}>
-          <Text style={{color: 'white', fontWeight: 'bold'}}>Time Tracker</Text>
-          </CardItem>
-          <CardItem button style={styles.card} onPress={() => this.navigate()}>
-          <Text style={{color: 'white', fontWeight: 'bold'}}>Project 1</Text>
-          </CardItem>
-          <CardItem button style={styles.card} onPress={() => this.navigate()}>
-          <Text style={{color: 'white', fontWeight: 'bold'}}>Project 2</Text>
-          </CardItem>
-          </Card>
+        <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
+          <ListView
+            dataSource={this.state.projects}
+            renderRow={(rowData) =>
+              <TouchableHighlight style={StyleSheet.flatten([style.button, style.height55])}
+                onPress={()=> this.navigate()}>
+                <Text style={{fontWeight: 'bold'}}>{rowData}</Text>
+              </TouchableHighlight>}
+          />
         </View>
       </View>
     );
@@ -44,10 +51,6 @@ export default class Dashboard extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center'
-  },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -58,12 +61,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 50,
     height: 60,
-  },
-  card: {
-    flexDirection: 'row',
-    backgroundColor: '#008080',
-    borderRadius: 64,
-    width: 300,
   }
 });
 

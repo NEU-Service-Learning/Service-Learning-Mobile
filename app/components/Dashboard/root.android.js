@@ -11,10 +11,11 @@ import {
 
 import { Title, Button, Icon, Header, Container, Content } from 'native-base';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Dashboard from './dashboard';
 import Summary from './summary';
+import Settings from './settings';
 
 
 export default class Root extends Component {
@@ -30,13 +31,14 @@ export default class Root extends Component {
       <View style={{flex: 1}}>
         <Header>
             <Button transparent>
-              <Icon name='ios-menu' />
+              <Icon name='bars' size={30} />
             </Button>
             <Title style={{color: '#008080', fontWeight: 'bold'}}>Service-Learning</Title>
         </Header>
               <ScrollableTabView>
                   <Dashboard tabLabel='Dashboard' navigator={this.props.navigator}/>
                   <Summary tabLabel='Summary' navigator={this.props.navigator}/>
+                  <Settings tabLabel='Settings' navigator={this.props.navigator}/>
               </ScrollableTabView>
       </View>
     );

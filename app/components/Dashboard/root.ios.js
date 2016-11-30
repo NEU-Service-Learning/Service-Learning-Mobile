@@ -15,6 +15,8 @@ import Summary from './summary';
 import DatePicker from '../Tracking/manual';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { Title, Button, Header, Container, Card, CardItem } from 'native-base';
+
 var style = require('../../Styles/styles');
 
 export default class Root extends Component {
@@ -27,6 +29,16 @@ export default class Root extends Component {
 
   render() {
     return (
+      <View style={{flex: 1}}>
+      <Header>
+      <Button transparent>
+      <Icon name='bars' size={30} />
+      </Button>
+      <Button transparent onPress={() => {this.props.navigator.push({ title: 'Settings' })}}>
+      <Icon name='cog' size={30} />
+      </Button>
+      <Title>Dashboard</Title>
+      </Header>
       <TabBarIOS selectedTab={this.state.selectedTab}>
       <Icon.TabBarItem
         title="Dashboard"
@@ -59,12 +71,12 @@ export default class Root extends Component {
         onPress={() => {
             this.setState({
               selectedTab: 'Summary'
-      })
-      }}>
+      })}}>
       <Summary navigator={this.props.navigator} />
       </Icon.TabBarItem>
-
       </TabBarIOS>
+      </View>
+
     );
   }
 }
