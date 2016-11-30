@@ -51,17 +51,7 @@ export default class Root extends Component {
       })}}>
       <Dashboard navigator={this.props.navigator} />
       </Icon.TabBarItem>
-      <Icon.TabBarItem
-        title="Clock In"
-        iconName="clock-o"
-        selectedIconName="clock-o"
-        selected={this.state.selectedTab === 'ManualTracking'}
-        onPress={() => {
-            this.setState({
-              selectedTab: 'ManualTracking'
-      })}}>
-      <DatePicker navigator={this.props.navigator}/>
-      </Icon.TabBarItem>
+
 
       <Icon.TabBarItem
         title='Summary'
