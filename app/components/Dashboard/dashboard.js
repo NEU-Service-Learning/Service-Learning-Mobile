@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
       <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
         <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
           <TouchableHighlight style={StyleSheet.flatten([style.button, style.height55])} onPress={this.navigate.bind(this)}>
-          <Text style={{fontWeight: 'bold', fontSize: 30}}> Clock In </Text>
+          <Text style={{fontSize: 30}}> Clock In </Text>
           </TouchableHighlight>
         </View>
         <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
@@ -41,7 +41,7 @@ export default class Dashboard extends Component {
             renderRow={(rowData) =>
               <TouchableHighlight style={StyleSheet.flatten([style.button, style.height55])}
                 onPress={()=> this.navigate()}>
-                <Text style={{fontWeight: 'bold'}}>{rowData}</Text>
+                <Text>{rowData}</Text>
               </TouchableHighlight>}
           />
         </View>
