@@ -21,6 +21,7 @@ import Root from './app/components/Dashboard/root';
 import Summary from './app/components/Dashboard/summary';
 import Details from './app/components/Details/details';
 import ManualTracking from './app/components/Tracking/manual';
+import Settings from './app/components/Dashboard/settings';
 
 export default class SLTracker extends Component {
 
@@ -49,6 +50,9 @@ export default class SLTracker extends Component {
      }
      if(route.title == 'EnterInfo') {
        return <InfoScreen navigator={navigator} />
+     }
+     if(route.title == 'Settings') {
+       return <Settings navigator={navigator} />
      }
    }
 
