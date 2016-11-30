@@ -148,6 +148,7 @@ export default class Dashboard extends Component {
            </Card>
           </Content>
       </Container>
+
     );
   }
 }
