@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
 
-var style = require('../../../Styles/styles');
+var style = require('../../Styles/styles');
 
 export default class LogInScreen extends Component {
 

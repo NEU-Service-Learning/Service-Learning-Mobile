@@ -13,7 +13,7 @@ import {
   Navigator
 } from 'react-native';
 
-import LogInScreen from './app/components/LogIn/LogInScreen/index';
+import LogInScreen from './app/components/LogIn/index';
 import InfoScreen from './app/components/SignUp/InfoScreen/index';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
 import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
