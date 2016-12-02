@@ -53,7 +53,7 @@ export default class LogInScreen extends Component {
             <Text style={{color: 'blue', textDecorationLine: 'underline'}}> Forgot Password </Text>
           </TouchableHighlight>
         </View>
-        <View style={styles.emptyContainer}>
+        <View style={style.container}>
         </View>
       </View>
     );
