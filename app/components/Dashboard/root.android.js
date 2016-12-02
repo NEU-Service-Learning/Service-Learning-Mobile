@@ -29,17 +29,6 @@ export default class Root extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Header>
-            <Button transparent>
-              <Icon name='ios-menu' />
-            </Button>
-            <Title style={{color: '#FFFFFF', fontWeight: 'bold'}}>Service-Learning</Title>
-        </Header>
-              <ScrollableTabView>
-                  <Dashboard tabLabel='Dashboard' navigator={this.props.navigator}/>
-                  <Summary tabLabel='Summary' navigator={this.props.navigator}/>
-              </ScrollableTabView>
-      </View>
        <Header>
            <Button transparent>
              <Icon name='bars' size={30} />

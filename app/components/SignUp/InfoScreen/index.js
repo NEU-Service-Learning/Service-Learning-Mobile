@@ -55,10 +55,6 @@ export default class InfoScreen extends Component {
           value={this.state.username}
           />
         </View>
-        <View style={StyleSheet.flatten([style.imputContainer, style.alignCenter])}>
-          <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}> Next </Text>
-          </TouchableHighlight>
         <View style={styles.nav}>
           <View style={styles.back}>
             <TouchableHighlight style={style.button}  onPress={() => this.props.navigator.pop()}>

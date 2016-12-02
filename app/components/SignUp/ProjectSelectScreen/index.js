@@ -62,14 +62,9 @@ export default class ProjectSelectScreen extends Component {
           data={this.state.selectedProjects}
           header="Added Projects"
           row={this.renderRow(false, this.onRemoveProject.bind(this))} />
-        <View style={style.next} >
-          <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}> Finish </Text>
-          </TouchableHighlight>
-        </View>
         <View style={styles.nav} >
             <View style={styles.back}>
-              <TouchableHighlight style={styles.button}  onPress={() => this.props.navigator.pop()}>
+              <TouchableHighlight style={style.button}  onPress={() => this.props.navigator.pop()}>
                 <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
               </TouchableHighlight>
             </View>

@@ -100,7 +100,7 @@ export default class ManualTracking extends Component {
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
       <Text>Notes</Text>
       <TextInput
-        style={styles.input}
+        style={style.input}
         onChangeText={(text) => this.setState({notes: text})}
         value = {this.state.notes} />
       </View>
@@ -126,3 +126,15 @@ export default class ManualTracking extends Component {
 		)
 	}
 }
+
+const styles = StyleSheet.create({
+   input: {
+     height: 30,
+     justifyContent: 'center',
+     padding: 5,
+     borderColor: 'gray',
+     borderWidth: 1,
+     marginVertical: 10,
+     backgroundColor: '#F0F0F0'
+   },
+ });

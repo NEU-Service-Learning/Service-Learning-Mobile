@@ -115,10 +115,6 @@ export default class ClassSelectScreen extends Component {
             header="Added Classes"
             row={this.renderRow(false, this.onRemoveClass.bind(this))}
             />
-          <View style={style.next}>
-            <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
-              <Text style={{fontWeight: 'bold'}}> Next </Text>
-            </TouchableHighlight>
           <View style={styles.nav} >
             <View style={styles.back}>
               <TouchableHighlight style={style.button}  onPress={() => this.back()}>
@@ -131,7 +127,7 @@ export default class ClassSelectScreen extends Component {
               </TouchableHighlight>
             </View>
           </View>
-      </View>
+          </View>
     );
   }
 }
