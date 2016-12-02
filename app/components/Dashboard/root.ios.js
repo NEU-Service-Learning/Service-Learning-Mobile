@@ -17,7 +17,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Title, Button, Header, Container, Card, CardItem } from 'native-base';
 
-var style = require('../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class Root extends Component {
   constructor(props) {
