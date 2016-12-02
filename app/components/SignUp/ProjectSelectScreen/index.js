@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, ActivityIndicator, TouchableHighlight } from 'react-native';
 
 import {SearchTable, SearchRow} from '../searchTable';
 import api from '../../api/index';
+import style from '../../../Styles/styles';
 
 
 export default class ProjectSelectScreen extends Component {
@@ -12,20 +13,23 @@ export default class ProjectSelectScreen extends Component {
     this.state = {error: false, loading: true, projects: [], selectedProjects: []}
   }
 
-  componentWillMount = async () => {
+  componentWillMount() {
   try {
-    let projects = []
-    this.props.classes.forEach(async (someClass) => {
-      const classProjects = await api.getProjectForCourse(someClass.id);
-      classProjects.forEach((project) => {
-        console.log("p");
-        console.log(project);
-        projects.push(project);
-      })
+    let projects = [];
+    let promises = [];
+    this.props.classes.forEach((someClass) => {
+      var projectPromise = api.getProjectForCourse(someClass.id);
+      promises.push(projectPromise);
     });
-    console.log("p2");
-    console.log(projects);
-    this.setState({loading: false, projects: projects});
+    Promise.all(promises).then((data) => {
+      data.forEach((classProjects) => {
+        classProjects.forEach((project) => {
+          console.log(project)
+          projects.push(project);
+        })
+      })
+      this.setState({loading: false, projects: projects});
+    });
   } catch (e) {
     this.setState({loading: false, error: true})
     }
