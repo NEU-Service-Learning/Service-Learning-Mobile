@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
 
-import {SearchTable, SearchRow} from '../searchTable'
+import {SearchTable, SearchRow} from './searchTable'
 import SearchBar from './searchBar'
 
 var style = require('../../styles/styles');
@@ -118,12 +118,12 @@ export default class ClassSelectScreen extends Component {
           <View style={styles.nav} >
             <View style={styles.back}>
               <TouchableHighlight style={style.button}  onPress={() => this.back()}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
+                <Text style={style.text}> Back </Text>
               </TouchableHighlight>
             </View>
             <View style={styles.next}>
               <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
+                <Text style={style.text}> Next </Text>
               </TouchableHighlight>
             </View>
           </View>

@@ -14,9 +14,9 @@ import {
 } from 'react-native';
 
 import LogInScreen from './app/components/LogIn/index';
-import InfoScreen from './app/components/SignUp/InfoScreen/index';
-import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
-import ProjectSelectScreen from './app/components/SignUp/ProjectSelectScreen/index';
+import InfoScreen from './app/components/SignUp/info';
+import ClassSelectScreen from './app/components/SignUp/classSelect';
+import ProjectSelectScreen from './app/components/SignUp/project';
 import Root from './app/components/Dashboard/root';
 import Summary from './app/components/Dashboard/summary';
 import Details from './app/components/Details/details';

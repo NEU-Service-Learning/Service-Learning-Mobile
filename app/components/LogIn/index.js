@@ -32,7 +32,7 @@ export default class LogInScreen extends Component {
         <View style={style.inputContainer}>
           <Text style={style.textCenter}>Email</Text>
           <TextInput
-          style={{textAlign : 'center', marginBottom: 30}}
+          style={{marginBottom: 30}}
           onChangeText={(username) => this.setState({username})}
           value={this.state.username}
           />

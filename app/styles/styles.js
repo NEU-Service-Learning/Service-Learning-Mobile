@@ -30,7 +30,7 @@ module.exports = StyleSheet.create({
     borderRadius: 64,
     marginBottom: 4,
     marginTop: 4,
-    width: 250,
+    padding: 10,
   },
   members : {
     flexDirection: 'row',
@@ -66,4 +66,8 @@ module.exports = StyleSheet.create({
   font20: {
     fontSize:20
   },
+  inputContainer: {
+    margin: 30,
+   justifyContent : 'center',
+ },
 });
