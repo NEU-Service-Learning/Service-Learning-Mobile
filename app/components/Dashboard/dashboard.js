@@ -35,43 +35,6 @@ var projects = [
   },
 ]
 
-/*
-<View style={StyleSheet.flatten([style.container, style.alignCenter])}>
-  <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
-    <TouchableHighlight style={StyleSheet.flatten([style.button, style.height55])} onPress={this.navigate.bind(this)}>
-    <Text style={{fontWeight: 'bold', fontSize: 30}}> Clock In </Text>
-    </TouchableHighlight>
-  </View>
-  <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
-    <ListView
-      dataSource={this.state.projects}
-      renderRow={(rowData) =>
-        <TouchableHighlight style={StyleSheet.flatten([style.button, style.height55])}
-          onPress={()=> this.navigate()}>
-          <Text style={{fontWeight: 'bold'}}>{rowData}</Text>
-        </TouchableHighlight>}
-    />
-  </View>
-</View>
-*/
-
-/*
-<View style={{flex: 1}}>
-  <View style={{flex: 1}}>
-  <MapView
-    style={styles.map}
-    initialRegion={{
-      latitude: 37.78825,
-      longitude: -122.4324,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    }}
-  />
-</View>
-<View style={{flex: 1}}><Text>dfdsf</Text></View>
-</View>
-*/
-
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -87,8 +50,8 @@ export default class Dashboard extends Component {
   }
   render() {
     return(
-      <Container >
-          <Content style={{margin: 16}}>
+      <ScrollView>
+          <View style={{margin: 16}}>
               <Card>
                   <CardItem header>
                       <Text>Auto Tracking</Text>
@@ -146,8 +109,8 @@ export default class Dashboard extends Component {
                    ))}
 
            </Card>
-          </Content>
-      </Container>
+          </View>
+      </ScrollView>
 
     );
   }

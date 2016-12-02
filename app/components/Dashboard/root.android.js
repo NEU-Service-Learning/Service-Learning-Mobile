@@ -33,7 +33,7 @@ export default class Root extends Component {
            <Button transparent>
              <Icon name='bars' size={30} />
            </Button>
-           <Title style={{color: '#008080 ', fontWeight: 'bold'}}>Service-Learning</Title>
+           <Title style={{color: '#008080', fontWeight: 'bold'}}>Service-Learning</Title>
            <Button transparent onPress={() => {this.props.navigator.push({ title: 'Settings' })}}>
              <Icon name='cog' size={30} />
            </Button>

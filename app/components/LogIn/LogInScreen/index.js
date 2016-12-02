@@ -29,28 +29,27 @@ export default class LogInScreen extends Component {
   render() {
     return (
       <View style={style.container}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}>Email</Text>
+        <View style={style.inputContainer}>
+          <Text style={style.textCenter}>Email</Text>
           <TextInput
-          style={styles.input}
+          style={{textAlign : 'center', marginBottom: 30}}
           onChangeText={(username) => this.setState({username})}
           value={this.state.username}
           />
-          <Text style={styles.text}>Password</Text>
+          <Text style={style.textCenter}>Password</Text>
           <TextInput
-          style={styles.text}
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
           />
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={StyleSheet.flatten([style.inputContainer, style.alignCenter])}>
           <TouchableHighlight style={style.button}  onPress={() => this.navigateLogIn()}>
             <Text style={{fontSize: 30, fontWeight: 'bold'}}> Log In </Text>
           </TouchableHighlight>
           <TouchableHighlight style={style.button}  onPress={() => this.navigateSignUp()}>
             <Text style={{fontSize: 30, fontWeight: 'bold'}}> Sign Up </Text>
           </TouchableHighlight>
-          <TouchableHighlight style={style.margin16}  onPress={() => this.navigateSignUp()}>
+          <TouchableHighlight  onPress={() => this.navigateSignUp()}>
             <Text style={{color: 'blue', textDecorationLine: 'underline'}}> Forgot Password </Text>
           </TouchableHighlight>
         </View>
@@ -58,27 +57,3 @@ export default class LogInScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 16,
-    justifyContent : 'center'
-  },
-  inputContainer: {
-    margin: 30,
-    justifyContent : 'center',
-  },
-  buttonContainer: {
-    margin: 30,
-    justifyContent : 'center',
-    alignItems: 'center'
-  },
-  input: {
-    textAlign : 'center',
-    marginBottom: 30
-  },
-  text: {
-    textAlign : 'center'
-  },
-});
