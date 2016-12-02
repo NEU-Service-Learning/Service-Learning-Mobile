@@ -76,10 +76,6 @@ module.exports = StyleSheet.create({
   font20: {
     fontSize:20
   },
-  inputContainer: {
-    margin: 30,
-   justifyContent : 'center',
- },
   textCenter: {
     textAlign : 'center'
   },
