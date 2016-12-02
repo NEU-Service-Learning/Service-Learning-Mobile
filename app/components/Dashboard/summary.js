@@ -30,7 +30,7 @@ export default class Summary extends Component {
        work: dsWork.cloneWithRows([
                     'Oct 17: 1hr Direct Work','Oct 18: 2hr Group','Oct 19: 3hr Individual',
               ]),
-      project: 'Time Tracker',
+      project: 'time Tracker',
       projects: [{label:'Time Tracker', key:'0'},
                       {label:'Project 1', key:'1'},
                       {label:'Project 2', key:'2'}]
