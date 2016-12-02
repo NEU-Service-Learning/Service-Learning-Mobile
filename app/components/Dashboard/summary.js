@@ -39,24 +39,24 @@ export default class Summary extends Component {
   render() {
     return(
       <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
-        <Text style={StyleSheet.flatten([style.header, style.font30])}>Course</Text>
-        <TouchableHighlight style={StyleSheet.flatten([style.button, style.height55])}>
-          <Text style={style.font30}>CS4500</Text>
+        <Text style={StyleSheet.flatten([style.subheader, style.margin7])}>Course</Text>
+        <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}>
+          <Text style={style.buttonText}>CS4500</Text>
         </TouchableHighlight>
-        <Text style={StyleSheet.flatten([style.header, style.font25])}>Team Members</Text>
+        <Text style={StyleSheet.flatten([style.subheader, style.margin7])}>Team Members</Text>
         <ListView
           dataSource={this.state.team}
           renderRow={(rowData) => <Text style={style.members}>{rowData}</Text>}>
         </ListView>
-        <Progress style={{width:250}} styleAttr="Horizontal" indeterminate={false} progress={.5}/>
-        <Text style={StyleSheet.flatten([style.header, style.font30])}>Hours Completed: 6</Text>
-        <Text style={style.font20}>Class Average: 7.2</Text>
+        <Progress style={{width:250, marginBottom: 10}} styleAttr="Horizontal" indeterminate={false} progress={.5}/>
+        <Text style={StyleSheet.flatten([style.header, style.font15])}>Hours Completed: 6</Text>
+        <Text style={StyleSheet.flatten([style.header, style.font15])}>Class Average: 7.2</Text>
         <ListView
           dataSource={this.state.work}
           renderRow={(rowData) =>
             <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}
               onPress={()=> this.navigate.bind(this)}>
-              <Text>{rowData}</Text>
+              <Text style={style.buttonText}>{rowData}</Text>
             </TouchableHighlight>}
         />
       </View>

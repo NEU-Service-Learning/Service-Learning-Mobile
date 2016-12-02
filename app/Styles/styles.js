@@ -7,13 +7,15 @@ var {
 } = React;
 
 module.exports = StyleSheet.create({
-
   container: {
     flex: 1,
     justifyContent: 'center',
   },
   margin16: {
     margin: 16,
+  },
+  margin7: {
+    margin: 7,
   },
   alignCenter: {
     alignItems: 'center'
@@ -26,29 +28,28 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 64,
-    marginBottom: 4,
-    marginTop: 4,
+    backgroundColor: '#BCEE68',
+    borderRadius: 60,
+    marginBottom: 7,
+    marginTop: 7,
     padding: 10,
   },
   buttonWidth: {
-    width: 250,
+    width: 300,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
   },
   members : {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 64,
     marginBottom: 1,
     marginTop: 1,
     width: 250,
-    height: 30,
-  },
-  height55 : {
-    height: 55,
-    marginBottom: 10,
-    marginTop: 10
+    height: 20,
   },
   height40 : {
     height: 40,
@@ -61,17 +62,23 @@ module.exports = StyleSheet.create({
     height: 30,
   },
   header : {
-    color: 'black',
-    fontWeight: 'bold'
+    color: '#FF7F00',
+    fontWeight: 'bold',
+    fontSize:20
   },
-  font30 : {
-    fontSize: 30
-  },
-  font25: {
-    fontSize:25
+  subheader : {
+    color: '#878787',
+    fontWeight: 'bold',
+    fontSize:15
   },
   font20: {
     fontSize:20
+  },
+  font15: {
+    fontSize:15
+  },
+  font10: {
+    fontSize:10
   },
   textCenter: {
     textAlign : 'center'
@@ -79,5 +86,58 @@ module.exports = StyleSheet.create({
   next: {
     flexDirection: 'row',
     justifyContent:'flex-end',
+  },
+  nav: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  back: {
+    justifyContent:'flex-start',
+    flexDirection: 'row',
+    flex: 1
+  },
+  next: {
+    justifyContent:'flex-end',
+    flexDirection: 'row',
+    flex: 1
+  },
+  table: {
+    flex: 1,
+    backgroundColor:'#878787',
+    borderRadius: 24,
+    marginBottom: 10,
+    padding: 10
+  },
+  tableHeader: {
+    marginBottom: 5,
+    fontSize: 18,
+    color: 'white',
+    fontWeight: 'bold'
+  },
+  row: {
+    backgroundColor:'#BCEE68',
+    padding: 4,
+    flexDirection:'row',
+    borderRadius: 10,
+    marginBottom: 10,
+    marginTop: 10,
+    height: 50
+  },
+  rowHeader: {
+    flexDirection: 'column',
+    flex: 1
+  },
+  tableHeaderText: {
+    flex: 2,
+    fontSize: 15,
+    color: 'white',
+    fontWeight: 'bold'
+
+  },
+  tableSubHeaderText: {
+    flex: 1,
+    fontSize: 13,
+    color: 'white',
+    fontWeight: 'bold'
   }
 });

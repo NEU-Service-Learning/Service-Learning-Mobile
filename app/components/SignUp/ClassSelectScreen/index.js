@@ -115,15 +115,15 @@ export default class ClassSelectScreen extends Component {
             header="Added Classes"
             row={this.renderRow(false, this.onRemoveClass.bind(this))}
             />
-          <View style={styles.nav} >
-            <View style={styles.back}>
-              <TouchableHighlight style={style.button}  onPress={() => this.back()}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
+          <View style={StyleSheet.flatten([style.nav])} >
+            <View style={StyleSheet.flatten([style.back])}>
+              <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={() => this.back()}>
+                <Text style={StyleSheet.flatten([style.buttonText])}> Back </Text>
               </TouchableHighlight>
             </View>
-            <View style={styles.next}>
-              <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
+            <View style={StyleSheet.flatten([style.next])}>
+              <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={() => this.navigate()}>
+                <Text style={StyleSheet.flatten([style.buttonText])}> Next </Text>
               </TouchableHighlight>
             </View>
           </View>
@@ -131,20 +131,3 @@ export default class ClassSelectScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  nav: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-  },
-  back: {
-    justifyContent:'flex-start',
-    flexDirection: 'row',
-    flex: 1
-  },
-  next: {
-    justifyContent:'flex-end',
-    flexDirection: 'row',
-    flex: 1
-  },
-});

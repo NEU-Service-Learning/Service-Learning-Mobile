@@ -47,7 +47,7 @@ export default class ManualTracking extends Component {
 			  <Button transparent onPress={() => this.back()}>
           <Icon name='arrow-left' size={30}/>
         </Button>
-        <Title>Log Hours</Title>
+        <Title style={StyleSheet.flatten([style.header, style.alignCenter, style.font20])}>Log Hours</Title>
         <View style={{padding:10}} />
       </Header>
       <ScrollView>
@@ -115,7 +115,7 @@ export default class ManualTracking extends Component {
       <Button
         style={StyleSheet.flatten([style.button, style.alignCenter, style.height50])}
         onPress={this._onPressButton.bind(this)}>
-        <Text style={{fontSize: 20}}>Log Hours</Text>
+        <Text style={StyleSheet.flatten([style.buttonText])}> Submit </Text>
       </Button>
 
       <View style={{padding:10}} />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, TextInput } from 'react-native';
+var style = require('../../../Styles/styles');
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ export default class SearchBar extends Component {
 
   render() {
     return(
-      <View style={styles.container}>
+      <View style={StyleSheet.flatten([style.alignCenter, style.margin16])}>
         <TextInput
           style={styles.input}
           placeholder="Search for a class here!"
