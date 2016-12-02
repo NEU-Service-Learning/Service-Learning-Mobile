@@ -83,13 +83,6 @@ export default class Dropmenu extends Component {
         date={this.state.date}
         mode={this.props.mode}
         timeZoneOffsetInMinutes={this.props.timeZoneOffsetInHours * 60}
-<<<<<<< HEAD
-        onDateChange={this.onDateChange.bind(this)}
-      /> ) }
-
-    var picker = (
-     <View>
-=======
         onDateChange={this.onDateChange.bind(this)}>
       </DatePickerIOS> ) }
 
@@ -98,7 +91,6 @@ export default class Dropmenu extends Component {
         <TouchableOpacity onPress={ this.toggleVisible.bind(this)} style={{marginRight: 20, alignItems: 'flex-end'}}>
           <Text>Done</Text>
         </TouchableOpacity>
->>>>>>> eb11998061d1639a2763047fe46ac0f7b43b1c8c
             {menu}
       </View>
      )

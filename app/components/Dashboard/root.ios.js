@@ -31,9 +31,7 @@ export default class Root extends Component {
     return (
       <View style={{flex: 1}}>
       <Header>
-      <Button transparent>
-      <Icon name='bars' size={25} />
-      </Button>
+      <Button transparent> </Button>
       <Button transparent onPress={() => {this.props.navigator.push({ title: 'Settings' })}}>
       <Icon name='cog' size={25} />
       </Button>
