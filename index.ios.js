@@ -36,18 +36,6 @@ export default class SLTracker extends Component {
      if(route.title == 'Dashboard') {
        return <Root navigator={navigator} />
      }
-<<<<<<< HEAD
-=======
-     if(route.title == 'Summary') {
-       return <Summary navigator={navigator} />
-     }
-     if(route.title == 'Details') {
-       return <Details navigator={navigator} />
-    }
-     if(route.title == 'ManualTracking') {
-       return <ManualTracking navigator={navigator} />
-     }
->>>>>>> eb11998061d1639a2763047fe46ac0f7b43b1c8c
      if(route.title == 'LogIn') {
        return <LogInScreen navigator={navigator} />
      }
