@@ -29,7 +29,10 @@ export default class LogInScreen extends Component {
   render() {
     return (
       <View style={style.container}>
-        <View style={style.inputContainer}>
+          <Image style={{alignSelf: 'center', marginTop: 3}}
+                source={require('../../assets/img/Logo.png')}
+          />
+          <View style={style.inputContainer}>
           <Text style={style.textCenter}>Email</Text>
           <TextInput
           style={{textAlign : 'center', marginBottom: 30}}
