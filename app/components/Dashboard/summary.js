@@ -30,7 +30,7 @@ export default class Summary extends Component {
        work: dsWork.cloneWithRows([
                     'Oct 17: 1hr Direct Work','Oct 18: 2hr Group','Oct 19: 3hr Individual',
               ]),
-      project: 'time Tracker',
+      project: 'Time Tracker',
       projects: [{label:'Time Tracker', key:'0'},
                       {label:'Project 1', key:'1'},
                       {label:'Project 2', key:'2'}]
@@ -44,12 +44,12 @@ export default class Summary extends Component {
   render() {
     return(
       <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
-        <Text style={StyleSheet.flatten([style.header, style.font30])}>Course</Text>
+        <Text style={StyleSheet.flatten([style.header, style.font30])}>Project</Text>
         <Picker
-          style={StyleSheet.flatten([style.button, style.height55])}
+          style={StyleSheet.flatten([style.button, style.height55, {width:  250}])}
           selectedValue={this.state.project}
           onValueChange={(proj) => this.setState({project: proj})}>
-          { this.state.projects.map((proj) => (
+          {this.state.projects.map((proj) => (
             <Picker.Item key={proj.key} label={proj.label} value={proj.label}/>)) }
         </Picker>
         <Text style={StyleSheet.flatten([style.header, style.font25])}>Team Members</Text>
