@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
-import {SearchTable, SearchRow} from '../searchTable'
+import {SearchTable, SearchRow} from '../searchTable';
 
+var style = require('../../../Styles/styles');
 
 export default class ProjectSelectScreen extends Component {
 
@@ -51,7 +52,7 @@ export default class ProjectSelectScreen extends Component {
        return !this.state.selectedProjects.includes(project);
     });
     return(
-      <View style={styles.container}>
+      <View style={StyleSheet.flatten([style.container, style.margin16])}>
         <SearchTable
           style={{marginTop: 38}}
           data={shownProjects}
@@ -63,12 +64,12 @@ export default class ProjectSelectScreen extends Component {
           row={this.renderRow(false, this.onRemoveProject.bind(this))} />
         <View style={styles.nav} >
             <View style={styles.back}>
-              <TouchableHighlight style={styles.button}  onPress={() => this.props.navigator.pop()}>
+              <TouchableHighlight style={style.button}  onPress={() => this.props.navigator.pop()}>
                 <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
               </TouchableHighlight>
             </View>
             <View style={styles.next}>
-              <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
+              <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
                 <Text style={{color: 'white', fontWeight: 'bold'}}> Finish </Text>
               </TouchableHighlight>
             </View>
@@ -79,12 +80,6 @@ export default class ProjectSelectScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 16,
-    paddingTop: 24,
-    justifyContent: 'space-between',
-  },
   nav: {
     flexDirection: 'row',
     alignItems: 'flex-end',
@@ -99,12 +94,4 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1
   },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 64,
-    width: 100,
-    height: 40
-  }
 });

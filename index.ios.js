@@ -43,7 +43,7 @@ export default class SLTracker extends Component {
        return <Details navigator={navigator} />
     }
      if(route.title == 'ManualTracking') {
-      return <ManualTracking navigator={navigator} />
+       return <ManualTracking navigator={navigator} />
      }
      if(route.title == 'LogIn') {
        return <LogInScreen navigator={navigator} />

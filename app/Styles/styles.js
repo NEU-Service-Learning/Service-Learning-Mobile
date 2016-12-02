@@ -12,12 +12,15 @@ module.exports = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-
+  margin16: {
+    margin: 16,
+  },
   alignCenter: {
     alignItems: 'center'
   },
-  margin16: {
-    margin: 16
+  inputContainer: {
+    margin: 30,
+    justifyContent : 'center',
   },
   button: {
     flexDirection: 'row',
@@ -27,6 +30,9 @@ module.exports = StyleSheet.create({
     borderRadius: 64,
     marginBottom: 4,
     marginTop: 4,
+    padding: 10,
+  },
+  buttonWidth: {
     width: 250,
   },
   members : {
@@ -47,6 +53,10 @@ module.exports = StyleSheet.create({
   height40 : {
     height: 40,
   },
+  height50 : {
+    height: 50,
+    alignSelf: 'center'
+  },
   height30 : {
     height: 30,
   },
@@ -63,4 +73,11 @@ module.exports = StyleSheet.create({
   font20: {
     fontSize:20
   },
+  textCenter: {
+    textAlign : 'center'
+  },
+  next: {
+    flexDirection: 'row',
+    justifyContent:'flex-end',
+  }
 });

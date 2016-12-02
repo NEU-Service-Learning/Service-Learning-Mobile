@@ -5,7 +5,6 @@ import {
   StyleSheet,
   View,
   Text
-
 } from 'react-native';
 
 const styles = StyleSheet.create({
