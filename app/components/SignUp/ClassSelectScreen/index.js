@@ -4,6 +4,8 @@ import {StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-nati
 import {SearchTable, SearchRow} from '../searchTable'
 import SearchBar from './searchBar'
 
+var style = require('../../../Styles/styles');
+
 // Dummy data
 var classes = [
   {
@@ -87,6 +89,10 @@ export default class ClassSelectScreen extends Component {
     })
   }
 
+  back() {
+    this.props.navigator.pop();
+  }
+
   render() {
     const shownClasses = classes.filter((classData) => {
       var show = this.state.searchText.length != 0 &&
@@ -95,7 +101,7 @@ export default class ClassSelectScreen extends Component {
        return show;
     });
     return (
-      <View style={styles.container}>
+      <View style={StyleSheet.flatten([style.container, style.margin16])}>
         <SearchBar
           filterText={this.state.searchText}
           onChangeText={this.handleInput.bind(this)}/>
@@ -109,33 +115,36 @@ export default class ClassSelectScreen extends Component {
             header="Added Classes"
             row={this.renderRow(false, this.onRemoveClass.bind(this))}
             />
-          <View style={styles.next} >
-            <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
-              <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
-            </TouchableHighlight>
+          <View style={styles.nav} >
+            <View style={styles.back}>
+              <TouchableHighlight style={style.button}  onPress={() => this.back()}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
+              </TouchableHighlight>
+            </View>
+            <View style={styles.next}>
+              <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
+              </TouchableHighlight>
+            </View>
           </View>
-      </View>
+          </View>
     );
   }
 }
 
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 16,
-    justifyContent: 'space-between'
+  nav: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  back: {
+    justifyContent:'flex-start',
+    flexDirection: 'row',
+    flex: 1
   },
   next: {
-    flexDirection: 'row',
     justifyContent:'flex-end',
+    flexDirection: 'row',
+    flex: 1
   },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 64,
-    width: 100,
-    height: 40
-  }
 });

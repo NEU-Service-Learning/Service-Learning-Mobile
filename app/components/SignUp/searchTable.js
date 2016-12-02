@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export class SearchTable extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export class SearchTable extends Component {
       return rowRender(piece);
     });
     return(
-      <View style={styles.table}>
+      <View style={[styles.table, this.props.style]}>
       <Text style={styles.header}>{this.props.header}</Text>
       <ScrollView>
         {rows}
@@ -28,15 +29,16 @@ export class SearchRow extends Component {
   }
 
   render() {
-    var type = this.props.type ? 'Add' : 'Remove'
+    var type = this.props.type ? (<Icon size={32} color="green" name="plus-square" onPress={() => this.props.onClicked(this.props.data)}></Icon>)
+    : (<Icon size={32} color="red" name="minus-square" onPress={() => this.props.onClicked(this.props.data)}></Icon>)
     return(
       <View style={styles.row}>
         <View style={styles.rowHeader}>
           <Text style={styles.headerText}>{this.props.header}</Text>
           <Text style={styles.subHeaderText}>{this.props.subHeader}</Text>
         </View>
-        <TouchableOpacity onPress={() => this.props.onClicked(this.props.data)}>
-          <Text>{type}</Text>
+        <TouchableOpacity style={{marginRight: 4}} onPress={() => this.props.onClicked(this.props.data)}>
+          {type}
         </TouchableOpacity>
       </View>
     )

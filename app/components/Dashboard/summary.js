@@ -13,44 +13,7 @@ import {
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center'
-  },
-  course: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 64,
-    marginBottom: 10,
-    marginTop: 10,
-    width: 250,
-    height: 55,
-  },
-  work : {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 64,
-    marginBottom: 4,
-    marginTop: 4,
-    width: 250,
-    height: 40,
-  },
-  members : {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 64,
-    marginBottom: 4,
-    marginTop: 4,
-    width: 250,
-    height: 30,
-  }
-});
+var style = require('../../Styles/styles');
 
 const Progress = (Platform.OS == 'ios') ? ProgressViewIOS : ProgressBarAndroid;
 
@@ -68,31 +31,31 @@ export default class Summary extends Component {
               ])
     }
   }
-    navigate(rowData) {
+    navigate() {
      this.props.navigator.push({
        title: 'Details'
      })
   }
   render() {
     return(
-      <View style={styles.container}>
-        <Text style={{color: 'black', fontWeight: 'bold', fontSize: 30}}>Course</Text>
-        <TouchableHighlight style={styles.course}>
-          <Text style={{color: 'black', fontSize: 30}}>CS4500</Text>
+      <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
+        <Text style={StyleSheet.flatten([style.header, style.font30])}>Course</Text>
+        <TouchableHighlight style={StyleSheet.flatten([style.button, style.height55])}>
+          <Text style={style.font30}>CS4500</Text>
         </TouchableHighlight>
-        <Text style={{color: 'black', fontWeight: 'bold', fontSize: 25}}>Team Members</Text>
+        <Text style={StyleSheet.flatten([style.header, style.font25])}>Team Members</Text>
         <ListView
           dataSource={this.state.team}
-          renderRow={(rowData) => <Text style={styles.members}>{rowData}</Text>}>
+          renderRow={(rowData) => <Text style={style.members}>{rowData}</Text>}>
         </ListView>
         <Progress style={{width:250}} styleAttr="Horizontal" indeterminate={false} progress={.5}/>
-        <Text style={{color: 'black', fontWeight: 'bold', fontSize: 25}}>Hours Completed: 6</Text>
-        <Text style={{color: 'black', fontSize: 20}}>Class Average: 7.2</Text>
+        <Text style={StyleSheet.flatten([style.header, style.font30])}>Hours Completed: 6</Text>
+        <Text style={style.font20}>Class Average: 7.2</Text>
         <ListView
           dataSource={this.state.work}
           renderRow={(rowData) =>
-            <TouchableHighlight style={styles.work}
-              onPress={()=> this.navigate(rowData)}>
+            <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}
+              onPress={()=> this.navigate.bind(this)}>
               <Text>{rowData}</Text>
             </TouchableHighlight>}
         />

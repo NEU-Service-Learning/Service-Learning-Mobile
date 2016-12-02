@@ -9,9 +9,12 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Picker,
+  PickerIOS,
   Platform,
   DatePickerIOS,
 } from 'react-native';
+
+const Pick = (Platform.OS === 'ios' ? PickerIOS : Picker);
 
 var projects = [{label:'Time Tracker', key:'0'},
                 {label:'Project 1', key:'1'},
@@ -25,7 +28,7 @@ export default class Dropmenu extends Component {
 
   constructor(props){
     super(props);
-    
+
     this.state = {
       date: new Date(),
       project: 'Time Tracker',
@@ -61,37 +64,37 @@ export default class Dropmenu extends Component {
   render() {
   	var menu;
     if (this.props.mode == "project") {
-      menu = ( <Picker
+      menu = ( <Pick
         selectedValue={this.state.project}
         onValueChange={(proj) => this.setState({project: proj})}>
         { projects.map((proj) => (
           <Picker.Item key={proj.key} label={proj.label} value={proj.label}/>)) }
-      </Picker> ) }
+      </Pick> ) }
     else if (this.props.mode == "category") {
-      menu = ( <Picker
+      menu = ( <Pick
         selectedValue={this.state.category}
         onValueChange={(cat) => this.setState({category: cat})}>
         { categories.map((cat) => (
           <Picker.Item key={cat.key} label={cat.label} value={cat.label}/>)) }
-      </Picker> ) }
+      </Pick> ) }
     else {
       menu = ( <DatePickerIOS
         style={styles.datepicker}
         date={this.state.date}
         mode={this.props.mode}
         timeZoneOffsetInMinutes={this.props.timeZoneOffsetInHours * 60}
-        onDateChange={this.onDateChange.bind(this)}
-      /> ) }
-    
+        onDateChange={this.onDateChange.bind(this)}>
+      </DatePickerIOS> ) }
+
     var picker = (
      <View>
         <TouchableOpacity onPress={ this.toggleVisible.bind(this)} style={{marginRight: 20, alignItems: 'flex-end'}}>
           <Text>Done</Text>
         </TouchableOpacity>
-            {menu} 
+            {menu}
       </View>
      )
-    
+
 	return (
 	  <View>
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
@@ -110,20 +113,20 @@ export default class Dropmenu extends Component {
 
 var styles = StyleSheet.create({
 	datePicker: {
-    borderTopWidth: 1, 
-    position: 'absolute', 
-    bottom: 0, 
-    right: 0, 
-    left: 0, 
-    height: 100, 
-    borderColor: '#CCC', 
-    backgroundColor: '#FFF',    
+    borderTopWidth: 1,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
+    height: 100,
+    borderColor: '#CCC',
+    backgroundColor: '#FFF',
   },
   input: {
-    height: 30, 
-    justifyContent: 'center', 
-    padding: 5, 
-    borderColor: 'gray', 
+    height: 30,
+    justifyContent: 'center',
+    padding: 5,
+    borderColor: 'gray',
     borderWidth: 1,
     marginVertical: 10,
     backgroundColor: '#F0F0F0'

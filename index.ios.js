@@ -21,6 +21,7 @@ import Root from './app/components/Dashboard/root';
 import Summary from './app/components/Dashboard/summary';
 import Details from './app/components/Details/details';
 import ManualTracking from './app/components/Tracking/manual';
+import Settings from './app/components/Dashboard/settings';
 
 export default class SLTracker extends Component {
 
@@ -35,11 +36,26 @@ export default class SLTracker extends Component {
      if(route.title == 'Dashboard') {
        return <Root navigator={navigator} />
      }
+<<<<<<< HEAD
+=======
+     if(route.title == 'Summary') {
+       return <Summary navigator={navigator} />
+     }
+     if(route.title == 'Details') {
+       return <Details navigator={navigator} />
+    }
+     if(route.title == 'ManualTracking') {
+       return <ManualTracking navigator={navigator} />
+     }
+>>>>>>> eb11998061d1639a2763047fe46ac0f7b43b1c8c
      if(route.title == 'LogIn') {
        return <LogInScreen navigator={navigator} />
      }
      if(route.title == 'EnterInfo') {
        return <InfoScreen navigator={navigator} />
+     }
+     if(route.title == 'Settings') {
+       return <Settings navigator={navigator} />
      }
    }
 

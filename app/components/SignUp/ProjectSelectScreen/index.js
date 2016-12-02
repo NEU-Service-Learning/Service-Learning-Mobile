@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
-import {SearchTable, SearchRow} from '../searchTable'
+import {SearchTable, SearchRow} from '../searchTable';
 
+var style = require('../../../Styles/styles');
 
 export default class ProjectSelectScreen extends Component {
 
@@ -43,7 +44,7 @@ export default class ProjectSelectScreen extends Component {
   navigate() {
    this.props.navigator.push({
      title: 'Dashboard'
-   })
+   });
   }
 
   render() {
@@ -51,8 +52,9 @@ export default class ProjectSelectScreen extends Component {
        return !this.state.selectedProjects.includes(project);
     });
     return(
-      <View style={styles.container}>
+      <View style={StyleSheet.flatten([style.container, style.margin16])}>
         <SearchTable
+          style={{marginTop: 38}}
           data={shownProjects}
           header="Avaliable Projects"
           row={this.renderRow(true, this.onAddProject.bind(this))} />
@@ -60,33 +62,36 @@ export default class ProjectSelectScreen extends Component {
           data={this.state.selectedProjects}
           header="Added Projects"
           row={this.renderRow(false, this.onRemoveProject.bind(this))} />
-        <View style={styles.next} >
-          <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}> Finish </Text>
-          </TouchableHighlight>
-        </View>
+        <View style={styles.nav} >
+            <View style={styles.back}>
+              <TouchableHighlight style={style.button}  onPress={() => this.props.navigator.pop()}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
+              </TouchableHighlight>
+            </View>
+            <View style={styles.next}>
+              <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}> Finish </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 16,
-    paddingTop: 24,
-    justifyContent: 'space-between',
+  nav: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  back: {
+    justifyContent:'flex-start',
+    flexDirection: 'row',
+    flex: 1
   },
   next: {
-    flexDirection: 'row',
     justifyContent:'flex-end',
+    flexDirection: 'row',
+    flex: 1
   },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 64,
-    width: 100,
-    height: 40
-  }
 });

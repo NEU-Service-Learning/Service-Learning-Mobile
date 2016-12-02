@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
+var style = require('../../../Styles/styles');
+
 export default class LogInScreen extends Component {
 
   constructor(props) {
@@ -26,33 +28,29 @@ export default class LogInScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.emptyContainer}>
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}>Email</Text>
+      <View style={style.container}>
+        <View style={style.inputContainer}>
+          <Text style={style.textCenter}>Email</Text>
           <TextInput
-          style={styles.input}
+          style={{textAlign : 'center', marginBottom: 30}}
           onChangeText={(username) => this.setState({username})}
           value={this.state.username}
           />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}>Password</Text>
+          <Text style={style.textCenter}>Password</Text>
           <TextInput
-          style={styles.text}
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
           />
         </View>
-        <View style={styles.buttonContainer}>
-          <TouchableHighlight style={styles.button}  onPress={() => this.navigateLogIn()}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}> Log In </Text>
+        <View style={StyleSheet.flatten([style.inputContainer, style.alignCenter])}>
+          <TouchableHighlight style={style.button}  onPress={() => this.navigateLogIn()}>
+            <Text style={{fontSize: 30, fontWeight: 'bold'}}> Log In </Text>
           </TouchableHighlight>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableHighlight style={styles.button}  onPress={() => this.navigateSignUp()}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}> Sign Up </Text>
+          <TouchableHighlight style={style.button}  onPress={() => this.navigateSignUp()}>
+            <Text style={{fontSize: 30, fontWeight: 'bold'}}> Sign Up </Text>
+          </TouchableHighlight>
+          <TouchableHighlight  onPress={() => this.navigateSignUp()}>
+            <Text style={{color: 'blue', textDecorationLine: 'underline'}}> Forgot Password </Text>
           </TouchableHighlight>
         </View>
         <View style={styles.emptyContainer}>
@@ -61,42 +59,3 @@ export default class LogInScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 10,
-    margin: 16,
-    justifyContent : 'center'
-  },
-  emptyContainer: {
-    flex: 2
-  },
-  imageContainer: {
-    flex: 2,
-    justifyContent : 'center',
-    alignItems: 'center'
-  },
-  inputContainer: {
-    flex: 2,
-    justifyContent : 'center',
-  },
-  buttonContainer: {
-    flex: 1,
-    justifyContent : 'center',
-    alignItems: 'center'
-  },
-  input: {
-    textAlign : 'center'
-  },
-  text: {
-    textAlign : 'center'
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 64,
-    width: 100,
-    height: 40
-  }
-});
