@@ -25,7 +25,7 @@ export default class ManualTracking extends Component {
     super(props);
 
     this.state = {
-    	notes: "Enter notes here",
+    	notes: "",
     	group_log: false,
     }
   }

@@ -19,11 +19,14 @@ module.exports = StyleSheet.create({
   margin16: {
     margin: 16
   },
+  text: {
+    color: '#9ACD32',
+  },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
+    backgroundColor: '#708090',
     borderRadius: 64,
     marginBottom: 4,
     marginTop: 4,

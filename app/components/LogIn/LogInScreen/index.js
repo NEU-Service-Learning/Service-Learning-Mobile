@@ -45,10 +45,10 @@ export default class LogInScreen extends Component {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableHighlight style={style.button}  onPress={() => this.navigateLogIn()}>
-            <Text style={{fontSize: 30, fontWeight: 'bold'}}> Log In </Text>
+            <Text style={{fontSize: 30, fontWeight: 'bold', color: '#9ACD32'}}> Log In </Text>
           </TouchableHighlight>
           <TouchableHighlight style={style.button}  onPress={() => this.navigateSignUp()}>
-            <Text style={{fontSize: 30, fontWeight: 'bold'}}> Sign Up </Text>
+            <Text style={{fontSize: 30, fontWeight: 'bold', color: '#9ACD32'}}> Sign Up </Text>
           </TouchableHighlight>
           <TouchableHighlight style={style.margin16}  onPress={() => this.navigateSignUp()}>
             <Text style={{color: 'blue', textDecorationLine: 'underline'}}> Forgot Password </Text>

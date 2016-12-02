@@ -25,7 +25,7 @@ export default class Dropmenu extends Component {
 
   constructor(props){
     super(props);
-    
+
     this.state = {
       date: new Date(),
       project: 'Time Tracker',
@@ -82,27 +82,19 @@ export default class Dropmenu extends Component {
         timeZoneOffsetInMinutes={this.props.timeZoneOffsetInHours * 60}
         onDateChange={this.onDateChange.bind(this)}
       /> ) }
-    
+
     var picker = (
      <View>
-        <TouchableOpacity onPress={ this.toggleVisible.bind(this)} style={{marginRight: 20, alignItems: 'flex-end'}}>
-          <Text>Done</Text>
-        </TouchableOpacity>
-            {menu} 
+            {menu}
       </View>
      )
-    
+
 	return (
 	  <View>
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
         <Text>{this.props.text}</Text>
-          <TouchableWithoutFeedback onPress={ this.toggleVisible.bind(this) }>
-            <View style={ styles.input }>
-              <Text>{this.output(this.props.mode)}</Text>
-            </View>
-          </TouchableWithoutFeedback>
+          {picker}
       </View>
-          { this.state.visibility == 'visible' ? picker : <View/> }
       </View>
     )
 	}
@@ -110,20 +102,20 @@ export default class Dropmenu extends Component {
 
 var styles = StyleSheet.create({
 	datePicker: {
-    borderTopWidth: 1, 
-    position: 'absolute', 
-    bottom: 0, 
-    right: 0, 
-    left: 0, 
-    height: 100, 
-    borderColor: '#CCC', 
-    backgroundColor: '#FFF',    
+    borderTopWidth: 1,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
+    height: 100,
+    borderColor: '#CCC',
+    backgroundColor: '#FFF',
   },
   input: {
-    height: 30, 
-    justifyContent: 'center', 
-    padding: 5, 
-    borderColor: 'gray', 
+    height: 30,
+    justifyContent: 'center',
+    padding: 5,
+    borderColor: 'gray',
     borderWidth: 1,
     marginVertical: 10,
     backgroundColor: '#F0F0F0'
