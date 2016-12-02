@@ -59,8 +59,37 @@ export default class InfoScreen extends Component {
           <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}> Next </Text>
           </TouchableHighlight>
+        <View style={styles.nav}>
+          <View style={styles.back}>
+            <TouchableHighlight style={style.button}  onPress={() => this.props.navigator.pop()}>
+              <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
+            </TouchableHighlight>
+          </View>
+          <View style={styles.next}>
+            <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
+              <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
+            </TouchableHighlight>
+          </View>
         </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  nav: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  back: {
+    justifyContent:'flex-start',
+    flexDirection: 'row',
+    flex: 1
+  },
+  next: {
+    justifyContent:'flex-end',
+    flexDirection: 'row',
+    flex: 1
+  },
+});
