@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
-import {SearchTable, SearchRow} from '../searchTable';
+import {SearchTable, SearchRow} from './searchTable';
 
-var style = require('../../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class ProjectSelectScreen extends Component {
 
@@ -65,12 +65,12 @@ export default class ProjectSelectScreen extends Component {
         <View style={styles.nav} >
             <View style={styles.back}>
               <TouchableHighlight style={style.button}  onPress={() => this.props.navigator.pop()}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
+                <Text style={style.text}> Back </Text>
               </TouchableHighlight>
             </View>
             <View style={styles.next}>
               <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}> Finish </Text>
+                <Text style={style.text}> Finish </Text>
               </TouchableHighlight>
             </View>
           </View>

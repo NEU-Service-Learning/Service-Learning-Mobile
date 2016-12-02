@@ -22,11 +22,14 @@ module.exports = StyleSheet.create({
     margin: 30,
     justifyContent : 'center',
   },
+  text: {
+    color: '#708090',
+  },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
+    backgroundColor: '#9ACD32',
     borderRadius: 64,
     marginBottom: 4,
     marginTop: 4,
@@ -73,6 +76,10 @@ module.exports = StyleSheet.create({
   font20: {
     fontSize:20
   },
+  inputContainer: {
+    margin: 30,
+   justifyContent : 'center',
+ },
   textCenter: {
     textAlign : 'center'
   },

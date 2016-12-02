@@ -8,7 +8,7 @@ import {
 
 } from 'react-native';
 
-var style = require('../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class ClockIn extends Component {
   render() {

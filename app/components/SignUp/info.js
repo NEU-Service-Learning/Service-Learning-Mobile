@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, Picker, TouchableHighlight } from 'react-native';
 
-var style = require('../../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class InfoScreen extends Component {
 
@@ -58,12 +58,12 @@ export default class InfoScreen extends Component {
         <View style={styles.nav}>
           <View style={styles.back}>
             <TouchableHighlight style={style.button}  onPress={() => this.props.navigator.pop()}>
-              <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
+              <Text style={style.text}> Back </Text>
             </TouchableHighlight>
           </View>
           <View style={styles.next}>
             <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
-              <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
+              <Text style={style.text}> Next </Text>
             </TouchableHighlight>
           </View>
         </View>

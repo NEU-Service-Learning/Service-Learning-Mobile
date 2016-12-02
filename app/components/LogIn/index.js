@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
-var style = require('../../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class LogInScreen extends Component {
 
@@ -44,10 +44,10 @@ export default class LogInScreen extends Component {
         </View>
         <View style={StyleSheet.flatten([style.inputContainer, style.alignCenter])}>
           <TouchableHighlight style={style.button}  onPress={() => this.navigateLogIn()}>
-            <Text style={{fontSize: 30, fontWeight: 'bold'}}> Log In </Text>
+            <Text style={StyleSheet.flatten([{fontSize: 30, fontWeight: 'bold'},style.text])}> Log In </Text>
           </TouchableHighlight>
           <TouchableHighlight style={style.button}  onPress={() => this.navigateSignUp()}>
-            <Text style={{fontSize: 30, fontWeight: 'bold'}}> Sign Up </Text>
+            <Text style={StyleSheet.flatten([{fontSize: 30, fontWeight: 'bold'},style.text])}> Sign Up </Text>
           </TouchableHighlight>
           <TouchableHighlight  onPress={() => this.navigateSignUp()}>
             <Text style={{color: 'blue', textDecorationLine: 'underline'}}> Forgot Password </Text>

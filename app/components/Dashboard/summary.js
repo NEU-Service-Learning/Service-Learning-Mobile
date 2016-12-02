@@ -9,11 +9,12 @@ import {
   TouchableHighlight,
   ProgressBarAndroid,
   ProgressViewIOS,
+  Picker,
 } from 'react-native';
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
 
-var style = require('../../Styles/styles');
+var style = require('../../styles/styles');
 
 const Progress = (Platform.OS == 'ios') ? ProgressViewIOS : ProgressBarAndroid;
 
@@ -28,7 +29,11 @@ export default class Summary extends Component {
               ]),
        work: dsWork.cloneWithRows([
                     'Oct 17: 1hr Direct Work','Oct 18: 2hr Group','Oct 19: 3hr Individual',
-              ])
+              ]),
+      project: 'time Tracker',
+      projects: [{label:'Time Tracker', key:'0'},
+                      {label:'Project 1', key:'1'},
+                      {label:'Project 2', key:'2'}]
     }
   }
     navigate() {
@@ -40,9 +45,13 @@ export default class Summary extends Component {
     return(
       <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
         <Text style={StyleSheet.flatten([style.header, style.font30])}>Course</Text>
-        <TouchableHighlight style={StyleSheet.flatten([style.button, style.height55])}>
-          <Text style={style.font30}>CS4500</Text>
-        </TouchableHighlight>
+        <Picker
+          style={StyleSheet.flatten([style.button, style.height55])}
+          selectedValue={this.state.project}
+          onValueChange={(proj) => this.setState({project: proj})}>
+          { this.state.projects.map((proj) => (
+            <Picker.Item key={proj.key} label={proj.label} value={proj.label}/>)) }
+        </Picker>
         <Text style={StyleSheet.flatten([style.header, style.font25])}>Team Members</Text>
         <ListView
           dataSource={this.state.team}
@@ -56,7 +65,7 @@ export default class Summary extends Component {
           renderRow={(rowData) =>
             <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}
               onPress={()=> this.navigate(rowData)}>
-              <Text>{rowData}</Text>
+              <Text style={style.text}>{rowData}</Text>
             </TouchableHighlight>}
         />
       </View>
