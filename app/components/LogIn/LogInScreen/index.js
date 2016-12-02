@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
 var style = require('../../../Styles/styles');
 
@@ -52,6 +52,8 @@ export default class LogInScreen extends Component {
           <TouchableHighlight  onPress={() => this.navigateSignUp()}>
             <Text style={{color: 'blue', textDecorationLine: 'underline'}}> Forgot Password </Text>
           </TouchableHighlight>
+        </View>
+        <View style={style.container}>
         </View>
       </View>
     );

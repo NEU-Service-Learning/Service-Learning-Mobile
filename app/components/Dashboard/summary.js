@@ -55,7 +55,7 @@ export default class Summary extends Component {
           dataSource={this.state.work}
           renderRow={(rowData) =>
             <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}
-              onPress={()=> this.navigate.bind(this)}>
+              onPress={()=> this.navigate(rowData)}>
               <Text>{rowData}</Text>
             </TouchableHighlight>}
         />
