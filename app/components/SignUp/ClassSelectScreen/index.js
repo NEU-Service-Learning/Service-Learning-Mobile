@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, TextInput, ActivityIndicator, TouchableHighlight } from 'react-native';
 
 import {SearchTable, SearchRow} from '../searchTable'
 import SearchBar from './searchBar'
+import api from '../../api/index'
+import style from '../../../Styles/styles'
+
+
 
 // Dummy data
 var classes = [
@@ -30,8 +34,18 @@ export default class ClassSelectScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {searchText: '', selectedClasses: []};
+    this.state = {loading: true, searchText: '', error: false, classes: [], selectedClasses: []};
   }
+
+  componentWillMount = async () => {
+  try {
+    const classes = await api.getClasses();
+    console.log(classes);
+    this.setState({loading: false, classes: classes});
+  } catch (e) {
+    this.setState({loading: false, error: true})
+  }
+}
 
   // Called when the search text changes and updates the state
   handleInput(searchText) {
@@ -62,10 +76,10 @@ export default class ClassSelectScreen extends Component {
         return (
           <SearchRow
               onClicked={onClickFn}
-              header={someClass.classNum + " - " + someClass.name}
-              subHeader={someClass.prof}
+              header={someClass.id + " - " + someClass.name}
+              subHeader={"Department: " + someClass.department}
               data={someClass}
-              key={someClass.name}
+              key={someClass.id}
               type={add}/>
             )
         }
@@ -74,15 +88,12 @@ export default class ClassSelectScreen extends Component {
   // Used to move to the next screen
   // Passes the list of projects from the classes to the next screen
   navigate() {
-    const projects = this.state.selectedClasses.reduce((addedProjects, selectedClass) => {
-      return [...addedProjects, ...selectedClass.projects];
-    }, []);
     this.props.navigator.push({
       title: 'SelectProject',
       // extras is used to pass data to the next screen.
       // the data gets placed in the props of the Component
       extras: {
-        projects: projects
+        classes: this.state.selectedClasses
       }
     })
   }
@@ -92,12 +103,19 @@ export default class ClassSelectScreen extends Component {
   }
 
   render() {
-    const shownClasses = classes.filter((classData) => {
+    const shownClasses = this.state.classes.filter((classData) => {
       var show = this.state.searchText.length != 0 &&
-       classData.classNum.toLowerCase().includes(this.state.searchText.toLowerCase()) &&
-       !this.state. selectedClasses.includes(classData);
+       classData.name.toLowerCase().includes(this.state.searchText.toLowerCase()) &&
+       !this.state.selectedClasses.includes(classData);
        return show;
     });
+    if(this.state.loading) {
+        return(
+        <View style={[style.container, style.alignCenter]}>
+          <ActivityIndicator animating={true} />
+        </View>
+      )
+    }
     return (
       <View style={styles.container}>
         <SearchBar

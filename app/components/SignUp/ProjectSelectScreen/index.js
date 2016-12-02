@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
-import {SearchTable, SearchRow} from '../searchTable'
+import {SearchTable, SearchRow} from '../searchTable';
+import api from '../../api/index';
 
 
 export default class ProjectSelectScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {selectedProjects: []}
+    this.state = {error: false, loading: true, projects: [], selectedProjects: []}
+  }
+
+  componentWillMount = async () => {
+  try {
+    let projects = []
+    this.props.classes.forEach(async (someClass) => {
+      const classProjects = await api.getProjectForCourse(someClass.id);
+      classProjects.forEach((project) => {
+        console.log("p");
+        console.log(project);
+        projects.push(project);
+      })
+    });
+    console.log("p2");
+    console.log(projects);
+    this.setState({loading: false, projects: projects});
+  } catch (e) {
+    this.setState({loading: false, error: true})
+    }
   }
 
   // Adds a project to the state when clicked
@@ -28,12 +48,14 @@ export default class ProjectSelectScreen extends Component {
   // Renders a given project's row in the table
   renderRow(add, onClickFn) {
       return  (someProj) => {
+        console.log(someProj)
         return(
           <SearchRow
               onClicked={onClickFn}
-              header={someProj}
+              header={someProj.name}
+              subHeader={someProj.description}
               data={someProj}
-              key={someProj}
+              key={someProj.id}
               type={add}/>
           );
       }
@@ -47,14 +69,23 @@ export default class ProjectSelectScreen extends Component {
   }
 
   render() {
-    const shownProjects = this.props.projects.filter((project) => {
+    console.log("PR");
+    console.log(this.state.projects);
+    const shownProjects = this.state.projects.filter((project) => {
        return !this.state.selectedProjects.includes(project);
     });
+    if(this.state.loading) {
+        return(
+        <View style={[style.container, style.alignCenter]}>
+          <ActivityIndicator animating={true} />
+        </View>
+      )
+    }
     return(
       <View style={styles.container}>
         <SearchTable
           style={{marginTop: 38}}
-          data={shownProjects}
+          data={this.state.projects}
           header="Avaliable Projects"
           row={this.renderRow(true, this.onAddProject.bind(this))} />
         <SearchTable
