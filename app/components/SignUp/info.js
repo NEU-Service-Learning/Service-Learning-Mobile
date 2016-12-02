@@ -40,7 +40,7 @@ export default class InfoScreen extends Component {
           <Text style={style.textCenter}>College</Text>
           <Picker
             selectedValue={this.state.college}
-            onValueChange={(lang) => this.setState({language: lang})}>
+            onValueChange={(college) => this.setState({college: college})}>
             <Picker.Item label="College of Science" value="College of Science" />
             <Picker.Item label="College of Computer and Information Science" value="College of Computer and Information Science" />
             <Picker.Item label="College of Engineering" value="College of Engineering" />

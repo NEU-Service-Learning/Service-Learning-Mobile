@@ -5,7 +5,6 @@ import {SearchTable, SearchRow} from './searchTable'
 import SearchBar from './searchBar'
 
 var style = require('../../styles/styles');
-
 // Dummy data
 var classes = [
   {
