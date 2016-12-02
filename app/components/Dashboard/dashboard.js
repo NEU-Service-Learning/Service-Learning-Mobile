@@ -50,8 +50,13 @@ export default class Dashboard extends Component {
   }
   render() {
     return(
+<<<<<<< HEAD
       <Container>
           <Content style={{margin: 16}}>
+=======
+      <ScrollView>
+          <View style={{margin: 16}}>
+>>>>>>> eb11998061d1639a2763047fe46ac0f7b43b1c8c
               <Card>
                   <CardItem header>
                       <Text>Auto Tracking</Text>
@@ -108,8 +113,8 @@ export default class Dashboard extends Component {
                    ))}
 
            </Card>
-          </Content>
-      </Container>
+          </View>
+      </ScrollView>
 
     );
   }

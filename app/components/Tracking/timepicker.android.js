@@ -23,12 +23,7 @@ export default class AndroidTimePicker extends Component {
   }
 
   state = {
-    isoFormatText: 'pick a time (24-hour format)',
-    presetHour: 4,
-    presetMinute: 4,
-    presetText: 'pick a time, default: 4:04AM',
-    simpleText: 'pick a time',
-    time: new Date().toLocaleTimeString().substring(0,5),
+    time: new Date(),
   };
 
   showPicker = async (stateKey, options) => {
@@ -36,7 +31,8 @@ export default class AndroidTimePicker extends Component {
       const {action, minute, hour} = await TimePickerAndroid.open(options);
       var newTime = new Date();
       if (action === TimePickerAndroid.timeSetAction) {
-        newTime = this._formatTime(hour, minute);
+        newTime.setHours(hour);
+        newTime.setMinutes(minute);
       } else if (action === TimePickerAndroid.dismissedAction) {
         // do nothing
       }
@@ -51,34 +47,36 @@ export default class AndroidTimePicker extends Component {
   		<View>
           <TouchableWithoutFeedback
             onPress={this.showPicker.bind(this, 'preset', {
-              hour: this.state.presetHour,
-              minute: this.state.presetMinute,
+              hour: this.state.time.getHours(),
+              minute: this.state.time.getMinutes(),
             })}>
-            <View style={styles.input}><Text>{this.state.time}</Text></View>
+            <View style={styles.input}><Text>
+              {this.state.time.toLocaleTimeString().substring(0,5)}
+            </Text></View>
           </TouchableWithoutFeedback>
 
       </View>
       )
-  	
+
   }
 }
 
 var styles = StyleSheet.create({
   datePicker: {
-    borderTopWidth: 1, 
-    position: 'absolute', 
-    bottom: 0, 
-    right: 0, 
-    left: 0, 
-    height: 100, 
-    borderColor: '#CCC', 
-    backgroundColor: '#FFF',    
+    borderTopWidth: 1,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
+    height: 100,
+    borderColor: '#CCC',
+    backgroundColor: '#FFF',
   },
   input: {
-    height: 40, 
-    justifyContent: 'center', 
-    padding: 5, 
-    borderColor: 'gray', 
+    height: 40,
+    justifyContent: 'center',
+    padding: 5,
+    borderColor: 'gray',
     borderWidth: 1,
     marginVertical: 10,
     backgroundColor: '#EEE'

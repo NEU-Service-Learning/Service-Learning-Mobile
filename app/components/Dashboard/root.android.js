@@ -29,9 +29,17 @@ export default class Root extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
+<<<<<<< HEAD
        <Header style={{backgroundColor: '#708090'}}>
            <Button transparent> </Button>
            <Title style={{color: '#9ACD32', fontWeight: 'bold'}}>Service-Learning</Title>
+=======
+       <Header>
+           <Button transparent>
+             <Icon name='bars' size={30} />
+           </Button>
+           <Title style={{color: '#008080', fontWeight: 'bold'}}>Service-Learning</Title>
+>>>>>>> eb11998061d1639a2763047fe46ac0f7b43b1c8c
            <Button transparent onPress={() => {this.props.navigator.push({ title: 'Settings' })}}>
              <Icon name='cog' size={30} />
            </Button>

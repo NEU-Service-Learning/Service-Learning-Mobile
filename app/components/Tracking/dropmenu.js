@@ -9,9 +9,12 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Picker,
+  PickerIOS,
   Platform,
   DatePickerIOS,
 } from 'react-native';
+
+const Pick = (Platform.OS === 'ios' ? PickerIOS : Picker);
 
 var projects = [{label:'Time Tracker', key:'0'},
                 {label:'Project 1', key:'1'},
@@ -61,30 +64,41 @@ export default class Dropmenu extends Component {
   render() {
   	var menu;
     if (this.props.mode == "project") {
-      menu = ( <Picker
+      menu = ( <Pick
         selectedValue={this.state.project}
         onValueChange={(proj) => this.setState({project: proj})}>
         { projects.map((proj) => (
           <Picker.Item key={proj.key} label={proj.label} value={proj.label}/>)) }
-      </Picker> ) }
+      </Pick> ) }
     else if (this.props.mode == "category") {
-      menu = ( <Picker
+      menu = ( <Pick
         selectedValue={this.state.category}
         onValueChange={(cat) => this.setState({category: cat})}>
         { categories.map((cat) => (
           <Picker.Item key={cat.key} label={cat.label} value={cat.label}/>)) }
-      </Picker> ) }
+      </Pick> ) }
     else {
       menu = ( <DatePickerIOS
         style={styles.datepicker}
         date={this.state.date}
         mode={this.props.mode}
         timeZoneOffsetInMinutes={this.props.timeZoneOffsetInHours * 60}
+<<<<<<< HEAD
         onDateChange={this.onDateChange.bind(this)}
       /> ) }
 
     var picker = (
      <View>
+=======
+        onDateChange={this.onDateChange.bind(this)}>
+      </DatePickerIOS> ) }
+
+    var picker = (
+     <View>
+        <TouchableOpacity onPress={ this.toggleVisible.bind(this)} style={{marginRight: 20, alignItems: 'flex-end'}}>
+          <Text>Done</Text>
+        </TouchableOpacity>
+>>>>>>> eb11998061d1639a2763047fe46ac0f7b43b1c8c
             {menu}
       </View>
      )

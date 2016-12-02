@@ -19,6 +19,8 @@ import AndroidDatePicker from './datepicker.android';
 import AndroidTimePicker from './timepicker.android';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+var style = require('../../styles/styles');
+
 export default class ManualTracking extends Component {
 
 	constructor(props){
@@ -62,12 +64,10 @@ export default class ManualTracking extends Component {
         text = {"Date"}
         mode = {"date"}
       />
-
       <Dropmenu
         text = {"Start Time"}
         mode = {"time"}
       />
-
       <Dropmenu
         text = {"End Time"}
         mode = {"time"}
@@ -91,7 +91,6 @@ export default class ManualTracking extends Component {
       </View>
 
       </View>}
-
       <Dropmenu
         text = {"Category"}
         mode = {"category"}
@@ -114,7 +113,7 @@ export default class ManualTracking extends Component {
   	  </View>
 
       <Button
-        style={styles.button}
+        style={StyleSheet.flatten([style.button, style.alignCenter, style.height50])}
         onPress={this._onPressButton.bind(this)}>
         <Text style={{fontSize: 20}}>Log Hours</Text>
       </Button>
@@ -128,20 +127,13 @@ export default class ManualTracking extends Component {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#2ab9f7',
-    alignSelf: 'center',
-    width: 200,
-    height: 50,
-    marginTop: 30,
-  },
-  input: {
-    height: 30,
-    justifyContent: 'center',
-    padding: 5,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginVertical: 10,
-    backgroundColor: '#F0F0F0'
-  },
-})
+   input: {
+     height: 30,
+     justifyContent: 'center',
+     padding: 5,
+     borderColor: 'gray',
+     borderWidth: 1,
+     marginVertical: 10,
+     backgroundColor: '#F0F0F0'
+   },
+ });

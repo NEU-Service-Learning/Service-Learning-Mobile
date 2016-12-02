@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, Picker, TouchableHighlight } from 'react-native';
 
+var style = require('../../styles/styles');
+
 export default class InfoScreen extends Component {
 
   constructor(props) {
@@ -17,25 +19,25 @@ export default class InfoScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}>First Name</Text>
+      <View style={StyleSheet.flatten([style.container, style.margin16])}>
+        <View style={style.inputContainer}>
+          <Text style={style.textCenter}>First Name</Text>
           <TextInput
-          style={styles.input}
+          style={style.textCenter}
           onChangeText={(firstName) => this.setState({firstName})}
           value={this.state.username}
           />
         </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}>Last Name</Text>
+        <View style={style.inputContainer}>
+          <Text style={style.textCenter}>Last Name</Text>
           <TextInput
-          style={styles.input}
+          style={style.textCenter}
           onChangeText={(lastName) => this.setState({lastName})}
           value={this.state.username}
           />
         </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}>College</Text>
+        <View style={style.inputContainer}>
+          <Text style={style.textCenter}>College</Text>
           <Picker
             selectedValue={this.state.college}
             onValueChange={(lang) => this.setState({language: lang})}>
@@ -45,22 +47,22 @@ export default class InfoScreen extends Component {
             <Picker.Item label="College of Arts, Media and Design" value="College of Arts, Media and Design" />
           </Picker>
         </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}>Graduation Year</Text>
+        <View style={style.inputContainer}>
+          <Text style={style.textCenter}>Graduation Year</Text>
           <TextInput
-          style={styles.input}
+          style={style.textCenter}
           onChangeText={(gradYear) => this.setState({gradYear})}
           value={this.state.username}
           />
         </View>
         <View style={styles.nav}>
           <View style={styles.back}>
-            <TouchableHighlight style={styles.button}  onPress={() => this.props.navigator.pop()}>
+            <TouchableHighlight style={style.button}  onPress={() => this.props.navigator.pop()}>
               <Text style={{color: 'white', fontWeight: 'bold'}}> Back </Text>
             </TouchableHighlight>
           </View>
           <View style={styles.next}>
-            <TouchableHighlight style={styles.button}  onPress={() => this.navigate()}>
+            <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
               <Text style={{color: 'white', fontWeight: 'bold'}}> Next </Text>
             </TouchableHighlight>
           </View>
@@ -71,34 +73,6 @@ export default class InfoScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 16,
-    justifyContent : 'center'
-  },
-  inputContainer: {
-    margin: 15,
-    justifyContent : 'center',
-  },
-  buttonContainer: {
-    margin: 30,
-    justifyContent : 'center',
-    alignItems: 'center'
-  },
-  input: {
-    textAlign : 'center'
-  },
-  text: {
-    textAlign : 'center'
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 64,
-    width: 100,
-    height: 40
-  },
   nav: {
     flexDirection: 'row',
     flex: 1,
