@@ -14,7 +14,7 @@ import {
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
 
-var style = require('../../Styles/styles');
+var style = require('../../styles/styles');
 
 const Progress = (Platform.OS == 'ios') ? ProgressViewIOS : ProgressBarAndroid;
 
