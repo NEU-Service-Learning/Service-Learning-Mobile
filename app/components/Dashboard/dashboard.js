@@ -13,8 +13,8 @@ import {
 import MapView from 'react-native-maps';
 
 import { Title, Icon, Header, Thumbnail, Content, Container, Card, CardItem, Button } from 'native-base';
-import AutoTracking from '../Tracking/auto.js'
-
+import AutoTracking from '../Tracking/auto';
+var auto = require('../Tracking/auto');
 var style = require('../../Styles/styles');
 var img = require('../../assets/img/Logo.png')
 
@@ -61,9 +61,25 @@ export default class Dashboard extends Component {
     )
   }
   startAuto() {
+    //auto.handleStartStop.bind(this);
     this.setState({auto: true});
   }
-  stopAuto() {
+  stopAlert(startTime, endTime) {
+    Alert.alert(
+      'Clock Out',
+      'Are you sure you want to clock out of "Service Learning Mobile"?',
+      [
+        {text: 'Cancel', onPress: () => console.log('Dismissed')},
+        {text: 'Clock Out', onPress: this.stopAuto.bind(this)},
+      ]
+    )
+  }
+  stopAuto(startTime, endTime) {
+
+    this.props.navigator.push({title: 'ManualTracking', extras: {
+      startTime: startTime,
+      endTime: endTime,
+    }});
     this.setState({auto: false});
   }
   render() {
@@ -71,7 +87,7 @@ export default class Dashboard extends Component {
     return(
       <ScrollView>
           <View style={{margin: 16}}>
-             {this.state.auto ? <AutoTracking onStop={this.stopAuto}/> : null}
+             {this.state.auto ? <AutoTracking onStop={this.stopAlert.bind(this)}/> : null}
               <Card style={styles.card}>
                   <CardItem header>
                       <Text>Overview</Text>

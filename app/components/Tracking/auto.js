@@ -20,9 +20,9 @@ export default class AutoTracking extends Component {
     super(props);
 
     this.state = {
-      isRunning: false,
-      timer: null,
-      timerStart: null,
+      isRunning: true,
+      startTime: new Date(),
+      endTime: null,
     }
   }
 
@@ -50,11 +50,11 @@ export default class AutoTracking extends Component {
       return;
     }
 
-    this.setState({timerStart: new Date()});
+    this.setState({startTime: new Date()});
 
     this.interval = setInterval(() => {
       this.setState({
-        timer: new Date() - this.state.timerStart,
+        timer: new Date() - this.state.startTime,
         isRunning: true,
       });
     }, 30);
@@ -68,13 +68,12 @@ export default class AutoTracking extends Component {
           <Text>Time Worked</Text>
 
           <View style={styles.container}>
-            <Text style={styles.timer}>{ TimeFormatter(this.state.timer) }</Text>
+            <Text style={styles.timer}>{ TimeFormatter(this.state.endTime) }</Text>
           </View>
 
         </CardItem>
         <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
-          <Button onPress={() => this.setState({isRunning: false})} style={{flex: 2, marginRight: 20}}>Pause</Button>
-          <Button onPress={this.props.onStop.bind(this)}
+          <Button onPress={() => this.props.onStop(this.state.startTime, new Date())}
                   style={{flex: 1}}>Clock Out</Button>
         </CardItem>
       </Card>

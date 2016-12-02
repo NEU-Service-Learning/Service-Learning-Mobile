@@ -101,7 +101,8 @@ export default class Dropmenu extends Component {
         <Text>{this.props.text}</Text>
           <TouchableWithoutFeedback onPress={ this.toggleVisible.bind(this) }>
             <View style={ styles.input }>
-              <Text>{this.output(this.props.mode)}</Text>
+              <Text>{this.props.time == null ? this.output(this.props.mode) :
+              this.props.time}</Text>
             </View>
           </TouchableWithoutFeedback>
       </View>
