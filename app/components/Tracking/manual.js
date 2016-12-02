@@ -71,7 +71,6 @@ export default class ManualTracking extends Component {
       <Dropmenu
         text = {"End Time"}
         mode = {"time"}
-      />
       /></View> :
 
       // ANDROID DATE PICKING
@@ -100,7 +99,7 @@ export default class ManualTracking extends Component {
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
       <Text>Notes</Text>
       <TextInput
-        style={style.input}
+        style={styles.input}
         onChangeText={(text) => this.setState({notes: text})}
         value = {this.state.notes} />
       </View>
