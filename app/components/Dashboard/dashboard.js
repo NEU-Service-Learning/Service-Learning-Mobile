@@ -92,7 +92,7 @@ export default class Dashboard extends Component {
              {this.state.auto ? <AutoTracking onStop={this.stopAlert.bind(this)}/> : null}
               <Card style={styles.card}>
                   <CardItem header>
-                      <Text>Overview</Text>
+                      <Text style={StyleSheet.flatten([style.subheader])}>Project Tracking</Text>
                   </CardItem>
                   <CardItem>
                       <MapView
@@ -119,25 +119,29 @@ export default class Dashboard extends Component {
                   </CardItem>
                   <CardItem style={{flexDirection:'row'}}>
                     <Text style={{flex: 2}}>You are near a Service-Learning partner</Text>
-                    <Button onPress={this.startAlert.bind(this)} style={{flex: 1}}>
-                      Clock In</Button>
-                  </CardItem>
+
+                    <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}>
+                      <Text style={style.buttonText}> Clock In</Text>
+                    </TouchableHighlight>
+                     </CardItem>
              </Card>
              <Card style={styles.card}>
                  <CardItem header>
-                     <Text>Log Hours</Text>
+                     <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
                  </CardItem>
 
                  <CardItem>
                    <Text>You last clocked 2 hours on 11/30 for Service-Learning</Text>
                  </CardItem>
                  <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
-                   <Button onPress={this.navigate.bind(this)}>Clock Hours</Button>
-                 </CardItem>
+                 <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={this.navigate.bind(this)}>
+                   <Text style={style.buttonText}> Log Hours</Text>
+                   </TouchableHighlight>
+                  </CardItem>
             </Card>
             <Card style={styles.card}>
                 <CardItem header>
-                    <Text>Project Details</Text>
+                    <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
                 </CardItem>
                 {projects.map(project => (
                      <CardItem button onPress={() => this.navigate()}>

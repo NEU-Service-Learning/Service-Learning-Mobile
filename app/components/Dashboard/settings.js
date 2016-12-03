@@ -25,12 +25,12 @@ export default class Settings extends Component {
       <Button transparent onPress={() => this.back()}>
       <Icon name='arrow-left' size={25} />
       </Button>
-      <Title> Settings </Title>
+      <Title style={StyleSheet.flatten([style.header, style.alignCenter, style.font20])}> Settings </Title>
       </Header>
       <View style={styles.container}>
-        <Button transparent style={styles.button}  onPress={() => {this.props.navigator.push({ title: 'LogIn' })}}>
-          <Text style={{color: 'black'}}> Sign Out </Text>
-        </Button>
+      <TouchableHighlight style={StyleSheet.flatten([style.button, style.height50])} onPress={() => {this.props.navigator.push({ title: 'LogIn' })}}>
+        <Text style={style.buttonText}>Sign Out</Text>
+      </TouchableHighlight>
       </View>
       </View>
     )

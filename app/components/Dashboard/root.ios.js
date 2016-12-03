@@ -35,7 +35,7 @@ export default class Root extends Component {
       <Button transparent onPress={() => {this.props.navigator.push({ title: 'Settings' })}}>
       <Icon name='cog' size={25} />
       </Button>
-      <Title> Service-Learning </Title>
+      <Title style={StyleSheet.flatten([style.header, style.alignCenter, style.font20])}> Service-Learning </Title>
       </Header>
       <TabBarIOS selectedTab={this.state.selectedTab}>
       <Icon.TabBarItem

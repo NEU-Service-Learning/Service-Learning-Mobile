@@ -62,36 +62,19 @@ export default class ProjectSelectScreen extends Component {
           data={this.state.selectedProjects}
           header="Added Projects"
           row={this.renderRow(false, this.onRemoveProject.bind(this))} />
-        <View style={styles.nav} >
-            <View style={styles.back}>
-              <TouchableHighlight style={style.button}  onPress={() => this.props.navigator.pop()}>
-                <Text style={style.text}> Back </Text>
+        <View style={StyleSheet.flatten([style.nav])}>
+            <View style={StyleSheet.flatten([style.back])}>
+              <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}  onPress={() => this.props.navigator.pop()}>
+                <Text style={StyleSheet.flatten([style.buttonText])}> Back </Text>
               </TouchableHighlight>
             </View>
-            <View style={styles.next}>
-              <TouchableHighlight style={style.button}  onPress={() => this.navigate()}>
-                <Text style={style.text}> Finish </Text>
-              </TouchableHighlight>
+            <View style={StyleSheet.flatten([style.next])}>
+              <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}  onPress={() => this.navigate()}>
+                <Text style={StyleSheet.flatten([style.buttonText])}> Finish </Text>
+                </TouchableHighlight>
             </View>
           </View>
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  nav: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-  },
-  back: {
-    justifyContent:'flex-start',
-    flexDirection: 'row',
-    flex: 1
-  },
-  next: {
-    justifyContent:'flex-end',
-    flexDirection: 'row',
-    flex: 1
-  },
-});
