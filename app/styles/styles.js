@@ -37,9 +37,6 @@ module.exports = StyleSheet.create({
     marginTop: 7,
     padding: 10,
   },
-  buttonWidth: {
-    width: 300,
-  },
   buttonText: {
     color: 'white',
     fontSize: 15,
@@ -88,10 +85,6 @@ module.exports = StyleSheet.create({
   },
   textCenter: {
     textAlign : 'center'
-  },
-  next: {
-    flexDirection: 'row',
-    justifyContent:'flex-end',
   },
   nav: {
     flexDirection: 'row',
