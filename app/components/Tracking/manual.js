@@ -19,7 +19,7 @@ import AndroidDatePicker from './datepicker.android';
 import AndroidTimePicker from './timepicker.android';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-var style = require('../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class ManualTracking extends Component {
 
@@ -27,7 +27,7 @@ export default class ManualTracking extends Component {
     super(props);
 
     this.state = {
-    	notes: "Enter notes here",
+    	notes: "",
     	group_log: false,
     }
   }

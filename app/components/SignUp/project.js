@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
-import {SearchTable, SearchRow} from '../searchTable';
+import {SearchTable, SearchRow} from './searchTable';
 
-var style = require('../../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class ProjectSelectScreen extends Component {
 
@@ -71,7 +71,7 @@ export default class ProjectSelectScreen extends Component {
             <View style={StyleSheet.flatten([style.next])}>
               <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}  onPress={() => this.navigate()}>
                 <Text style={StyleSheet.flatten([style.buttonText])}> Finish </Text>
-              </TouchableHighlight>
+                </TouchableHighlight>
             </View>
           </View>
       </View>

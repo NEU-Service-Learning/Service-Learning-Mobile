@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
-var style = require('../../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class LogInScreen extends Component {
 
@@ -28,8 +28,11 @@ export default class LogInScreen extends Component {
 
   render() {
     return (
-      <View style={style.container}>
-        <View style={style.inputContainer}>
+      <View style={[style.container, style.margin16]}>
+          <Image style={{alignSelf: 'center'}}
+                source={require('../../assets/img/Logo.png')}
+          />
+          <View style={style.inputContainer}>
           <Text style={style.textCenter}>Email</Text>
           <TextInput
           style={{textAlign : 'center', marginBottom: 30}}
@@ -44,14 +47,16 @@ export default class LogInScreen extends Component {
         </View>
         <View style={StyleSheet.flatten([style.inputContainer, style.alignCenter])}>
           <TouchableHighlight style={style.button}  onPress={() => this.navigateLogIn()}>
-            <Text style={{fontSize: 30, fontWeight: 'bold'}}> Log In </Text>
+            <Text style={StyleSheet.flatten([style.buttonText])}> Log In </Text>
           </TouchableHighlight>
           <TouchableHighlight style={style.button}  onPress={() => this.navigateSignUp()}>
-            <Text style={{fontSize: 30, fontWeight: 'bold'}}> Sign Up </Text>
+            <Text style={StyleSheet.flatten([style.buttonText])}> Sign Up </Text>
           </TouchableHighlight>
           <TouchableHighlight  onPress={() => this.navigateSignUp()}>
-            <Text style={{color: 'blue', textDecorationLine: 'underline'}}> Forgot Password </Text>
+            <Text style={{color: 'blue', textDecorationLine: 'underline', margin: 10}}> Forgot Password </Text>
           </TouchableHighlight>
+        </View>
+        <View style={style.container}>
         </View>
       </View>
     );

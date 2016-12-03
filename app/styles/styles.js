@@ -24,6 +24,9 @@ module.exports = StyleSheet.create({
     margin: 30,
     justifyContent : 'center',
   },
+  text: {
+    color: '#708090',
+  },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -41,6 +44,9 @@ module.exports = StyleSheet.create({
     color: 'white',
     fontSize: 15,
     fontWeight: 'bold',
+  },
+  buttonWidth: {
+    width: 250,
   },
   members : {
     flexDirection: 'row',

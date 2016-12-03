@@ -13,7 +13,7 @@ import MapView from 'react-native-maps';
 
 import { Title, Icon, Header, Thumbnail, Content, Container, Card, CardItem, Button } from 'native-base';
 
-var style = require('../../Styles/styles');
+var style = require('../../styles/styles');
 var img = require('../../assets/img/Logo.png')
 
 var projects = [
@@ -56,7 +56,6 @@ export default class Dashboard extends Component {
                   <CardItem header>
                       <Text style={StyleSheet.flatten([style.subheader])}>Auto Tracking</Text>
                   </CardItem>
-
                   <CardItem>
                       <MapView
                         style={styles.map}

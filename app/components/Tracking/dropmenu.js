@@ -99,13 +99,8 @@ export default class Dropmenu extends Component {
 	  <View>
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
         <Text>{this.props.text}</Text>
-          <TouchableWithoutFeedback onPress={ this.toggleVisible.bind(this) }>
-            <View style={ styles.input }>
-              <Text>{this.output(this.props.mode)}</Text>
-            </View>
-          </TouchableWithoutFeedback>
+          {picker}
       </View>
-          { this.state.visibility == 'visible' ? picker : <View/> }
       </View>
     )
 	}

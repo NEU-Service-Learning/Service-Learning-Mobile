@@ -11,7 +11,7 @@ import {
 import { Title, Button, Header, Container, Content } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-var style = require('../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class Settings extends Component {
   back() {

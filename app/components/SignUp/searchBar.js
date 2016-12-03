@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, TextInput } from 'react-native';
-var style = require('../../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class SearchBar extends Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-var style = require('../../Styles/styles');
+var style = require('../../styles/styles');
 
 export class SearchTable extends Component {
   constructor(props) {

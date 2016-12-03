@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
 
-import {SearchTable, SearchRow} from '../searchTable'
+import {SearchTable, SearchRow} from './searchTable'
 import SearchBar from './searchBar'
 
-var style = require('../../../Styles/styles');
-
+var style = require('../../styles/styles');
 // Dummy data
 var classes = [
   {
@@ -124,10 +123,10 @@ export default class ClassSelectScreen extends Component {
             <View style={StyleSheet.flatten([style.next])}>
               <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={() => this.navigate()}>
                 <Text style={StyleSheet.flatten([style.buttonText])}> Next </Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-          </View>
+                </TouchableHighlight>
+                </View>
+                </View>
+                </View>
     );
   }
 }
