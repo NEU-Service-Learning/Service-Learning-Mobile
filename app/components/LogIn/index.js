@@ -28,8 +28,8 @@ export default class LogInScreen extends Component {
 
   render() {
     return (
-      <View style={[style.container, style.margin16]}>
-          <Image style={{alignSelf: 'center'}}
+      <View style={[style.container]}>
+          <Image style={{alignSelf: 'center', margin: 50}}
                 source={require('../../assets/img/Logo.png')}
           />
           <View style={style.inputContainer}>
