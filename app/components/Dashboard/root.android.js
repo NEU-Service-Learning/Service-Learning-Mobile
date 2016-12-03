@@ -17,6 +17,7 @@ import Dashboard from './dashboard';
 import Summary from './summary';
 import Settings from './settings';
 
+var style = require('../../styles/styles');
 
 export default class Root extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ export default class Root extends Component {
       <View style={{flex: 1}}>
        <Header style={{backgroundColor: '#708090'}}>
            <Button transparent> </Button>
-           <Title style={{color: '#9ACD32', fontWeight: 'bold'}}>Service-Learning</Title>
+           <Title style={StyleSheet.flatten([style.header, style.alignCenter, style.font20])}>Service-Learning</Title>
            <Button transparent onPress={() => {this.props.navigator.push({ title: 'Settings' })}}>
              <Icon name='cog' size={30} />
            </Button>
