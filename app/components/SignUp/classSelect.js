@@ -5,7 +5,7 @@ import {SearchTable, SearchRow} from './searchTable'
 import SearchBar from './searchBar'
 
 var style = require('../../styles/styles');
-import api from '../../api/index'
+import api from '../../components/api/index'
 
 // Dummy data
 var classes = [

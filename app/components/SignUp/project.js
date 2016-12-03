@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, ActivityIndicator, TouchableHighlight } from 'react-native';
 
 import {SearchTable, SearchRow} from './searchTable';
-import api from '../../api/index';
+import api from '../../components/api/index';
 
 var style = require('../../styles/styles');
 
