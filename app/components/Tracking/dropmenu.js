@@ -33,7 +33,7 @@ export default class Dropmenu extends Component {
       date: new Date(),
       project: 'Time Tracker',
       visibility: 'hidden',
-      category: 'Trainings & Orientations',
+      category: '',
     }
   }
 
@@ -99,7 +99,16 @@ export default class Dropmenu extends Component {
 	  <View>
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
         <Text>{this.props.text}</Text>
-          {picker}
+
+          {Platform.OS === 'ios' ?
+          <TouchableWithoutFeedback onPress={ this.toggleVisible.bind(this) }>
+            <View style={ styles.input }>
+              <Text>{this.props.time == null ? this.output(this.props.mode) :
+              this.props.time}</Text>
+            </View>
+          </TouchableWithoutFeedback> :
+          picker}
+
       </View>
       </View>
     )

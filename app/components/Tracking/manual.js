@@ -67,10 +67,12 @@ export default class ManualTracking extends Component {
       <Dropmenu
         text = {"Start Time"}
         mode = {"time"}
+        time = {this.props.start.toLocaleTimeString()}
       />
       <Dropmenu
         text = {"End Time"}
         mode = {"time"}
+        time = {this.props.end.toLocaleTimeString()}
       /></View> :
 
       // ANDROID DATE PICKING

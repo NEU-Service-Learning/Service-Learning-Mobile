@@ -7,11 +7,13 @@ import {
   Text,
   ScrollView,
   TouchableHighlight,
-  ListView
+  ListView,
+  Alert,
 } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { Title, Icon, Header, Thumbnail, Content, Container, Card, CardItem, Button } from 'native-base';
+import AutoTracking from '../Tracking/auto';
 
 var style = require('../../styles/styles');
 var img = require('../../assets/img/Logo.png')
@@ -48,13 +50,49 @@ export default class Dashboard extends Component {
   navigate() {
     this.props.navigator.push({title: 'ManualTracking'});
   }
+  startAlert() {
+    Alert.alert(
+      'Clock In',
+      'You will be logging hours for the project "Service Learning Mobile"',
+      [
+        {text: 'Cancel', onPress: () => console.log('Dismissed')},
+        {text: 'OK', onPress: this.startAuto.bind(this)},
+      ]
+    )
+  }
+  startAuto() {
+    this.setState({auto: true});
+  }
+  stopAlert(startTime, endTime) {
+    this.setState({startTime: startTime, endTime: endTime});
+    var timer = (endTime - startTime) / 60000;
+    Alert.alert(
+      'Clock Out',
+      'Worked ' + timer.toFixed(2) + ' minutes for "Service Learning Mobile". Please input category'
+      + ' and any relevant notes',
+      [
+        {text: 'OK', onPress: this.stopAuto.bind(this)},
+      ]
+    )
+  }
+  stopAuto(startTime, endTime) {
+    this.props.navigator.push({
+      title: 'ManualTracking',
+      extras: {
+        start: this.state.startTime,
+        end: this.state.endTime,
+      }});
+    this.setState({auto: false});
+  }
   render() {
+
     return(
       <ScrollView>
           <View style={{margin: 16}}>
-              <Card>
+             {this.state.auto ? <AutoTracking onStop={this.stopAlert.bind(this)}/> : null}
+              <Card style={styles.card}>
                   <CardItem header>
-                      <Text>Auto Tracking</Text>
+                      <Text>Overview</Text>
                   </CardItem>
                   <CardItem>
                       <MapView
@@ -81,12 +119,13 @@ export default class Dashboard extends Component {
                   </CardItem>
                   <CardItem style={{flexDirection:'row'}}>
                     <Text style={{flex: 2}}>You are near a Service-Learning partner</Text>
-                    <Button style={{flex: 1}}>Start Auto-Tracking</Button>
+                    <Button onPress={this.startAlert.bind(this)} style={{flex: 1}}>
+                      Clock In</Button>
                   </CardItem>
              </Card>
              <Card style={styles.card}>
                  <CardItem header>
-                     <Text>Clock Hours</Text>
+                     <Text>Log Hours</Text>
                  </CardItem>
 
                  <CardItem>
