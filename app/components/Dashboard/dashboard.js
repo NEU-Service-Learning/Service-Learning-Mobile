@@ -14,7 +14,6 @@ import MapView from 'react-native-maps';
 
 import { Title, Icon, Header, Thumbnail, Content, Container, Card, CardItem, Button } from 'native-base';
 import AutoTracking from '../Tracking/auto';
-var auto = require('../Tracking/auto');
 var style = require('../../Styles/styles');
 var img = require('../../assets/img/Logo.png')
 
@@ -61,25 +60,27 @@ export default class Dashboard extends Component {
     )
   }
   startAuto() {
-    //auto.handleStartStop.bind(this);
     this.setState({auto: true});
   }
   stopAlert(startTime, endTime) {
+    this.setState({startTime: startTime, endTime: endTime});
+    var timer = (endTime - startTime) / 60000;
     Alert.alert(
       'Clock Out',
-      'Are you sure you want to clock out of "Service Learning Mobile"?',
+      'Worked ' + timer.toFixed(2) + ' minutes for "Service Learning Mobile". Please input category'
+      + ' and any relevant notes',
       [
-        {text: 'Cancel', onPress: () => console.log('Dismissed')},
-        {text: 'Clock Out', onPress: this.stopAuto.bind(this)},
+        {text: 'OK', onPress: this.stopAuto.bind(this)},
       ]
     )
   }
   stopAuto(startTime, endTime) {
-
-    this.props.navigator.push({title: 'ManualTracking', extras: {
-      startTime: startTime,
-      endTime: endTime,
-    }});
+    this.props.navigator.push({
+      title: 'ManualTracking',
+      extras: {
+        start: this.state.startTime,
+        end: this.state.endTime,
+      }});
     this.setState({auto: false});
   }
   render() {

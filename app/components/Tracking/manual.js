@@ -27,11 +27,9 @@ export default class ManualTracking extends Component {
     super(props);
 
     this.state = {
-    	notes: "Enter notes here",
+    	notes: "",
     	group_log: false,
     }
-    console.log(this.props.startTime);
-    console.log(this.props.endTime);
   }
 
   _onPressButton() {
@@ -69,12 +67,12 @@ export default class ManualTracking extends Component {
       <Dropmenu
         text = {"Start Time"}
         mode = {"time"}
-        time = {this.props.startTime}
+        time = {this.props.start.toLocaleTimeString()}
       />
       <Dropmenu
         text = {"End Time"}
         mode = {"time"}
-        time = {this.props.endTime}
+        time = {this.props.end.toLocaleTimeString()}
       /></View> :
 
       // ANDROID DATE PICKING

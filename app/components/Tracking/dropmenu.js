@@ -33,7 +33,7 @@ export default class Dropmenu extends Component {
       date: new Date(),
       project: 'Time Tracker',
       visibility: 'hidden',
-      category: 'Trainings & Orientations',
+      category: '',
     }
   }
 

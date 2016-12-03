@@ -20,10 +20,12 @@ export default class AutoTracking extends Component {
     super(props);
 
     this.state = {
-      isRunning: true,
+      isRunning: false,
       startTime: new Date(),
       endTime: null,
+      timer: null,
     }
+    this.handleStartStop();
   }
 
   start() {
@@ -50,7 +52,7 @@ export default class AutoTracking extends Component {
       return;
     }
 
-    this.setState({startTime: new Date()});
+    this.setState({timer: new Date()});
 
     this.interval = setInterval(() => {
       this.setState({
@@ -61,6 +63,11 @@ export default class AutoTracking extends Component {
 
   }
 
+  stop() {
+    this.handleStartStop();
+    this.props.onStop(this.state.startTime, new Date());
+  }
+
   render() {
     return(
       <Card style = {styles.card}>
@@ -68,12 +75,12 @@ export default class AutoTracking extends Component {
           <Text>Time Worked</Text>
 
           <View style={styles.container}>
-            <Text style={styles.timer}>{ TimeFormatter(this.state.endTime) }</Text>
+            <Text style={styles.timer}>{ TimeFormatter(this.state.timer) }</Text>
           </View>
 
         </CardItem>
         <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
-          <Button onPress={() => this.props.onStop(this.state.startTime, new Date())}
+          <Button onPress={this.stop.bind(this)}
                   style={{flex: 1}}>Clock Out</Button>
         </CardItem>
       </Card>
