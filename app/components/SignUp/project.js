@@ -67,7 +67,7 @@ export default class ProjectSelectScreen extends Component {
 
   // For now just goes to Dashboard
   navigate() {
-   this.props.navigator.push({
+   this.props.navigator.resetTo({
      title: 'Dashboard'
    });
   }

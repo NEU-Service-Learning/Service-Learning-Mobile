@@ -13,7 +13,7 @@ export default class LogInScreen extends Component {
   // Used to move to the next screen
   // Passes the list of projects from the classes to the next screen
   navigateLogIn() {
-    this.props.navigator.push({
+    this.props.navigator.resetTo({
       title: 'Dashboard'
     })
   }

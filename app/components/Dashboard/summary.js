@@ -40,7 +40,7 @@ export default class Summary extends Component {
     navigate(rowData) {
      this.props.navigator.push({
        title: 'Details',
-       extras: rowData,
+       extras: {key: rowData.key},
      })
   }
   render() {

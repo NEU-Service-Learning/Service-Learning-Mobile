@@ -4,52 +4,95 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
+  ScrollView,
   Text
 } from 'react-native';
 
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+import { Title, Button, Header, Card, CardItem, Icon} from 'native-base';
+import MapView from 'react-native-maps';
+
+var style = require('../../styles/styles');
+
 const styles = StyleSheet.create({
-  description: {
-    fontSize: 20,
-    textAlign: 'center',
-    color: '#FFFFFF'
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'teal'
-  },
   map: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'red'
+    height: 200
   },
-  text: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontWeight: 'bold',
-    fontSize: 25
-  }
+  card: {
+    marginTop: 8
+  },
 });
 
 export default class Details extends Component {
+  constructor(props) {
+    super(props);
+    var group = true ? 'check-square-o' : 'square-o';
+    this.state = {
+    }
+  }
+  navigate() {
+   this.props.navigator.push({
+     title: 'Dashboard',
+     extras: {summary : true}
+   })
+  }
+
   render() {
     return(
-      <View style={styles.container}>
-      <View style={styles.map}>
-        <Text style={styles.text} onPress={() => this.props.navigator.push({title: 'Dashboard'})}>Map</Text>
-      </View>
-      <View style={styles.container}>
-        <Text style={{fontWeight: 'bold', fontSize: 15}}>Notes:</Text>
-        <Text>Field for where the hours go</Text>
-        <Text>Bucket</Text>
-        <Text>This is where notes go</Text>
-        <Text>Place for extra fields</Text>
-      </View>
+      <View style={style.container}>
+        <Header  style={{backgroundColor: '#708090'}}>
+          <Button transparent textStyle={{color: 'black'}} onPress={() => {this.props.navigator.push({ title: 'Dashboard'})}}>
+          <Icon style={{color: 'black'}} name='ios-arrow-back' size={30}/>
+          Back
+          </Button>
+          <Title style={StyleSheet.flatten([style.header, style.alignCenter, style.font20])}> Service-Learning</Title>
+          <Button transparent onPress={() => {this.props.navigator.push({ title: 'ManualTracking' })}}>
+            <FontAwesome name='pencil' size={30} />
+          </Button>
+        </Header>
+        <Text style={style.subheader}>Time Tracking</Text>
+        <ScrollView>
+        <Card style={styles.card}>
+        <CardItem>
+        <Text style={style.subheader}>Location</Text>
+            <MapView
+              style={styles.map}
+              initialRegion={{
+                latitude: 42.340951,
+                longitude: -71.087566,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            />
+            <MapView.Marker
+              coordinate={{'latitude': 42.341855, 'longitude': -71.086745}}
+              title={"Sdfdsf"}
+              description={"sdfdsf"}
+            />
+        </CardItem>
+        <CardItem>
+        <Text style={style.subheader}>Date</Text>
+        </CardItem>
+        <CardItem>
+        <Text style={style.subheader}>FromTime-EndTime</Text>
+        </CardItem>
+        <CardItem>
+        <Text style={style.subheader}>Category</Text>
+        </CardItem>
+        <CardItem>
+        <Text style={style.subheader}>Notes</Text>
+        </CardItem>
+        <CardItem>
+        <FontAwesome name={this.group} />
+        <Text style={style.subheader}>Group Logged</Text>
+        </CardItem>
+        <CardItem>
+        <Text style={style.subheader}>Extra Fields</Text>
+        </CardItem>
+        </Card>
+        </ScrollView>
       </View>
     )
   }
