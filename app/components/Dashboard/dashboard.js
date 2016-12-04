@@ -120,7 +120,8 @@ export default class Dashboard extends Component {
                   <CardItem style={{flexDirection:'row'}}>
                     <Text style={{flex: 2}}>You are near a Service-Learning partner</Text>
 
-                    <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}>
+                    <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}
+                      onPress={this.startAlert.bind(this)}>
                       <Text style={style.buttonText}> Clock In</Text>
                     </TouchableHighlight>
                      </CardItem>
