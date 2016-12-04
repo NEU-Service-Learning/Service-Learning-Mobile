@@ -52,48 +52,44 @@ export default class Dashboard extends Component {
   navigate() {
     this.props.navigator.push({title: 'ManualTracking'});
   }
-  startAlert() {
+  startAuto() {
     Alert.alert(
       'Clock In',
       'You will be logging hours for the project "Service Learning Mobile"',
       [
         {text: 'Cancel', onPress: () => console.log('Dismissed')},
-        {text: 'OK', onPress: this.startAuto.bind(this)},
+        {text: 'OK', onPress: () => {this.setState({auto: true})}},
       ]
     )
   }
-  startAuto() {
-    this.setState({auto: true});
-  }
-  stopAlert(startTime, endTime) {
-    this.setState({startTime: startTime, endTime: endTime});
+  stopAuto(startTime, endTime, proj) {
     var timer = (endTime - startTime) / 60000;
     Alert.alert(
       'Clock Out',
       'Worked ' + timer.toFixed(2) + ' minutes for "Service Learning Mobile". Please input category'
       + ' and any relevant notes',
       [
-        {text: 'OK', onPress: this.stopAuto.bind(this)},
+        {text: 'OK', onPress: () => {
+          this.props.navigator.push({
+            title: 'ManualTracking',
+            extras: {
+              start: startTime,
+              end: endTime,
+              project: proj,
+            }});
+          this.setState({auto: false});}},
       ]
     )
   }
-  stopAuto(startTime, endTime) {
-    this.props.navigator.push({
-      title: 'ManualTracking',
-      extras: {
-        start: this.state.startTime,
-        end: this.state.endTime,
-      }});
-    this.setState({auto: false});
-  }
+
   render() {
 
     return(
       <ScrollView>
           <View style={{margin: 16}}>
-             {this.state.auto ? <AutoTracking onStop={this.stopAlert.bind(this)}/> : null}
+             {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> : null}
 
-             <AutoTrackingMap projects={projects} onStart={this.startAlert.bind(this)}/>
+             <AutoTrackingMap projects={projects} onStart={this.startAuto.bind(this)}/>
              <Card style={styles.card}>
                  <CardItem header>
                      <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>

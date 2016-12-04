@@ -66,7 +66,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   input: {
-    height: 40,
+    height: 30,
     justifyContent: 'center',
     padding: 5,
     borderColor: 'gray',
@@ -75,7 +75,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFF'
   },
   presetInput: {
-    height: 40,
+    height: 30,
     justifyContent: 'center',
     padding: 5,
     borderColor: 'gray',

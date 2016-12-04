@@ -16,9 +16,9 @@ import {
 
 const Pick = (Platform.OS === 'ios' ? PickerIOS : Picker);
 
-var projects = [{label:'Time Tracker', key:'0'},
-                {label:'Project 1', key:'1'},
-                {label:'Project 2', key:'2'}]
+var projects = [{label:'Time Tracker', key:0},
+                {label:'Project 1', key:1},
+                {label:'Project 2', key:2}]
 const categories = [{label:"Trainings & Orientations", key:"1"},
                     {label:"Direct Service", key:"2"},
                     {label:"Individual Research & Planning", key:"3"},
@@ -31,15 +31,22 @@ export default class Dropmenu extends Component {
 
     this.state = {
       date: new Date(),
-      project: 'Time Tracker',
+      project: this.props.project == null ? projects[0].label : this.findProj(this.props.project),
       visibility: 'hidden',
       category: '',
-      preset: this.props.time == null ? false : true,
+      preset: this.props.time == null && this.props.project == null ? false : true,
     }
   }
 
   onDateChange(date){
     this.setState({date: date});
+  }
+
+  findProj(key) {
+    for(var i=0; i < projects.length; i++) {
+      if(projects[i].key == key) {
+        return projects[i].label; }
+    }
   }
 
   // Makes the dropdown menu visible
@@ -107,9 +114,10 @@ export default class Dropmenu extends Component {
       {Platform.OS === 'ios' ?
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
         <Text>{this.props.text}</Text>
-          <TouchableWithoutFeedback onPress={this.preset ? {} : this.toggleVisible.bind(this) }>
-            <View style={this.preset ? styles.presetInput : styles.input}>
-              <Text>{this.preset ? this.props.time : this.output(this.props.mode)}</Text>
+          <TouchableWithoutFeedback onPress={this.state.preset ? null : this.toggleVisible.bind(this) }>
+            <View style={this.state.preset ? styles.presetInput : styles.input}>
+              <Text>{(this.state.preset && this.props.time != null) ?
+                this.props.time : this.output(this.props.mode)}</Text>
             </View>
           </TouchableWithoutFeedback>
           {this.state.visibility == 'visible' ? picker : <View/>}
@@ -142,7 +150,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFF'
   },
   presetInput: {
-    height: 40,
+    height: 30,
     justifyContent: 'center',
     padding: 5,
     borderColor: 'gray',

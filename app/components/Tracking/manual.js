@@ -54,6 +54,7 @@ export default class ManualTracking extends Component {
       <Dropmenu
         text = {"Project"}
         mode = {"project"}
+        project = {this.props.project == null ? null : this.props.project}
       />
 
       {Platform.OS === 'ios' ?
@@ -63,7 +64,7 @@ export default class ManualTracking extends Component {
       <Dropmenu
         text = {"Date"}
         mode = {"date"}
-        preset = {this.props.start == null ? false : true}
+        time = {this.props.start == null ? null : this.props.start.toLocaleDateString()}
       />
       <Dropmenu
         text = {"Start Time"}

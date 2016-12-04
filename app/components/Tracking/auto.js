@@ -48,7 +48,8 @@ export default class AutoTracking extends Component {
 
   stop() {
     this.handleStartStop();
-    this.props.onStop(this.state.startTime, new Date());
+    this.props.onStop(this.state.startTime, new Date(), 0);
+    //TODO: change the above project parameter to reflect that actual project
   }
 
   render() {
