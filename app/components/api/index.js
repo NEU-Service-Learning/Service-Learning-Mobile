@@ -10,5 +10,10 @@ module.exports = {
     let response = await fetch(domain + '/course/' + courseId +'/projects');
     let responseJson = await response.json();
     return responseJson;
+  },
+  getSectionsForCourse: async function(courseId) {
+    let response = await fetch(domain + '/course/' + courseId +'/sections');
+    let responseJson = await response.json();
+    return responseJson;
   }
 }

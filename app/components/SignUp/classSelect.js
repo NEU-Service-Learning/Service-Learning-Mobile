@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, ActivityIndicator, TouchableHighlight } from 'react-native';
+import moment from 'moment';
 
 import {SearchTable, SearchRow} from './searchTable'
 import SearchBar from './searchBar'
+import api from '../api/index'
 
 var style = require('../../styles/styles');
-import api from '../../api/index'
+
 
 // Dummy data
 var classes = [
@@ -39,8 +41,16 @@ export default class ClassSelectScreen extends Component {
   componentWillMount = async () => {
   try {
     const classes = await api.getClasses();
-    console.log(classes);
+    sectionPromises = classes.map((someClass) => {
+      return api.getSectionsForCourse(someClass.id);
+    });
+    Promise.all(sectionPromises).then((data) => {
+      data.forEach((sections, index) => {
+        classes[index].sections = sections
+      })
+    });
     this.setState({loading: false, classes: classes});
+    console.log(classes);
   } catch (e) {
     this.setState({loading: false, error: true})
   }
@@ -67,21 +77,31 @@ export default class ClassSelectScreen extends Component {
     this.setState({selectedClasses: addedClasses});
   }
 
+  formatTime(time) {
+    return moment(time, "HH:mm:ss.SS").format("hh:mm");
+  }
+
   // add is a boolean flag if you want the 'add' button/text or the 'remove' button/text
   // onClickFn is a function that represents what happens after the user clicks the action
   // Retuns a function that takes a class and returns a single row on how to render that class
   renderRow(add, onClickFn) {
+    ft = this.formatTime;
       return (someClass) => {
-        return (
-          <SearchRow
-              onClicked={onClickFn}
-              header={someClass.id + " - " + someClass.name}
-              subHeader={"Department: " + someClass.department}
-              data={someClass}
-              key={someClass.id}
-              type={add}/>
+        let rows = someClass.sections.map((section) => {
+          let meeting_time = section.meeting_days + " " + ft(section.meeting_start_time) + "-" + ft(section.meeting_end_time);
+          return(
+            <SearchRow
+                onClicked={onClickFn}
+                header={someClass.id + " - " + someClass.name}
+                subHeader={section.professor}
+                subHeader2={meeting_time}
+                data={someClass}
+                key={someClass.id}
+                type={add}/>
             )
-        }
+        });
+        return rows;
+      }
     }
 
   // Used to move to the next screen
@@ -112,6 +132,7 @@ export default class ClassSelectScreen extends Component {
         return(
         <View style={[style.container, style.alignCenter]}>
           <ActivityIndicator animating={true} />
+          <Text>Loading Service-Learning Classes</Text>
         </View>
       )
     }

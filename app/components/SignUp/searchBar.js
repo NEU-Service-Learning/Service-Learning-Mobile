@@ -9,7 +9,7 @@ export default class SearchBar extends Component {
 
   render() {
     return(
-      <View style={StyleSheet.flatten([style.alignCenter, style.margin16])}>
+      <View style={[style.margin16, {flexDirection: 'row'}]}>
         <TextInput
           style={styles.input}
           placeholder="Search for a class here!"
@@ -22,10 +22,8 @@ export default class SearchBar extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10
-  },
   input: {
-    height: 40
+    height: 40,
+    flex: 1
   }
 });

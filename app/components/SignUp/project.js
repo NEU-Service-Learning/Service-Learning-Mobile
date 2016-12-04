@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, ActivityIndicator, TouchableHighlight } from 'react-native';
 
 import {SearchTable, SearchRow} from './searchTable';
-import api from '../../api/index';
+import api from '../api/index';
 
 var style = require('../../styles/styles');
 
@@ -82,6 +82,7 @@ export default class ProjectSelectScreen extends Component {
         return(
         <View style={[style.container, style.alignCenter]}>
           <ActivityIndicator animating={true} />
+          <Text>Loading Service-Learning Projects</Text>
         </View>
       )
     }
@@ -89,7 +90,7 @@ export default class ProjectSelectScreen extends Component {
       <View style={StyleSheet.flatten([style.container, style.margin16])}>
         <SearchTable
           style={{marginTop: 38}}
-          data={this.state.projects}
+          data={shownProjects}
           header="Avaliable Projects"
           row={this.renderRow(true, this.onAddProject.bind(this))} />
         <SearchTable
