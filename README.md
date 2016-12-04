@@ -7,6 +7,8 @@ SL Time Tracker is a cross-platform react-native app that was developed by Team 
 # Getting Started
 See Facebook's [documentation](https://facebook.github.io/react-native/docs/getting-started.html) on getting started with react-native.
 
+run `npm install' from an elevated command prompt/terminal window to install all requirements
+
 # Documentation of components
 ## User Signup
 ## Course Registration
