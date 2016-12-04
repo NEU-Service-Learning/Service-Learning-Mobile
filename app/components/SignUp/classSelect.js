@@ -8,29 +8,6 @@ import api from '../api/index'
 
 var style = require('../../styles/styles');
 
-
-// Dummy data
-var classes = [
-  {
-    classNum: 'CS 4500',
-    name: 'Software dev',
-    prof: 'Wientraub',
-    projects: ['Mobile Time Tracker', 'Back-end Service-Learning', 'Front-end Service-Learning']
-  },
-  {
-    classNum: 'ARTF 1122',
-    name: 'Art and stuff',
-    prof: 'Thorne',
-    projects: ['Madison High School']
-  },
-  {
-    classNum: 'PT 2568',
-    name: 'Physical Therapy and stuff',
-    prof: 'Parker',
-    projects: ['Hospital Service']
-  }
-]
-
 export default class ClassSelectScreen extends Component {
 
   constructor(props) {
