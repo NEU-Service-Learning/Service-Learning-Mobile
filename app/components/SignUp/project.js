@@ -13,21 +13,30 @@ export default class ProjectSelectScreen extends Component {
     this.state = {error: false, loading: true, projects: [], selectedProjects: []}
   }
 
-  componentWillMount() {
+  componentDidMount() {
   try {
     let projects = [];
-    let promises = [];
-    this.props.classes.forEach((someClass) => {
-      var projectPromise = api.getProjectForCourse(someClass.id);
-      promises.push(projectPromise);
+    let promises = this.props.classes.map((someClass) => {
+      return api.getProjectForCourse(someClass.id);
     });
-    Promise.all(promises).then((data) => {
+    Promise.all(promises)
+    .then((data) => {
+      // Push all the projects into a single array
       data.forEach((classProjects) => {
         classProjects.forEach((project) => {
-          console.log(project)
           projects.push(project);
-        })
-      })
+        });
+      });
+      // Request the community Partner data
+      var communityPromises = projects.map((project) => {
+        return api.getCommunityPartner(project.community_partner);
+      });
+      return Promise.all(communityPromises);
+    })
+    .then((communityPartnerData) => {
+      communityPartnerData.forEach((partner, index) => {
+        projects[index].communityPartner = partner;
+      });
       this.setState({loading: false, projects: projects});
     });
   } catch (e) {
@@ -52,12 +61,11 @@ export default class ProjectSelectScreen extends Component {
   // Renders a given project's row in the table
   renderRow(add, onClickFn) {
       return  (someProj) => {
-        console.log(someProj)
         return(
           <SearchRow
               onClicked={onClickFn}
               header={someProj.name}
-              subHeader={someProj.description}
+              subHeader={someProj.communityPartner.name}
               data={someProj}
               key={someProj.id}
               type={add}/>
@@ -73,8 +81,6 @@ export default class ProjectSelectScreen extends Component {
   }
 
   render() {
-    console.log("PR");
-    console.log(this.state.projects);
     const shownProjects = this.state.projects.filter((project) => {
        return !this.state.selectedProjects.includes(project);
     });

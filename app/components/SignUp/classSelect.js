@@ -38,19 +38,20 @@ export default class ClassSelectScreen extends Component {
     this.state = {loading: true, searchText: '', error: false, classes: [], selectedClasses: []};
   }
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
   try {
     const classes = await api.getClasses();
-    sectionPromises = classes.map((someClass) => {
+    let sectionPromises = classes.map((someClass) => {
       return api.getSectionsForCourse(someClass.id);
     });
+    // Get all the sections for a class
     Promise.all(sectionPromises).then((data) => {
+      // Update each class with its list of sections
       data.forEach((sections, index) => {
         classes[index].sections = sections
       })
     });
     this.setState({loading: false, classes: classes});
-    console.log(classes);
   } catch (e) {
     this.setState({loading: false, error: true})
   }
@@ -85,7 +86,7 @@ export default class ClassSelectScreen extends Component {
   // onClickFn is a function that represents what happens after the user clicks the action
   // Retuns a function that takes a class and returns a single row on how to render that class
   renderRow(add, onClickFn) {
-    ft = this.formatTime;
+    const ft = this.formatTime;
       return (someClass) => {
         let rows = someClass.sections.map((section) => {
           let meeting_time = section.meeting_days + " " + ft(section.meeting_start_time) + "-" + ft(section.meeting_end_time);
