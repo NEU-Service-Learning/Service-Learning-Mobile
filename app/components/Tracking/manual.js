@@ -63,6 +63,7 @@ export default class ManualTracking extends Component {
       <Dropmenu
         text = {"Date"}
         mode = {"date"}
+        preset = {this.props.start == null ? false : true}
       />
       <Dropmenu
         text = {"Start Time"}
@@ -79,17 +80,20 @@ export default class ManualTracking extends Component {
       <View>
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
     	  <Text>Date</Text>
-    	  <AndroidDatePicker />
+    	  <AndroidDatePicker
+          preset = {this.props.start == null ? false : true} />
       </View>
 
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
     	  <Text>Start Time</Text>
-    	  <AndroidTimePicker />
+    	  <AndroidTimePicker
+          autoTime = {this.props.start == null ? null : this.props.start.toLocaleTimeString()}/>
       </View>
 
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
     	  <Text>End Time</Text>
-    	  <AndroidTimePicker />
+    	  <AndroidTimePicker
+          autoTime = {this.props.end == null ? null : this.props.end.toLocaleTimeString()}/>
       </View>
 
       </View>}
@@ -136,6 +140,6 @@ const styles = StyleSheet.create({
      borderColor: 'gray',
      borderWidth: 1,
      marginVertical: 10,
-     backgroundColor: '#F0F0F0'
+     backgroundColor: '#FFF'
    },
  });

@@ -28,23 +28,6 @@ export default class AutoTracking extends Component {
     this.handleStartStop();
   }
 
-  start() {
-    this.setState({timerStart: new Date()});
-
-    this.interval = setInterval(() => {
-      this.setState({
-        timer: new Date() - this.state.timerStart,
-        isRunning: true,
-      });
-    }, 30);
-  }
-
-  stop() {
-    clearInterval(this.interval);
-    this.setState({isRunning: false});
-    return;
-  }
-
   handleStartStop() {
     if (this.state.isRunning) {
       clearInterval(this.interval);

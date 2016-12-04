@@ -92,42 +92,7 @@ export default class Dashboard extends Component {
       <ScrollView>
           <View style={{margin: 16}}>
              {this.state.auto ? <AutoTracking onStop={this.stopAlert.bind(this)}/> : null}
-              <Card style={styles.card}>
-                  <CardItem header>
-                      <Text style={StyleSheet.flatten([style.subheader])}>Project Tracking</Text>
-                  </CardItem>
-                  <CardItem>
-                      <MapView
-                        style={styles.map}
-                        initialRegion={{
-                          latitude: 42.340951,
-                          longitude: -71.087566,
-                          latitudeDelta: 0.0922,
-                          longitudeDelta: 0.0421,
-                        }}
-                      />
-                      <MapView.Marker
-                        coordinate={{'latitude': 42.341855, 'longitude': -71.086745}}
-                        title={"Sdfdsf"}
-                        description={"sdfdsf"}
-                      />
-                    {projects.map(marker => (
-                          <MapView.Marker
-                            coordinate={marker.location}
-                            title={marker.name}
-                            description={marker.description}
-                          />
-                        ))}
-                  </CardItem>
-                  <CardItem style={{flexDirection:'row'}}>
-                    <Text style={{flex: 2}}>You are near a Service-Learning partner</Text>
 
-                    <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}
-                      onPress={this.startAlert.bind(this)}>
-                      <Text style={style.buttonText}> Clock In</Text>
-                    </TouchableHighlight>
-                     </CardItem>
-             </Card>
              <AutoTrackingMap projects={projects} onStart={this.startAlert.bind(this)}/>
              <Card style={styles.card}>
                  <CardItem header>

@@ -34,6 +34,7 @@ export default class Dropmenu extends Component {
       project: 'Time Tracker',
       visibility: 'hidden',
       category: '',
+      preset: this.props.time == null ? false : true,
     }
   }
 
@@ -86,30 +87,35 @@ export default class Dropmenu extends Component {
         onDateChange={this.onDateChange.bind(this)}>
       </DatePickerIOS> ) }
 
-    var picker = (
-     <View>
-        <TouchableOpacity onPress={ this.toggleVisible.bind(this)} style={{marginRight: 20, alignItems: 'flex-end'}}>
+    var picker;
+    if (Platform.OS === 'ios') {
+      picker = (
+      <View>
+        <TouchableOpacity onPress={ this.toggleVisible.bind(this)}
+          style={{marginRight: 20, alignItems: 'flex-end'}}>
           <Text>Done</Text>
         </TouchableOpacity>
-            {menu}
+        {menu}
       </View>
-     )
+    )}
+    else {
+      picker = menu;
+    }
 
 	return (
 	  <View>
+      {Platform.OS === 'ios' ?
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
         <Text>{this.props.text}</Text>
-
-          {Platform.OS === 'ios' ?
-          <TouchableWithoutFeedback onPress={ this.toggleVisible.bind(this) }>
-            <View style={ styles.input }>
-              <Text>{this.props.time == null ? this.output(this.props.mode) :
-              this.props.time}</Text>
+          <TouchableWithoutFeedback onPress={this.preset ? {} : this.toggleVisible.bind(this) }>
+            <View style={this.preset ? styles.presetInput : styles.input}>
+              <Text>{this.preset ? this.props.time : this.output(this.props.mode)}</Text>
             </View>
-          </TouchableWithoutFeedback> :
-          picker}
-
-      </View>
+          </TouchableWithoutFeedback>
+          {this.state.visibility == 'visible' ? picker : <View/>}
+      </View> :
+      <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
+        <Text>{this.props.text}</Text>{picker}</View>}
       </View>
     )
 	}
@@ -128,6 +134,15 @@ var styles = StyleSheet.create({
   },
   input: {
     height: 30,
+    justifyContent: 'center',
+    padding: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginVertical: 10,
+    backgroundColor: '#FFF'
+  },
+  presetInput: {
+    height: 40,
     justifyContent: 'center',
     padding: 5,
     borderColor: 'gray',
