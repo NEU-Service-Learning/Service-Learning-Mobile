@@ -10,10 +10,11 @@ import {
   ListView,
   Alert,
 } from 'react-native';
-import MapView from 'react-native-maps';
+
 
 import { Title, Icon, Header, Thumbnail, Content, Container, Card, CardItem, Button } from 'native-base';
 import AutoTracking from '../Tracking/auto';
+import AutoTrackingMap from '../Tracking/map'
 
 var style = require('../../styles/styles');
 var img = require('../../assets/img/Logo.png')
@@ -25,7 +26,7 @@ var projects = [
     "description": "Creating a new system for tracking the hours worked by students doing service learning.",
     "start date": "2016-09-01 00:00:00",
     "end date": "2016-12-31 23:59:59.999999",
-    "location": { "latitude": 42.339803, "longitude": -1.089274 }
+    "location": { 'latitude': 42.3403955, 'longitude': -71.0885132 }
   },
   { "id": 8888,
     "name": "Wediko",
@@ -33,7 +34,7 @@ var projects = [
     "description": "Child care",
     "start date": "2016-09-01 00:00:00",
     "end date": "2016-12-31 23:59:59.999999",
-    "location": { "latitude": 42.339170, "longitude": -71.069139 }
+    "location": { 'latitude': 42.339170, 'longitude': -71.069139 }
   },
 ]
 
@@ -45,6 +46,7 @@ export default class Dashboard extends Component {
        projects: dsProj.cloneWithRows([
                     'Time Tracker', 'Project 1', 'Project 2',
               ]),
+      auto: false
     }
   }
   navigate() {
@@ -126,6 +128,7 @@ export default class Dashboard extends Component {
                     </TouchableHighlight>
                      </CardItem>
              </Card>
+             <AutoTrackingMap projects={projects} onStart={this.startAlert.bind(this)}/>
              <Card style={styles.card}>
                  <CardItem header>
                      <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
@@ -145,7 +148,7 @@ export default class Dashboard extends Component {
                     <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
                 </CardItem>
                 {projects.map(project => (
-                     <CardItem button onPress={() => this.navigate()}>
+                     <CardItem button key={project.id} onPress={() => this.navigate()}>
                          <Thumbnail source={img}/>
                          <Text>{project.name}</Text>
                      </CardItem>
