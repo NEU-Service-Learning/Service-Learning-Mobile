@@ -15,6 +15,10 @@ From Android SDK Manager Install:
 - Android SDK Build-tools 23.0.1
 - Android SDK Build-tools 23.0.3
 
+Other Requirements:
+- git
+- adb
+
 # Documentation of components
 ## User Signup
 ## Course Registration
