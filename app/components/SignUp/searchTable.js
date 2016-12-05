@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+var style = require('../../styles/styles');
+
 export class SearchTable extends Component {
   constructor(props) {
     super(props);
@@ -13,8 +15,8 @@ export class SearchTable extends Component {
       return rowRender(piece);
     });
     return(
-      <View style={[styles.table, this.props.style]}>
-      <Text style={styles.header}>{this.props.header}</Text>
+      <View style={StyleSheet.flatten([style.table, this.props.style])}>
+      <Text style={StyleSheet.flatten([style.buttonText])}>{this.props.header}</Text>
       <ScrollView>
         {rows}
       </ScrollView>
@@ -29,13 +31,19 @@ export class SearchRow extends Component {
   }
 
   render() {
-    var type = this.props.type ? (<Icon size={32} color="green" name="plus-square" onPress={() => this.props.onClicked(this.props.data)}></Icon>)
-    : (<Icon size={32} color="red" name="minus-square" onPress={() => this.props.onClicked(this.props.data)}></Icon>)
+    var type = this.props.type ? (<Icon size={30} color="#FF7F00" name="plus-square" onPress={() => this.props.onClicked(this.props.data)}></Icon>)
+    : (<Icon size={30} color="#FF7F00" name="minus-square" onPress={() => this.props.onClicked(this.props.data)}></Icon>)
+    var possibleSecondHeader = this.props.subHeader2 ?
+        (<Text style={StyleSheet.flatten([style.tableSubHeaderText])}>
+        {this.props.subHeader2}
+      </Text>) : null
+
     return(
-      <View style={styles.row}>
-        <View style={styles.rowHeader}>
-          <Text style={styles.headerText}>{this.props.header}</Text>
-          <Text style={styles.subHeaderText}>{this.props.subHeader}</Text>
+      <View style={StyleSheet.flatten([style.row])}>
+        <View style={StyleSheet.flatten([style.rowHeader])}>
+          <Text style={StyleSheet.flatten([style.tableHeaderText])}>{this.props.header}</Text>
+          <Text style={StyleSheet.flatten([style.tableSubHeaderText])}>{this.props.subHeader}</Text>
+          {possibleSecondHeader}
         </View>
         <TouchableOpacity style={{marginRight: 4}} onPress={() => this.props.onClicked(this.props.data)}>
           {type}
@@ -44,46 +52,3 @@ export class SearchRow extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  table: {
-    flex: 1,
-    backgroundColor:'teal',
-    borderRadius: 24,
-    marginBottom: 10,
-    padding: 10
-  },
-  header: {
-    marginBottom: 5,
-    fontSize: 18,
-    color: 'white',
-    fontWeight: 'bold'
-  },
-  row: {
-    backgroundColor:'skyblue',
-    padding: 4,
-    flexDirection:'row',
-    borderRadius: 10,
-    marginBottom: 5,
-    marginTop: 5,
-    height: 50
-  },
-  rowHeader: {
-    flexDirection: 'column',
-    flex: 1
-  },
-  headerText: {
-    flex: 2,
-    fontSize: 14,
-    color: 'teal',
-    fontWeight: 'bold'
-
-  },
-  subHeaderText: {
-    flex: 1,
-    fontSize: 13,
-    color: 'teal',
-    fontWeight: 'bold'
-
-  }
-});
