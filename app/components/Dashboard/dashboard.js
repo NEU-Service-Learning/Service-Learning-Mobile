@@ -11,7 +11,8 @@ import {
   Alert,
 } from 'react-native';
 import MapView from 'react-native-maps';
-
+//removes deprecated warnings
+console.disableYellowBox = true;
 import { Title, Icon, Header, Thumbnail, Content, Container, Card, CardItem, Button } from 'native-base';
 import AutoTracking from '../Tracking/auto';
 

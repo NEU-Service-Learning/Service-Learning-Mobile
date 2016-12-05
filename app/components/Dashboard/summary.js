@@ -14,7 +14,8 @@ import {
 } from 'react-native';
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
-
+//removes deprecated warnings
+console.disableYellowBox = true;
 var style = require('../../styles/styles');
 
 const Progress = (Platform.OS == 'ios') ? ProgressViewIOS : ProgressBarAndroid;

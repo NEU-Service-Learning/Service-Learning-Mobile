@@ -50,7 +50,7 @@ export default class LogInScreen extends Component {
             <Text style={StyleSheet.flatten([style.buttonText])}> Log In </Text>
           </TouchableHighlight>
           <TouchableHighlight style={style.button}  onPress={() => this.navigateSignUp()}>
-            <Text style={StyleSheet.f`latten([style.buttonText])}> Sign Up </Text>
+            <Text style={StyleSheet.flatten([style.buttonText])}> Sign Up </Text>
           </TouchableHighlight>
           <TouchableHighlight  onPress={() => this.navigateSignUp()}>
             <Text style={{color: 'blue', textDecorationLine: 'underline', margin: 10}}> Forgot Password </Text>
