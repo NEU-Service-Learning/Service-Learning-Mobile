@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, AsyncStorage, TextInput, Image, Platform, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, AsyncStorage, TextInput, Image, Platform, Alert, TouchableHighlight } from 'react-native';
 
 import api from '../../api/index'
 import storage from '../../api/storage'
@@ -10,7 +10,7 @@ export default class LogInScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {loading: false, error: false, username: '', password: '', key: ''};
+    this.state = {loading: false, error: false, email: '', password: '', key: ''};
   }
 
   // Used to move to the next screen
@@ -25,22 +25,43 @@ export default class LogInScreen extends Component {
   }
 
   tryLogIn = async function() {
-    try {
-      this.setState({loading: true});
-      const key = await api.getAuthKey(this.state.username,this.state.password);
+    console.log(this.state.email)
+    if(!this.state.email) {
+      this.loginPopUp("Empty email field");
+    }
+    else if(!this.state.email.includes("@")) {
+      this.loginPopUp("Invalid email");
+    }
+    else if(!this.state.password) {
+      this.loginPopUp("Empty password field");
+    }
+    else {
       try {
-        console.log(key.key);
-        await storage.saveAuthKey(key.key)
-      } catch (error) {
-        console.log(error + " error saving key to storage");
+        this.setState({loading: true});
+        const body = await api.getAuthKey(this.state.email,this.state.password);
+        console.log(body);
+        if('key' in body) {
+          try {
+            console.log(body.key);
+            await storage.saveAuthKey(body.key)
+          } catch (error) {
+            console.log(error + " error saving key to storage");
+            this.setState({loading: false, error: true})
+          }
+        }
+        if('non_field_errors' in body) {
+          this.setState({loading: false, error: true});
+          this.loginPopUp("Unable to log in with provided credentials.");
+        }
+
+
+        this.setState({loading: false, key: body.key});
+        this.navigateLogIn();
+      } catch (e) {
+        console.log(e + "error");
         this.setState({loading: false, error: true})
       }
-      this.setState({loading: false, key: key.key});
-      this.navigateLogIn();
-    } catch (e) {
-      console.log(e + "error");
-      this.setState({loading: false, error: true})
-    }
+  }
   };
 
   // Used to move to the next screen
@@ -51,6 +72,16 @@ export default class LogInScreen extends Component {
     })
   }
 
+  loginPopUp(errorMessage) {
+        Alert.alert(
+          "Alert",
+            errorMessage,
+            [
+              {text: 'Try Again', onPress: () => {this.setState({password: ''})}}
+            ]
+    )
+  }
+
   render() {
     return (
       <View style={style.container}>
@@ -58,14 +89,17 @@ export default class LogInScreen extends Component {
           <Text style={style.textCenter}>Email</Text>
           <TextInput
           style={Platform.OS === 'ios' ? styles.input : {textAlign : 'center', marginBottom: 30}}
-          onChangeText={(username) => this.setState({username})}
-          value={this.state.username}
+          onChangeText={(email) => this.setState({email})}
+          value={this.state.email}
+          selectTextOnFocus={true}
+          keyboardType={'email-address'}
           />
           <Text style={style.textCenter}>Password</Text>
           <TextInput
           style={Platform.OS === 'ios' ? styles.input : {textAlign : 'center', marginBottom: 30}}
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
+          secureTextEntry={true}
           />
         </View>
         <View style={StyleSheet.flatten([style.inputContainer, style.alignCenter])}>
