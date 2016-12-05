@@ -13,6 +13,7 @@ import {
 
 import TimeFormatter from 'minutes-seconds-milliseconds';
 import { Title, Icon, Header, Card, CardItem, Button } from 'native-base';
+var style = require('../../styles/styles');
 
 export default class AutoTracking extends Component {
 
@@ -72,7 +73,7 @@ export default class AutoTracking extends Component {
     return(
       <Card style = {styles.card}>
         <CardItem>
-          <Text>Time Worked</Text>
+          <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Time Worked</Text>
 
           <View style={styles.container}>
             <Text style={styles.timer}>{ TimeFormatter(this.state.timer) }</Text>
@@ -81,7 +82,7 @@ export default class AutoTracking extends Component {
         </CardItem>
         <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
           <Button onPress={this.stop.bind(this)}
-                  style={{flex: 1}}>Clock Out</Button>
+                  style={StyleSheet.flatten([style.button, style.height40, style.buttonFlex])}>Clock Out</Button>
         </CardItem>
       </Card>
     )

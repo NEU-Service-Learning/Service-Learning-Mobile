@@ -45,6 +45,9 @@ module.exports = StyleSheet.create({
   buttonWidth: {
     width: 250,
   },
+  buttonFlex: {
+    flex: 1
+  },
   members : {
     flexDirection: 'row',
     alignItems: 'center',
