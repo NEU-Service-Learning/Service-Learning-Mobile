@@ -5,11 +5,13 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableHighlight
+  TouchableHighlight,
+  AsyncStorage
 } from 'react-native';
 
 import { Title, Button, Header, Container, Content } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import storage from '../api/storage';
 
 var style = require('../../Styles/styles');
 
@@ -17,6 +19,12 @@ export default class Settings extends Component {
   back() {
     this.props.navigator.pop();
   }
+
+  logOut() {
+     storage.removeAuthKey().then((err) => {
+       this.props.navigator.resetTo({ title: 'LogIn' })
+     });
+    }
 
   render() {
     return(
@@ -28,7 +36,7 @@ export default class Settings extends Component {
       <Title> Settings </Title>
       </Header>
       <View style={styles.container}>
-        <Button transparent style={styles.button}  onPress={() => {this.props.navigator.push({ title: 'LogIn' })}}>
+        <Button transparent style={styles.button}  onPress={this.logOut.bind(this)}>
           <Text style={{color: 'black'}}> Sign Out </Text>
         </Button>
       </View>

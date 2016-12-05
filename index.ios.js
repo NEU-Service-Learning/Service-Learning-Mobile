@@ -10,7 +10,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Navigator
+  Navigator,
+  AsyncStorage,
+  ActivityIndicator
 } from 'react-native';
 
 import LogInScreen from './app/components/LogIn/LogInScreen/index';
@@ -23,7 +25,30 @@ import Details from './app/components/Details/details';
 import ManualTracking from './app/components/Tracking/manual';
 import Settings from './app/components/Dashboard/settings';
 
+import storage from './app/components/api/storage';
+import style from './app/Styles/styles'
+
 export default class SLTracker extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {loading: true, initialRoute: 'LogIn'}
+  }
+
+  componentWillMount = async () =>  {
+    try {
+      const value = await storage.getAuthKey();
+      console.log(value);
+      if (value !== null){
+        this.setState({initialRoute: 'Dashboard'});
+      }
+      this.setState({loading: false});
+    } catch (error) {
+      // Error retrieving data
+      this.setState({loading: false});
+      console.log(error);
+    }
+  }
 
   // Renders a particular scene depending on the route title
   renderScene(route, navigator) {
@@ -35,6 +60,15 @@ export default class SLTracker extends Component {
      }
      if(route.title == 'Dashboard') {
        return <Root navigator={navigator} />
+     }
+     if(route.title == 'Summary') {
+       return <Summary navigator={navigator} />
+     }
+     if(route.title == 'Details') {
+       return <Details navigator={navigator} />
+    }
+     if(route.title == 'ManualTracking') {
+      return <ManualTracking navigator={navigator} />
      }
      if(route.title == 'LogIn') {
        return <LogInScreen navigator={navigator} />
@@ -50,9 +84,16 @@ export default class SLTracker extends Component {
   render() {
     // Change the 'initialRoute' to see your screen
     // Add a case for your screen in the 'renderScene' function
+    if(this.state.loading) {
+        return(
+        <View style={[style.container, style.alignCenter]}>
+          <ActivityIndicator animating={true} />
+        </View>
+      )
+    }
     return (
       <Navigator
-        initialRoute={{ title: 'LogIn'}}
+        initialRoute={{ title: this.state.initialRoute}}
         renderScene={this.renderScene}
       />
     );

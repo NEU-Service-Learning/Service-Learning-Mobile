@@ -19,13 +19,21 @@ module.exports = {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: "kename.f@husky.neu.edu",
-        password: "123456abc",
+        username: username,
+        password: password,
       })
     });
 
     let responseJson = await response.json();
-    console.log(responseJson);
     return responseJson;
   },
+  getUserFromAuthKey: async function(authKey) {
+    let response = await fetch(domain + '/me/', {
+      headers: {
+        'Authorization': 'Token ' + authKey
+      },
+    });
+    let responseJson = await response.json();
+    return responseJson;
+  }
 }

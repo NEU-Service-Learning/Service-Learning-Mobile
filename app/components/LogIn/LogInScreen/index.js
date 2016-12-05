@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, AsyncStorage, TextInput, Image, TouchableHighlight } from 'react-native';
 
 import api from '../../api/index'
+import storage from '../../api/storage'
 
 var style = require('../../../Styles/styles');
 
@@ -9,24 +10,32 @@ export default class LogInScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {loading: false, error: false, username: '', password: '', key: 'aasd'};
+    this.state = {loading: false, error: false, username: '', password: '', key: ''};
   }
 
   // Used to move to the next screen
   // Passes the list of projects from the classes to the next screen
   navigateLogIn() {
     this.props.navigator.push({
-      title: 'Dashboard'
+      title: 'Dashboard',
+      extras: {
+        authKey: this.state.key
+      }
     })
   }
 
   tryLogIn = async function() {
     try {
-      console.log('start');
       this.setState({loading: true});
       const key = await api.getAuthKey(this.state.username,this.state.password);
-      console.log(key);
-      this.setState({loading: false, key: key});
+      try {
+        console.log(key.key);
+        await storage.saveAuthKey(key.key)
+      } catch (error) {
+        console.log(error + " error saving key to storage");
+        this.setState({loading: false, error: true})
+      }
+      this.setState({loading: false, key: key.key});
       this.navigateLogIn();
     } catch (e) {
       console.log(e + "error");
