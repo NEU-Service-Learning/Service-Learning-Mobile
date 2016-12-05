@@ -9,6 +9,7 @@ import {
   TextInput,
   Navigator,
   Platform,
+  Alert,
 } from 'react-native';
 
 import { Title, Header, Button } from 'native-base';
@@ -27,17 +28,41 @@ export default class ManualTracking extends Component {
     super(props);
 
     this.state = {
+      project: this.props.project == null ? 'Time Tracker' : this.props.project,
+      date: this.props.start == null ? new Date() : this.props.start.toLocaleDateString(),
+      startTime: this.props.start == null ? new Date() : this.props.start,
+      endTime: this.props.end == null ? new Date() : this.props.end,
+      category: null,
     	notes: "",
     	group_log: false,
     }
   }
 
-  _onPressButton() {
-    this.props.navigator.push({title: 'Dashboard'});
+  trySubmitHours() {
+    if(this.state.category == null) {
+      Alert.alert(
+        'Incomplete Record',
+        'Please check that you have filled out all the relevant fields.',
+        [
+          {text: 'OK', onPress: () => console.log('Premature submission')},
+        ]
+      )
+    }
+    else {
+      this.props.navigator.push({title: 'Dashboard'});
+    }
   }
 
   back() {
-    this.props.navigator.pop();
+    Alert.alert(
+      'Dismiss Record',
+      'Are you sure you want to leave this page? Your hours have not yet been submitted.',
+      [
+        {text: 'Leave', onPress: () => this.props.navigator.pop()},
+        {text: 'Stay', onPress: () => console.log('Stayed on log hours pages')},
+      ]
+    )
+
   }
 
 	render() {
@@ -55,6 +80,7 @@ export default class ManualTracking extends Component {
         text = {"Project"}
         mode = {"project"}
         project = {this.props.project == null ? null : this.props.project}
+        onStateChange = {(proj) => this.setState({project: proj})}
       />
 
       {Platform.OS === 'ios' ?
@@ -65,16 +91,19 @@ export default class ManualTracking extends Component {
         text = {"Date"}
         mode = {"date"}
         time = {this.props.start == null ? null : this.props.start.toLocaleDateString()}
+        onStateChange = {(date) => this.setState({date: date})}
       />
       <Dropmenu
         text = {"Start Time"}
         mode = {"time"}
         time = {this.props.start == null ? null : this.props.start.toLocaleTimeString()}
+        onStateChange = {(time) => this.setState({startTime: time})}
       />
       <Dropmenu
         text = {"End Time"}
         mode = {"time"}
         time = {this.props.end == null ? null : this.props.end.toLocaleTimeString()}
+        onStateChange = {(time) => this.setState({endTime: time})}
       /></View> :
 
       // ANDROID DATE PICKING
@@ -101,6 +130,7 @@ export default class ManualTracking extends Component {
       <Dropmenu
         text = {"Category"}
         mode = {"category"}
+        onStateChange = {(cat) => this.setState({category: cat})}
       />
 
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
@@ -121,7 +151,7 @@ export default class ManualTracking extends Component {
 
       <Button
         style={StyleSheet.flatten([style.button, style.alignCenter, style.height50])}
-        onPress={this._onPressButton.bind(this)}>
+        onPress={this.trySubmitHours.bind(this)}>
         <Text style={StyleSheet.flatten([style.buttonText])}> Submit </Text>
       </Button>
 

@@ -74,14 +74,18 @@ export default class Dropmenu extends Component {
     if (this.props.mode == "project") {
       menu = ( <Pick
         selectedValue={this.state.project}
-        onValueChange={(proj) => this.setState({project: proj})}>
+        onValueChange={(proj) => {
+          this.setState({project: proj});
+          this.props.onStateChange(proj);}}>
         { projects.map((proj) => (
           <Picker.Item key={proj.key} label={proj.label} value={proj.label}/>)) }
       </Pick> ) }
     else if (this.props.mode == "category") {
       menu = ( <Pick
         selectedValue={this.state.category}
-        onValueChange={(cat) => this.setState({category: cat})}>
+        onValueChange={(cat) => {
+          this.setState({category: cat});
+          this.props.onStateChange(cat);}}>
         { categories.map((cat) => (
           <Picker.Item key={cat.key} label={cat.label} value={cat.label}/>)) }
       </Pick> ) }
@@ -91,7 +95,9 @@ export default class Dropmenu extends Component {
         date={this.state.date}
         mode={this.props.mode}
         timeZoneOffsetInMinutes={this.props.timeZoneOffsetInHours * 60}
-        onDateChange={this.onDateChange.bind(this)}>
+        onDateChange={(date) => {
+          this.setState({date: date});
+          this.props.onStateChange(date);}}>
       </DatePickerIOS> ) }
 
     var picker;
