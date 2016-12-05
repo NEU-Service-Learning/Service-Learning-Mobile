@@ -44,6 +44,8 @@ export default class LogInScreen extends Component {
           try {
             console.log(body.key);
             await storage.saveAuthKey(body.key)
+            this.setState({loading: false, key: body.key});
+            this.navigateLogIn();
           } catch (error) {
             console.log(error + " error saving key to storage");
             this.setState({loading: false, error: true})
@@ -55,8 +57,7 @@ export default class LogInScreen extends Component {
         }
 
 
-        this.setState({loading: false, key: body.key});
-        this.navigateLogIn();
+
       } catch (e) {
         console.log(e + "error");
         this.setState({loading: false, error: true})
@@ -68,7 +69,7 @@ export default class LogInScreen extends Component {
   // Passes the list of projects from the classes to the next screen
   navigateSignUp() {
     this.props.navigator.push({
-      title: 'EnterInfo'
+      title: 'SignUpCredentials'
     })
   }
 

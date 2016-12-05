@@ -15,6 +15,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 
+import CredentialsScreen from './app/components/SignUp/CredentialsScreen/index';
 import LogInScreen from './app/components/LogIn/LogInScreen/index';
 import InfoScreen from './app/components/SignUp/InfoScreen/index';
 import ClassSelectScreen from './app/components/SignUp/ClassSelectScreen/index';
@@ -75,6 +76,9 @@ export default class SLTracker extends Component {
      }
      if(route.title == 'EnterInfo') {
        return <InfoScreen navigator={navigator} />
+     }
+     if(route.title == 'SignUpCredentials') {
+       return <CredentialsScreen navigator={navigator} />
      }
      if(route.title == 'Settings') {
        return <Settings navigator={navigator} />
