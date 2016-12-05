@@ -33,11 +33,17 @@ export class SearchRow extends Component {
   render() {
     var type = this.props.type ? (<Icon size={30} color="#FF7F00" name="plus-square" onPress={() => this.props.onClicked(this.props.data)}></Icon>)
     : (<Icon size={30} color="#FF7F00" name="minus-square" onPress={() => this.props.onClicked(this.props.data)}></Icon>)
+    var possibleSecondHeader = this.props.subHeader2 ?
+        (<Text style={StyleSheet.flatten([style.tableSubHeaderText])}>
+        {this.props.subHeader2}
+      </Text>) : null
+
     return(
       <View style={StyleSheet.flatten([style.row])}>
         <View style={StyleSheet.flatten([style.rowHeader])}>
           <Text style={StyleSheet.flatten([style.tableHeaderText])}>{this.props.header}</Text>
           <Text style={StyleSheet.flatten([style.tableSubHeaderText])}>{this.props.subHeader}</Text>
+          {possibleSecondHeader}
         </View>
         <TouchableOpacity style={{marginRight: 4}} onPress={() => this.props.onClicked(this.props.data)}>
           {type}
