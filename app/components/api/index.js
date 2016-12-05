@@ -4,6 +4,7 @@ module.exports = {
   getClasses: async function() {
     let response = await fetch(domain + 'courses');
     let responseJson = await response.json();
+    console.log("here");
     return responseJson;
   },
   getProjectForCourse: async function(courseId) {
