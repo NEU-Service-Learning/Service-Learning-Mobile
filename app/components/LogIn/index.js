@@ -28,7 +28,7 @@ export default class LogInScreen extends Component {
 
   render() {
     return (
-      <View style={[style.container]}>
+      <View style={style.container}>
           <Image style={{alignSelf: 'center', marginTop: 50}}
                 source={require('../../assets/img/Logo.png')}
           />
@@ -50,13 +50,11 @@ export default class LogInScreen extends Component {
             <Text style={StyleSheet.flatten([style.buttonText])}> Log In </Text>
           </TouchableHighlight>
           <TouchableHighlight style={style.button}  onPress={() => this.navigateSignUp()}>
-            <Text style={StyleSheet.flatten([style.buttonText])}> Sign Up </Text>
+            <Text style={StyleSheet.f`latten([style.buttonText])}> Sign Up </Text>
           </TouchableHighlight>
           <TouchableHighlight  onPress={() => this.navigateSignUp()}>
             <Text style={{color: 'blue', textDecorationLine: 'underline', margin: 10}}> Forgot Password </Text>
           </TouchableHighlight>
-        </View>
-        <View style={style.container}>
         </View>
       </View>
     );
