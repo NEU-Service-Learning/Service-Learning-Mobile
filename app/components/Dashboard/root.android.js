@@ -22,10 +22,6 @@ var style = require('../../styles/styles');
 export default class Root extends Component {
   constructor(props) {
     super(props)
-    var initial = this.props.summary
-    this.state = {
-      initialPage: (initial) ? 1 : 0
-    };
   }
 
   render() {
@@ -38,7 +34,7 @@ export default class Root extends Component {
              <Icon name='cog' size={30} />
            </Button>
        </Header>
-             <ScrollableTabView initialPage={this.state.initialPage}>
+             <ScrollableTabView>
                  <Dashboard tabLabel='Dashboard' navigator={this.props.navigator}/>
                  <Summary tabLabel='Summary' navigator={this.props.navigator}/>
              </ScrollableTabView>
