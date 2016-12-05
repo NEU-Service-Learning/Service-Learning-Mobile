@@ -86,37 +86,44 @@ export default class Dashboard extends Component {
 
     return(
       <ScrollView>
-          <View style={{margin: 16}}>
-             {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> : null}
+        <View style={{margin: 16}}>
+          {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> :
+          <Card style={styles.card}>
+            <CardItem header>
+              <Text style={{fontSize: 16, fontWeight: 'bold', textAlign: 'center'}}>
+                Welcome, FakeUser!
+              </Text>
+            </CardItem>
+          </Card>}
 
-             <AutoTrackingMap projects={projects} onStart={this.startAuto.bind(this)}/>
-             <Card style={styles.card}>
-                 <CardItem header>
-                     <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
-                 </CardItem>
+          <AutoTrackingMap projects={projects} onStart={this.startAuto.bind(this)}/>
+          <Card style={styles.card}>
+            <CardItem header>
+              <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
+            </CardItem>
 
-                 <CardItem>
-                   <Text>You last clocked 2 hours on 11/30 for Service-Learning</Text>
-                 </CardItem>
-                 <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
-                 <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={this.navigate.bind(this)}>
-                   <Text style={style.buttonText}> Log Hours</Text>
-                   </TouchableHighlight>
-                  </CardItem>
-            </Card>
-            <Card style={styles.card}>
-                <CardItem header>
-                    <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
-                </CardItem>
-                {projects.map(project => (
-                     <CardItem button key={project.id} onPress={() => this.navigate()}>
-                         <Thumbnail source={img}/>
-                         <Text>{project.name}</Text>
-                     </CardItem>
-                   ))}
+            <CardItem>
+              <Text>You last clocked 2 hours on 11/30 for Service-Learning</Text>
+            </CardItem>
+            <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
+            <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={this.navigate.bind(this)}>
+              <Text style={style.buttonText}> Log Hours</Text>
+              </TouchableHighlight>
+            </CardItem>
+          </Card>
+          <Card style={styles.card}>
+              <CardItem header>
+                  <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
+              </CardItem>
+              {projects.map(project => (
+                   <CardItem button key={project.id} onPress={() => this.navigate()}>
+                       <Thumbnail source={img}/>
+                       <Text>{project.name}</Text>
+                   </CardItem>
+                 ))}
 
-           </Card>
-          </View>
+          </Card>
+        </View>
       </ScrollView>
 
     );

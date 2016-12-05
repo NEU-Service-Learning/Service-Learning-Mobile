@@ -26,6 +26,9 @@ export default class AutoTracking extends Component {
       endTime: null,
       timer: null,
     }
+  }
+
+  componentDidMount() {
     this.handleStartStop();
   }
 
