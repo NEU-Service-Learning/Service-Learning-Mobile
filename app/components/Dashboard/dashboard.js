@@ -48,24 +48,28 @@ export default class Dashboard extends Component {
     super(props);
     this.state = {
        projects: [],
+       records: [],
        auto: false,
        loading: true
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    let records = await api.getRecordsByUser(user.id);
+    console.log(records)
+    let recordPromises = records.map((record) => {
+      return api.getRecord(record.id)
+    });
     let projectPromises = user.projects.map((project) => {
       return api.getProject(project);
     });
-    // Get all the sections for a class
-    Promise.all(projectPromises).then((data) => {
-      // Update each class with its list of sections
-      // data.forEach((sections, index) => {
-      //   projects[index].sections = sections
-      // })
-      console.log(data)
+    Promise.all(allPromises).then((data) => {
       this.setState({loading: false, projects: data})
     });
+    Promise.all(recordPromises).then((data) => {
+      console.log(data)
+      this.setState({loading: false, records: data})
+    })
 }
 
   navigate() {

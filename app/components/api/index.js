@@ -32,5 +32,17 @@ module.exports = {
     let response = await fetch(domain + '/project/' + projectId);
     let responseJson = await response.json();
     return responseJson;
-  }
+  },
+
+  getRecordsByUser: async function(userId) {
+    let response = await fetch(domain + '/record/user/' + userId);
+    let responseJson = await response.json();
+    return responseJson;
+  },
+
+  getRecord: async function(recordId) {
+    let response = await fetch(domain + '/record/' + recordId);
+    let responseJson = await response.json();
+    return responseJson;
+  },
 }
