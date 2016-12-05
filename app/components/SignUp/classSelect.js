@@ -1,33 +1,12 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TextInput, ActivityIndicator, TouchableHighlight } from 'react-native';
+import moment from 'moment';
 
 import {SearchTable, SearchRow} from './searchTable'
 import SearchBar from './searchBar'
+import api from '../api/index'
 
 var style = require('../../styles/styles');
-import api from '../../components/api/index'
-
-// Dummy data
-var classes = [
-  {
-    classNum: 'CS 4500',
-    name: 'Software dev',
-    prof: 'Wientraub',
-    projects: ['Mobile Time Tracker', 'Back-end Service-Learning', 'Front-end Service-Learning']
-  },
-  {
-    classNum: 'ARTF 1122',
-    name: 'Art and stuff',
-    prof: 'Thorne',
-    projects: ['Madison High School']
-  },
-  {
-    classNum: 'PT 2568',
-    name: 'Physical Therapy and stuff',
-    prof: 'Parker',
-    projects: ['Hospital Service']
-  }
-]
 
 export default class ClassSelectScreen extends Component {
 
@@ -36,10 +15,19 @@ export default class ClassSelectScreen extends Component {
     this.state = {loading: true, searchText: '', error: false, classes: [], selectedClasses: []};
   }
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
   try {
     const classes = await api.getClasses();
-    console.log(classes);
+    let sectionPromises = classes.map((someClass) => {
+      return api.getSectionsForCourse(someClass.id);
+    });
+    // Get all the sections for a class
+    Promise.all(sectionPromises).then((data) => {
+      // Update each class with its list of sections
+      data.forEach((sections, index) => {
+        classes[index].sections = sections
+      })
+    });
     this.setState({loading: false, classes: classes});
   } catch (e) {
     this.setState({loading: false, error: true})
@@ -67,21 +55,31 @@ export default class ClassSelectScreen extends Component {
     this.setState({selectedClasses: addedClasses});
   }
 
+  formatTime(time) {
+    return moment(time, "HH:mm:ss.SS").format("hh:mm");
+  }
+
   // add is a boolean flag if you want the 'add' button/text or the 'remove' button/text
   // onClickFn is a function that represents what happens after the user clicks the action
   // Retuns a function that takes a class and returns a single row on how to render that class
   renderRow(add, onClickFn) {
+    const ft = this.formatTime;
       return (someClass) => {
-        return (
-          <SearchRow
-              onClicked={onClickFn}
-              header={someClass.id + " - " + someClass.name}
-              subHeader={"Department: " + someClass.department}
-              data={someClass}
-              key={someClass.id}
-              type={add}/>
+        let rows = someClass.sections.map((section) => {
+          let meeting_time = section.meeting_days + " " + ft(section.meeting_start_time) + "-" + ft(section.meeting_end_time);
+          return(
+            <SearchRow
+                onClicked={onClickFn}
+                header={someClass.id + " - " + someClass.name}
+                subHeader={section.professor}
+                subHeader2={meeting_time}
+                data={someClass}
+                key={someClass.id}
+                type={add}/>
             )
-        }
+        });
+        return rows;
+      }
     }
 
   // Used to move to the next screen
@@ -112,6 +110,7 @@ export default class ClassSelectScreen extends Component {
         return(
         <View style={[style.container, style.alignCenter]}>
           <ActivityIndicator animating={true} />
+          <Text>Loading Service-Learning Classes</Text>
         </View>
       )
     }
