@@ -19,6 +19,8 @@ Other Requirements:
 - git
 - adb
 
+If there are issues try:
+`cd android/ && ./gradlew clean`
 # Documentation of components
 ## User Signup
 ## Course Registration
