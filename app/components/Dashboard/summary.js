@@ -10,6 +10,7 @@ import {
   ProgressBarAndroid,
   ProgressViewIOS,
   Picker,
+  ScrollView,
 } from 'react-native';
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
@@ -30,15 +31,16 @@ export default class Summary extends Component {
        work: dsWork.cloneWithRows([
                     'Oct 17: 1hr Direct Work','Oct 18: 2hr Group','Oct 19: 3hr Individual',
               ]),
-      project: 'Time Tracker',
       projects: [{label:'Time Tracker', key:'0'},
                       {label:'Project 1', key:'1'},
-                      {label:'Project 2', key:'2'}]
+                      {label:'Project 2', key:'2'}],
+      project: {label:'Time Tracker', key:'0'},
     }
   }
-    navigate() {
+    navigate(rowData) {
      this.props.navigator.push({
-       title: 'Details'
+       title: 'Details',
+       extras: {key: rowData.key},
      })
   }
   render() {
@@ -46,17 +48,18 @@ export default class Summary extends Component {
       <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
        <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Project</Text>
        <Picker
-         style={StyleSheet.flatten([style.button, style.height40, {width:  100}])}
+         style={StyleSheet.flatten([style.button, style.height40, {width:  250}])}
          selectedValue={this.state.project}
          onValueChange={(proj) => this.setState({project: proj})}>
-         {this.state.projects.map((proj) => (
-           <Picker.Item key={proj.key} label={proj.label} value={proj.label}/>)) }
+         {this.state.projects.map((proj) => (<Picker.Item key={proj} label={proj.label} value={proj}/>)) }
        </Picker>
        <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Team Members</Text>
+       <ScrollView>
        <ListView
          dataSource={this.state.team}
          renderRow={(rowData) => <Text style={style.members}>{rowData}</Text>}>
        </ListView>
+       </ScrollView>
        <Progress style={{width:250, margin: 7}} styleAttr="Horizontal" indeterminate={false} progress={.5}/>
        <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Hours Completed: 6</Text>
        <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Class Average: 7.2</Text>

@@ -13,7 +13,7 @@ export default class LogInScreen extends Component {
   // Used to move to the next screen
   // Passes the list of projects from the classes to the next screen
   navigateLogIn() {
-    this.props.navigator.push({
+    this.props.navigator.resetTo({
       title: 'Dashboard'
     })
   }
@@ -29,7 +29,7 @@ export default class LogInScreen extends Component {
   render() {
     return (
       <View style={[style.container]}>
-          <Image style={{alignSelf: 'center', margin: 50}}
+          <Image style={{alignSelf: 'center', marginTop: 50}}
                 source={require('../../assets/img/Logo.png')}
           />
           <View style={style.inputContainer}>

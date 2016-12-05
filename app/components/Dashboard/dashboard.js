@@ -10,10 +10,11 @@ import {
   ListView,
   Alert,
 } from 'react-native';
-import MapView from 'react-native-maps';
+
 
 import { Title, Icon, Header, Thumbnail, Content, Container, Card, CardItem, Button } from 'native-base';
 import AutoTracking from '../Tracking/auto';
+import AutoTrackingMap from '../Tracking/map'
 
 var style = require('../../styles/styles');
 var img = require('../../assets/img/Logo.png')
@@ -25,7 +26,7 @@ var projects = [
     "description": "Creating a new system for tracking the hours worked by students doing service learning.",
     "start date": "2016-09-01 00:00:00",
     "end date": "2016-12-31 23:59:59.999999",
-    "location": { "latitude": 42.339803, "longitude": -1.089274 }
+    "location": { 'latitude': 42.3403955, 'longitude': -71.0885132 }
   },
   { "id": 8888,
     "name": "Wediko",
@@ -33,7 +34,7 @@ var projects = [
     "description": "Child care",
     "start date": "2016-09-01 00:00:00",
     "end date": "2016-12-31 23:59:59.999999",
-    "location": { "latitude": 42.339170, "longitude": -71.069139 }
+    "location": { 'latitude': 42.339170, 'longitude': -71.069139 }
   },
 ]
 
@@ -45,87 +46,50 @@ export default class Dashboard extends Component {
        projects: dsProj.cloneWithRows([
                     'Time Tracker', 'Project 1', 'Project 2',
               ]),
+      auto: false
     }
   }
   navigate() {
     this.props.navigator.push({title: 'ManualTracking'});
   }
-  startAlert() {
+  startAuto() {
     Alert.alert(
       'Clock In',
       'You will be logging hours for the project "Service Learning Mobile"',
       [
         {text: 'Cancel', onPress: () => console.log('Dismissed')},
-        {text: 'OK', onPress: this.startAuto.bind(this)},
+        {text: 'OK', onPress: () => {this.setState({auto: true})}},
       ]
     )
   }
-  startAuto() {
-    this.setState({auto: true});
-  }
-  stopAlert(startTime, endTime) {
-    this.setState({startTime: startTime, endTime: endTime});
+  stopAuto(startTime, endTime, proj) {
     var timer = (endTime - startTime) / 60000;
     Alert.alert(
       'Clock Out',
       'Worked ' + timer.toFixed(2) + ' minutes for "Service Learning Mobile". Please input category'
       + ' and any relevant notes',
       [
-        {text: 'OK', onPress: this.stopAuto.bind(this)},
+        {text: 'OK', onPress: () => {
+          this.props.navigator.push({
+            title: 'ManualTracking',
+            extras: {
+              start: startTime,
+              end: endTime,
+              project: proj,
+            }});
+          this.setState({auto: false});}},
       ]
     )
   }
-  stopAuto(startTime, endTime) {
-    this.props.navigator.push({
-      title: 'ManualTracking',
-      extras: {
-        start: this.state.startTime,
-        end: this.state.endTime,
-      }});
-    this.setState({auto: false});
-  }
+
   render() {
 
     return(
       <ScrollView>
           <View style={{margin: 16}}>
-             {this.state.auto ? <AutoTracking onStop={this.stopAlert.bind(this)}/> : null}
-              <Card style={styles.card}>
-                  <CardItem header>
-                      <Text style={StyleSheet.flatten([style.subheader])}>Project Tracking</Text>
-                  </CardItem>
-                  <CardItem>
-                      <MapView
-                        style={styles.map}
-                        initialRegion={{
-                          latitude: 42.340951,
-                          longitude: -71.087566,
-                          latitudeDelta: 0.0922,
-                          longitudeDelta: 0.0421,
-                        }}
-                      />
-                      <MapView.Marker
-                        coordinate={{'latitude': 42.341855, 'longitude': -71.086745}}
-                        title={"Sdfdsf"}
-                        description={"sdfdsf"}
-                      />
-                    {projects.map(marker => (
-                          <MapView.Marker
-                            coordinate={marker.location}
-                            title={marker.name}
-                            description={marker.description}
-                          />
-                        ))}
-                  </CardItem>
-                  <CardItem style={{flexDirection:'row'}}>
-                    <Text style={{flex: 2}}>You are near a Service-Learning partner</Text>
+             {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> : null}
 
-                    <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}
-                      onPress={this.startAlert.bind(this)}>
-                      <Text style={style.buttonText}> Clock In</Text>
-                    </TouchableHighlight>
-                     </CardItem>
-             </Card>
+             <AutoTrackingMap projects={projects} onStart={this.startAuto.bind(this)}/>
              <Card style={styles.card}>
                  <CardItem header>
                      <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
@@ -145,7 +109,7 @@ export default class Dashboard extends Component {
                     <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
                 </CardItem>
                 {projects.map(project => (
-                     <CardItem button onPress={() => this.navigate()}>
+                     <CardItem button key={project.id} onPress={() => this.navigate()}>
                          <Thumbnail source={img}/>
                          <Text>{project.name}</Text>
                      </CardItem>

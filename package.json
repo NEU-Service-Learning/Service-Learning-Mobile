@@ -7,8 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "geolib": "^2.0.22",
+=======
     "minutes-seconds-milliseconds": "^1.0.3",
     "moment": "^2.17.0",
+>>>>>>> master
     "native-base": "^0.5.13",
     "react": "15.3.2",
     "react-native": "^0.36.0",

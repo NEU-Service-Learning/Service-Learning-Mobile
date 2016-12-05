@@ -41,8 +41,9 @@ export default class AndroidDatePicker extends Component {
   	return (
   		<View>
           <TouchableWithoutFeedback
-            onPress={this.showPicker.bind(this, 'preset', {date: this.state.date})}>
-            <View style={styles.input}>
+            onPress={this.props.preset ? {} :
+              this.showPicker.bind(this, 'preset', {date: this.state.date})}>
+            <View style={this.props.preset ? styles.presetInput : styles.input}>
             <Text>{this.state.date.toLocaleDateString()}</Text>
             </View>
           </TouchableWithoutFeedback>
@@ -65,7 +66,16 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   input: {
-    height: 40,
+    height: 30,
+    justifyContent: 'center',
+    padding: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginVertical: 10,
+    backgroundColor: '#FFF'
+  },
+  presetInput: {
+    height: 30,
     justifyContent: 'center',
     padding: 5,
     borderColor: 'gray',

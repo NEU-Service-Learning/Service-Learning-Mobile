@@ -24,6 +24,7 @@ export default class AndroidTimePicker extends Component {
 
   state = {
     time: new Date(),
+    preset: this.props.autoTime == null ? false : true,
   };
 
   showPicker = async (stateKey, options) => {
@@ -46,12 +47,12 @@ export default class AndroidTimePicker extends Component {
   	return (
   		<View>
           <TouchableWithoutFeedback
-            onPress={this.showPicker.bind(this, 'preset', {
+            onPress={this.state.preset ? {} : this.showPicker.bind(this, 'preset', {
               hour: this.state.time.getHours(),
               minute: this.state.time.getMinutes(),
             })}>
-            <View style={styles.input}><Text>
-              {this.state.time.toLocaleTimeString().substring(0,5)}
+            <View style={this.state.preset ? styles.presetInput : styles.input}><Text>
+              {this.state.preset ? this.props.autoTime : this.state.time.toLocaleTimeString()}
             </Text></View>
           </TouchableWithoutFeedback>
 
@@ -73,7 +74,16 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   input: {
-    height: 40,
+    height: 30,
+    justifyContent: 'center',
+    padding: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginVertical: 10,
+    backgroundColor: '#FFF'
+  },
+  presetInput: {
+    height: 30,
     justifyContent: 'center',
     padding: 5,
     borderColor: 'gray',

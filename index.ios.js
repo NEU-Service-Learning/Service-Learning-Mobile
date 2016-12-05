@@ -28,31 +28,31 @@ export default class SLTracker extends Component {
   // Renders a particular scene depending on the route title
   renderScene(route, navigator) {
      if(route.title == 'SelectClass') {
-       return <ClassSelectScreen navigator={navigator} />
+       return <ClassSelectScreen navigator={navigator} {...route.extras}/>
      }
      if(route.title == 'SelectProject') {
        return <ProjectSelectScreen navigator={navigator} {...route.extras} />
      }
      if(route.title == 'Dashboard') {
-       return <Root navigator={navigator} />
+       return <Root navigator={navigator} {...route.extras}/>
      }
      if(route.title == 'Summary') {
-       return <Summary navigator={navigator} />
+       return <Summary navigator={navigator} {...route.extras}/>
      }
      if(route.title == 'Details') {
-       return <Details navigator={navigator} />
+       return <Details navigator={navigator} {...route.extras}/>
     }
      if(route.title == 'ManualTracking') {
        return <ManualTracking navigator={navigator} {...route.extras}/>
      }
      if(route.title == 'LogIn') {
-       return <LogInScreen navigator={navigator} />
+       return <LogInScreen navigator={navigator} {...route.extras}/>
      }
      if(route.title == 'EnterInfo') {
-       return <InfoScreen navigator={navigator} />
+       return <InfoScreen navigator={navigator} {...route.extras}/>
      }
      if(route.title == 'Settings') {
-       return <Settings navigator={navigator} />
+       return <Settings navigator={navigator} {...route.extras}/>
      }
    }
 
