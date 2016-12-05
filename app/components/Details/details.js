@@ -33,8 +33,8 @@ export default class Details extends Component {
     }
   }
   navigate() {
-   this.props.navigator.push({
-     title: 'Dashboard',
+   this.props.navigator.pop({
+     title: 'Summary',
      extras: {summary : true}
    })
   }
@@ -43,7 +43,7 @@ export default class Details extends Component {
     return(
       <View style={style.container}>
         <Header  style={{backgroundColor: '#708090'}}>
-          <Button transparent textStyle={{color: 'black'}} onPress={() => {this.props.navigator.push({ title: 'Dashboard'})}}>
+          <Button transparent textStyle={{color: 'black'}} onPress={this.navigate.bind(this)}>
           <Icon style={{color: 'black'}} name='ios-arrow-back' size={30}/>
           Back
           </Button>
