@@ -45,6 +45,9 @@ module.exports = StyleSheet.create({
   buttonWidth: {
     width: 250,
   },
+  buttonFlex: {
+    flex: 1
+  },
   members : {
     flexDirection: 'row',
     alignItems: 'center',
@@ -115,12 +118,12 @@ module.exports = StyleSheet.create({
   },
   row: {
     backgroundColor:'#BCEE68',
-    padding: 4,
+    padding: 6,
     flexDirection:'row',
     borderRadius: 10,
     marginBottom: 10,
     marginTop: 10,
-    height: 50
+    height: 76
   },
   rowHeader: {
     flexDirection: 'column',
@@ -128,14 +131,14 @@ module.exports = StyleSheet.create({
   },
   tableHeaderText: {
     flex: 2,
-    fontSize: 15,
+    fontSize: 16,
     color: 'white',
     fontWeight: 'bold'
 
   },
   tableSubHeaderText: {
     flex: 1,
-    fontSize: 13,
+    fontSize: 14,
     color: 'white',
     fontWeight: 'bold'
   }

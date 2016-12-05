@@ -13,6 +13,7 @@ import {
 
 import TimeFormatter from 'minutes-seconds-milliseconds';
 import { Title, Icon, Header, Card, CardItem, Button } from 'native-base';
+var style = require('../../styles/styles');
 
 export default class AutoTracking extends Component {
 
@@ -25,24 +26,10 @@ export default class AutoTracking extends Component {
       endTime: null,
       timer: null,
     }
+  }
+
+  componentDidMount() {
     this.handleStartStop();
-  }
-
-  start() {
-    this.setState({timerStart: new Date()});
-
-    this.interval = setInterval(() => {
-      this.setState({
-        timer: new Date() - this.state.timerStart,
-        isRunning: true,
-      });
-    }, 30);
-  }
-
-  stop() {
-    clearInterval(this.interval);
-    this.setState({isRunning: false});
-    return;
   }
 
   handleStartStop() {
@@ -65,14 +52,15 @@ export default class AutoTracking extends Component {
 
   stop() {
     this.handleStartStop();
-    this.props.onStop(this.state.startTime, new Date());
+    this.props.onStop(this.state.startTime, new Date(), 0);
+    //TODO: change the above project parameter to reflect that actual project
   }
 
   render() {
     return(
       <Card style = {styles.card}>
         <CardItem>
-          <Text>Time Worked</Text>
+          <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Time Worked</Text>
 
           <View style={styles.container}>
             <Text style={styles.timer}>{ TimeFormatter(this.state.timer) }</Text>
@@ -81,7 +69,7 @@ export default class AutoTracking extends Component {
         </CardItem>
         <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
           <Button onPress={this.stop.bind(this)}
-                  style={{flex: 1}}>Clock Out</Button>
+                  style={StyleSheet.flatten([style.button, style.height40, style.buttonFlex])}>Clock Out</Button>
         </CardItem>
       </Card>
     )
