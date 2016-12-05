@@ -18,7 +18,6 @@ export default class ClassSelectScreen extends Component {
   componentDidMount = async () => {
   try {
     const classes = await api.getClasses();
-    console.log("here");
     let sectionPromises = classes.map((someClass) => {
       return api.getSectionsForCourse(someClass.id);
     });
