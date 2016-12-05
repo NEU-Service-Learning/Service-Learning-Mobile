@@ -12,7 +12,7 @@ module.exports = {
     return responseJson;
   },
   getAuthKey: async function(username, password) {
-    let response = await fetch(domain + 'user/login', {
+    let response = await fetch(domain + 'user/login/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -24,7 +24,7 @@ module.exports = {
       })
     });
 
-    let responseJson = await JSON.stringify(response);
+    let responseJson = await response.json();
     console.log(responseJson);
     return responseJson;
   },
