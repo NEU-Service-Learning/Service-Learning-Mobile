@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, ActivityIndicator, TouchableHighlight } from 'react-native';
 
 import {SearchTable, SearchRow} from './searchTable';
-import api from '../../components/api/index';
+import api from '../api/index';
 
 var style = require('../../styles/styles');
 
@@ -13,21 +13,30 @@ export default class ProjectSelectScreen extends Component {
     this.state = {error: false, loading: true, projects: [], selectedProjects: []}
   }
 
-  componentWillMount() {
+  componentDidMount() {
   try {
     let projects = [];
-    let promises = [];
-    this.props.classes.forEach((someClass) => {
-      var projectPromise = api.getProjectForCourse(someClass.id);
-      promises.push(projectPromise);
+    let promises = this.props.classes.map((someClass) => {
+      return api.getProjectForCourse(someClass.id);
     });
-    Promise.all(promises).then((data) => {
+    Promise.all(promises)
+    .then((data) => {
+      // Push all the projects into a single array
       data.forEach((classProjects) => {
         classProjects.forEach((project) => {
-          console.log(project)
           projects.push(project);
-        })
-      })
+        });
+      });
+      // Request the community Partner data
+      var communityPromises = projects.map((project) => {
+        return api.getCommunityPartner(project.community_partner);
+      });
+      return Promise.all(communityPromises);
+    })
+    .then((communityPartnerData) => {
+      communityPartnerData.forEach((partner, index) => {
+        projects[index].communityPartner = partner;
+      });
       this.setState({loading: false, projects: projects});
     });
   } catch (e) {
@@ -52,12 +61,11 @@ export default class ProjectSelectScreen extends Component {
   // Renders a given project's row in the table
   renderRow(add, onClickFn) {
       return  (someProj) => {
-        console.log(someProj)
         return(
           <SearchRow
               onClicked={onClickFn}
               header={someProj.name}
-              subHeader={someProj.description}
+              subHeader={someProj.communityPartner.name}
               data={someProj}
               key={someProj.id}
               type={add}/>
@@ -73,8 +81,6 @@ export default class ProjectSelectScreen extends Component {
   }
 
   render() {
-    console.log("PR");
-    console.log(this.state.projects);
     const shownProjects = this.state.projects.filter((project) => {
        return !this.state.selectedProjects.includes(project);
     });
@@ -82,6 +88,7 @@ export default class ProjectSelectScreen extends Component {
         return(
         <View style={[style.container, style.alignCenter]}>
           <ActivityIndicator animating={true} />
+          <Text>Loading Service-Learning Projects</Text>
         </View>
       )
     }
@@ -89,7 +96,7 @@ export default class ProjectSelectScreen extends Component {
       <View style={StyleSheet.flatten([style.container, style.margin16])}>
         <SearchTable
           style={{marginTop: 38}}
-          data={this.state.projects}
+          data={shownProjects}
           header="Avaliable Projects"
           row={this.renderRow(true, this.onAddProject.bind(this))} />
         <SearchTable
