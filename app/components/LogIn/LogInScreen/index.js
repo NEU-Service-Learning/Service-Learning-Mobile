@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, AsyncStorage, TextInput, Image, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, AsyncStorage, TextInput, Image, Platform, TouchableHighlight } from 'react-native';
 
 import api from '../../api/index'
 import storage from '../../api/storage'
@@ -57,12 +57,13 @@ export default class LogInScreen extends Component {
         <View style={style.inputContainer}>
           <Text style={style.textCenter}>Email</Text>
           <TextInput
-          style={{textAlign : 'center', marginBottom: 30}}
+          style={Platform.OS === 'ios' ? styles.input : {textAlign : 'center', marginBottom: 30}}
           onChangeText={(username) => this.setState({username})}
           value={this.state.username}
           />
           <Text style={style.textCenter}>Password</Text>
           <TextInput
+          style={Platform.OS === 'ios' ? styles.input : {textAlign : 'center', marginBottom: 30}}
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
           />
@@ -84,3 +85,15 @@ export default class LogInScreen extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+   input: {
+     height: 30,
+     justifyContent: 'center',
+     padding: 5,
+     borderColor: 'gray',
+     borderWidth: 1,
+     marginVertical: 10,
+     backgroundColor: '#FFF'
+   },
+ });
