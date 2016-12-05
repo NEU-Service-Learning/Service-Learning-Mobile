@@ -20,5 +20,17 @@ module.exports = {
     let response = await fetch(domain + '/communityPartner/' + partnerId);
     let responseJson = await response.json();
     return responseJson;
+  },
+
+  getProjectsForUser: async function(userId) {
+    let response = await fetch(domain + '/user/' + userId);
+    let responseJson = await response.json();
+    return responseJson;
+  },
+
+  getProject: async function(projectId) {
+    let response = await fetch(domain + '/project/' + projectId);
+    let responseJson = await response.json();
+    return responseJson;
   }
 }

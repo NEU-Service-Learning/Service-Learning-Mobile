@@ -9,46 +9,65 @@ import {
   TouchableHighlight,
   ListView,
   Alert,
+  ActivityIndicator
 } from 'react-native';
 
 
 import { Title, Icon, Header, Thumbnail, Content, Container, Card, CardItem, Button } from 'native-base';
 import AutoTracking from '../Tracking/auto';
-import AutoTrackingMap from '../Tracking/map'
+import AutoTrackingMap from '../Tracking/map';
+import api from '../api/index';
 
 var style = require('../../styles/styles');
 var img = require('../../assets/img/Logo.png')
 
-var projects = [
-  { "id": 99999,
-    "name": "Service-Learning Time Tracker",
-    "community partner": 99999,
-    "description": "Creating a new system for tracking the hours worked by students doing service learning.",
-    "start date": "2016-09-01 00:00:00",
-    "end date": "2016-12-31 23:59:59.999999",
-    "location": { 'latitude': 42.3403955, 'longitude': -71.0885132 }
-  },
-  { "id": 8888,
-    "name": "Wediko",
-    "community partner": 5555,
-    "description": "Child care",
-    "start date": "2016-09-01 00:00:00",
-    "end date": "2016-12-31 23:59:59.999999",
-    "location": { 'latitude': 42.339170, 'longitude': -71.069139 }
-  },
-]
+var user =
+{
+    "pk": 3,
+    "username": "chen.jo@husky.neu.edu",
+    "email": "",
+    "first_name": "Joe",
+    "last_name": "Chen",
+    "role": null,
+    "id": 3,
+    "courses": [
+        "CS1200",
+        "CS4500"
+    ],
+    "projects": [
+        1
+    ],
+    "sections": [
+        "44221",
+        "56323"
+    ]
+}
 
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
-    var dsProj = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-       projects: dsProj.cloneWithRows([
-                    'Time Tracker', 'Project 1', 'Project 2',
-              ]),
-      auto: false
+       projects: [],
+       auto: false,
+       loading: true
     }
   }
+
+  componentDidMount() {
+    let projectPromises = user.projects.map((project) => {
+      return api.getProject(project);
+    });
+    // Get all the sections for a class
+    Promise.all(projectPromises).then((data) => {
+      // Update each class with its list of sections
+      // data.forEach((sections, index) => {
+      //   projects[index].sections = sections
+      // })
+      console.log(data)
+      this.setState({loading: false, projects: data})
+    });
+}
+
   navigate() {
     this.props.navigator.push({title: 'ManualTracking'});
   }
@@ -83,13 +102,20 @@ export default class Dashboard extends Component {
   }
 
   render() {
-
+    if(this.state.loading) {
+        return(
+        <View style={[style.container, style.alignCenter]}>
+          <ActivityIndicator animating={true} />
+          <Text>Loading Projects</Text>
+        </View>
+      )
+    }
     return(
       <ScrollView>
           <View style={{margin: 16}}>
              {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> : null}
+             <AutoTrackingMap projects={this.state.projects} onStart={this.startAuto.bind(this)}/>
 
-             <AutoTrackingMap projects={projects} onStart={this.startAuto.bind(this)}/>
              <Card style={styles.card}>
                  <CardItem header>
                      <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
@@ -108,13 +134,12 @@ export default class Dashboard extends Component {
                 <CardItem header>
                     <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
                 </CardItem>
-                {projects.map(project => (
+                {this.state.projects.map(project => (
                      <CardItem button key={project.id} onPress={() => this.navigate()}>
                          <Thumbnail source={img}/>
                          <Text>{project.name}</Text>
                      </CardItem>
                    ))}
-
            </Card>
           </View>
       </ScrollView>
