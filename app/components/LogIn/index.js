@@ -73,6 +73,10 @@ export default class LogInScreen extends Component {
     });
   }
 
+  //method for forgotPassword button
+  forgotPassword() {
+  }
+
   loginPopUp(errorMessage) {
         Alert.alert(
           "Alert",
@@ -113,7 +117,7 @@ export default class LogInScreen extends Component {
           <TouchableHighlight style={style.button}  onPress={() => this.navigateSignUp()}>
             <Text style={StyleSheet.flatten([style.buttonText])}> Sign Up </Text>
           </TouchableHighlight>
-          <TouchableHighlight  onPress={() => this.navigateSignUp()}>
+          <TouchableHighlight  onPress={() => this.forgotPassword()}>
             <Text style={{color: 'blue', textDecorationLine: 'underline', margin: 10}}> Forgot Password </Text>
           </TouchableHighlight>
         </View>
