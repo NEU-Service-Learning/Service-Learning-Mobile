@@ -43,18 +43,26 @@ export default class Summary extends Component {
               ]),
       project: 'Time Tracker',
       visible: false,
+      hoursComp: 0,
+      courseHours: 0,
+      courseAvg : 0,
     }
   }
 
   componentDidMount = async () => {
   try {
     const records = await api.getRecordsForUser(25);
-
-    this.setState({work: dsWork.cloneWithRows(records)});
+    const hours = await api.getHoursForProjectForUser(25,1);
+    const enrollment = await api.getEnrollmentsForCRN(56323);
+    const courseH = enrollment[0].required_hours;
+    const courseA = Math.round(courseH/enrollment.length * 100) / 100;
+    this.setState({work: dsWork.cloneWithRows(records),
+                  hoursComp: hours.total_hours, courseHours: courseH, courseAvg: courseA});
   } catch (e) {
     this.setState({loading: false, error: true})
     }
   }
+
   navigate(rowData) {
     this.props.navigator.push({
       title: 'Details',
@@ -117,9 +125,9 @@ export default class Summary extends Component {
        </ScrollView>
        </View>
        <View style={style.container}>
-       <Progress style={{width:250, margin: 7}} styleAttr="Horizontal" indeterminate={false} progress={.5}/>
-       <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Hours Completed: 6</Text>
-       <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Class Average: 7.2</Text>
+       <Progress style={{width:250, margin: 7}} styleAttr="Horizontal" indeterminate={false} progress={this.state.hoursComp/this.state.courseHours}/>
+       <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Hours Completed: {this.state.hoursComp}</Text>
+       <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Class Average: {this.state.courseAvg}</Text>
        <ListView
          dataSource={this.state.work}
          renderRow={(rowData) =>
