@@ -21,6 +21,24 @@ module.exports = {
     let responseJson = await response.json();
     return responseJson;
   },
+  getProjectsForUser: async function(userId) {
+    let response = await fetch(domain + '/user/' + userId);
+    let responseJson = await response.json();
+    return responseJson;
+  },
+
+  getProject: async function(projectId) {
+    let response = await fetch(domain + '/project/' + projectId);
+    let responseJson = await response.json();
+    return responseJson;
+  },
+
+  getRecordsByUser: async function(userId) {
+    let response = await fetch(domain + '/record/user/' + userId);
+    let responseJson = await response.json();
+    return responseJson;
+  },
+
   getRecord: async function(recordId) {
     let response = await fetch(domain + '/record/' + recordId);
     let responseJson = await response.json();
@@ -73,6 +91,7 @@ module.exports = {
     let responseJson = await response.json();
     return responseJson;
   },
+
   signUp: async function(username, password1, password2, firstName, lastName) {
     let response = await fetch(domain + 'user/registration/', {
       method: 'POST',
@@ -93,6 +112,7 @@ module.exports = {
     let responseJson = await response.json();
     return responseJson;
   },
+
   getUserFromAuthKey: async function(authKey) {
     let response = await fetch(domain + '/me/', {
       headers: {
