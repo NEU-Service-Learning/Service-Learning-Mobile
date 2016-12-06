@@ -39,6 +39,13 @@ export default class ManualTracking extends Component {
     }
   }
 
+  truncateCoords(coord) {
+    if(coord !== null) {
+      return Math.floor(coord * 100000) / 100000
+    }
+    return coord;
+  }
+
   trySubmitHours() {
     if(this.state.category == null || this.state.category == "") {
       Alert.alert(
@@ -57,8 +64,9 @@ export default class ManualTracking extends Component {
       var hours = (this.state.endTime.getTime() - this.state.startTime.getTime()) / 3600000;
       var fHours = hours.toFixed(2);
       var fCat = this.formatCategory(this.state.category);
+
       api.createRecord(this.state.project, fDate, fTime,
-        fHours, fCat, this.state.notes, this.props.longitude, this.props.latitude);
+        fHours, fCat, this.state.notes, this.truncateCoords(this.props.longitude), this.truncateCoords(this.props.latitude));
       this.props.navigator.push({title: 'Dashboard'});
     }
   }
