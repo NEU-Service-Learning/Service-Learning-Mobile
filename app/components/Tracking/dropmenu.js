@@ -19,7 +19,8 @@ const Pick = (Platform.OS === 'ios' ? PickerIOS : Picker);
 var projects = [{label:'Time Tracker', key:0},
                 {label:'Project 1', key:1},
                 {label:'Project 2', key:2}]
-const categories = [{label:"Trainings & Orientations", key:"1"},
+const categories = [{label:"", key:"0"},
+                    {label:"Trainings & Orientations", key:"1"},
                     {label:"Direct Service", key:"2"},
                     {label:"Individual Research & Planning", key:"3"},
                     {label:"Team Research & Planning", key:"4"}]
@@ -31,7 +32,7 @@ export default class Dropmenu extends Component {
 
     this.state = {
       date: new Date(),
-      project: this.props.project == null ? projects[0].label : this.findProj(this.props.project),
+      project: this.props.project == null ? 0 : this.props.project,
       visibility: 'hidden',
       category: '',
       preset: this.props.time == null && this.props.project == null ? false : true,
@@ -64,7 +65,7 @@ export default class Dropmenu extends Component {
       return this.state.date.toLocaleTimeString();
     }
   	else if (mode == "project") {
-      return this.state.project;
+      return this.findProj(this.state.project);
     }
     else return this.state.category;
   }
@@ -76,7 +77,8 @@ export default class Dropmenu extends Component {
         selectedValue={this.state.project}
         onValueChange={(proj) => {
           this.setState({project: proj});
-          this.props.onStateChange(proj);}}>
+          this.props.onStateChange(proj);}}
+        mode='dropdown'>
         { projects.map((proj) => (
           <Picker.Item key={proj.key} label={proj.label} value={proj.label}/>)) }
       </Pick> ) }
@@ -85,7 +87,8 @@ export default class Dropmenu extends Component {
         selectedValue={this.state.category}
         onValueChange={(cat) => {
           this.setState({category: cat});
-          this.props.onStateChange(cat);}}>
+          this.props.onStateChange(cat);}}
+        mode='dropdown'>
         { categories.map((cat) => (
           <Picker.Item key={cat.key} label={cat.label} value={cat.label}/>)) }
       </Pick> ) }
