@@ -75,7 +75,7 @@ export default class SLTracker extends Component {
      if(route.title == 'LogIn') {
        return <LogInScreen navigator={navigator} {...route.extras}/>
      }
-     if(route.title == 'EnterInfo') {
+     if(route.title == 'InfoScreen') {
        return <InfoScreen navigator={navigator} {...route.extras}/>
      }
      if(route.title == 'SignUpCredentials') {

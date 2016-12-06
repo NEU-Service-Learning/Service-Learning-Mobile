@@ -62,14 +62,14 @@ export default class CredentialsScreen extends Component {
         if(!('key' in body)) {
           console.log(body);
           this.setState({loading: false, error: true});
-          this.signinPopUp(body);
+          this.signinPopUp(body[body.keys()[0]]);
         }
 
       } catch (e) {
         console.log(e + "error");
         this.setState({loading: false, error: true})
       }
-  }
+    }
   };
 
   signinPopUp(errorMessage) {
