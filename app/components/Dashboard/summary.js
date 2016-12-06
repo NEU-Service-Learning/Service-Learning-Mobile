@@ -38,7 +38,9 @@ export default class Summary extends Component {
       team: dsTeam.cloneWithRows([
               'Ross Frank', 'Jagroop Hothi', 'Mustafa Camurcu', 'Charles Zheng', 'Joana  Vukatana'
               ]),
-      work: '',
+      work: dsTeam.cloneWithRows([
+              'Ross Frank', 'Jagroop Hothi', 'Mustafa Camurcu', 'Charles Zheng', 'Joana  Vukatana'
+              ]),
       project: 'Time Tracker',
       visible: false,
     }
