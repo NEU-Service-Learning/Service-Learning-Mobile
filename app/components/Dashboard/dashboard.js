@@ -129,11 +129,11 @@ export default class Dashboard extends Component {
       }
       return(
         <ScrollView>
-          <View style={{margin: 16}}>
+          <View style={StyleSheet.flatten([style.margin16])}>
             {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> :
             <Card style={styles.card}>
               <CardItem header>
-                <Text style={StyleSheet.flatten([style.subheader, style.font15])}>
+                <Text style={StyleSheet.flatten([style.subheader])}>
                   Welcome, FakeUser!
                 </Text>
               </CardItem>

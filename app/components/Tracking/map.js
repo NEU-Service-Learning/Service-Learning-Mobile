@@ -89,7 +89,7 @@ export default class AutoTrackingMap extends Component {
           </CardItem>
           <CardItem>
               <MapView
-                style={styles.map}
+                style={StyleSheet.flatten([style.map])}
                 initialRegion={{
                   latitude: 42.340951,
                   longitude: -71.087566,
