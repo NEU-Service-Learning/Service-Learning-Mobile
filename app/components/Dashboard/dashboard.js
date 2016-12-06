@@ -112,9 +112,9 @@ export default class Dashboard extends Component {
     var text = null
     if (this.state.records.length > 0 && this.state.projects.length > 0) {
       var recentProject = this.state.projects.filter((project) => {
-        return project.id == this.state.records[3].project
+        return project.id == this.state.records[0].project
       });
-      text = "You last clocked " + this.state.records[3].total_hours + " hours for " + recentProject[0].name + "."
+      text = "You last clocked " + this.state.records[0].total_hours + " hours for " + recentProject[0].name + "."
     } else {
       text = "Click Log In button to log your hours."
     }
