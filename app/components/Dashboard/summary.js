@@ -39,29 +39,39 @@ export default class Summary extends Component {
               'Ross Frank', 'Jagroop Hothi', 'Mustafa Camurcu', 'Charles Zheng', 'Joana  Vukatana'
               ]),
       work: dsWork.cloneWithRows([
-                    'Oct 17: 1hr Direct Work','Oct 18: 2hr Group','Oct 19: 3hr Individual',
+              'Ross Frank', 'Jagroop Hothi', 'Mustafa Camurcu', 'Charles Zheng', 'Joana  Vukatana'
               ]),
       project: 'Time Tracker',
       visible: false,
+      hoursComp: 0,
+      courseHours: 0,
+      courseAvg : 0,
     }
   }
 
   componentDidMount = async () => {
   try {
     const records = await api.getRecordsForUser(25);
-    let recordNames = records.map((record) => {
-      return '' + record.date + ': ' + record.total_hours + 'hrs work';
-    });
-
-    this.setState({work: dsWork.cloneWithRows(recordNames)});
+    const hours = await api.getHoursForProjectForUser(25,1);
+    const enrollment = await api.getEnrollmentsForCRN(56323);
+    const courseH = enrollment[0].required_hours;
+    const courseA = Math.round(courseH/enrollment.length * 100) / 100;
+    this.setState({work: dsWork.cloneWithRows(records),
+                  hoursComp: hours.total_hours, courseHours: courseH, courseAvg: courseA});
   } catch (e) {
     this.setState({loading: false, error: true})
     }
   }
+
   navigate(rowData) {
     this.props.navigator.push({
       title: 'Details',
+      extras: {data: rowData},
     })
+  }
+
+  displayData(record) {
+    return '' + record.date + ': ' + record.total_hours + 'hrs work';
   }
 
   toggleVisible() {
@@ -92,6 +102,7 @@ export default class Summary extends Component {
 
     return(
       <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
+      <View style={style.container}>
        <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Project</Text>
        <View>
          {Platform.OS === 'ios' ?
@@ -106,23 +117,26 @@ export default class Summary extends Component {
        </View>
 
        <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Team Members</Text>
-       <ScrollView>
+       <ScrollView style={{height: 120}}>
        <ListView
          dataSource={this.state.team}
          renderRow={(rowData) => <Text style={style.members}>{rowData}</Text>}>
        </ListView>
        </ScrollView>
-       <Progress style={{width:250, margin: 7}} styleAttr="Horizontal" indeterminate={false} progress={.5}/>
-       <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Hours Completed: 6</Text>
-       <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Class Average: 7.2</Text>
+       </View>
+       <View style={style.container}>
+       <Progress style={{width:250, margin: 7}} styleAttr="Horizontal" indeterminate={false} progress={this.state.hoursComp/this.state.courseHours}/>
+       <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Hours Completed: {this.state.hoursComp}</Text>
+       <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Class Average: {this.state.courseAvg}</Text>
        <ListView
          dataSource={this.state.work}
          renderRow={(rowData) =>
            <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}
              onPress={()=> this.navigate(rowData)}>
-             <Text style={StyleSheet.flatten([style.buttonText])}>{rowData}</Text>
+             <Text style={StyleSheet.flatten([style.buttonText])}>{this.displayData(rowData)}</Text>
            </TouchableHighlight>}
        />
+       </View>
      </View>
    )}}
 

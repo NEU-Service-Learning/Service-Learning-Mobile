@@ -27,6 +27,12 @@ module.exports = {
     return responseJson;
   },
 
+  getHoursForProjectForUser: async function(userId,projectId) {
+    let response = await fetch(domain + '/record/hours/user/' + userId + '/project/' + projectId);
+    let responseJson = await response.json();
+    return responseJson;
+  },
+
   getProject: async function(projectId) {
     let response = await fetch(domain + '/project/' + projectId);
     let responseJson = await response.json();
@@ -49,6 +55,13 @@ module.exports = {
     let responseJson = await response.json();
     return responseJson;
   },
+
+  getEnrollmentsForCRN: async function(crn) {
+    let response = await fetch(domain + '/enrollments/crn/' + crn);
+    let responseJson = await response.json();
+    return responseJson;
+  },
+
   createRecord: async function(project, date, startTime, hours, category, notes, longitude, latitude) {
     let response = await fetch(domain + '/record/', {
       method: 'POST',
