@@ -7,6 +7,8 @@ import {
   Text,
   ListView,
   TouchableHighlight,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
   ProgressBarAndroid,
   ProgressViewIOS,
   Picker,
@@ -14,14 +16,22 @@ import {
 } from 'react-native';
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
+<<<<<<< HEAD
 import api from '../api/index';
 
+=======
+//removes deprecated warnings
+console.disableYellowBox = true;
+>>>>>>> master
 var style = require('../../styles/styles');
 
 var dsTeam = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 var dsWork = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 const Progress = (Platform.OS == 'ios') ? ProgressViewIOS : ProgressBarAndroid;
+const projects = [{label:'Time Tracker', key:0},
+                      {label:'Project 1', key:1},
+                      {label:'Project 2', key:2}];
 
 export default class Summary extends Component {
   constructor(props) {
@@ -33,10 +43,8 @@ export default class Summary extends Component {
       work: dsWork.cloneWithRows([
                     'Oct 17: 1hr Direct Work','Oct 18: 2hr Group','Oct 19: 3hr Individual',
               ]),
-      projects: [{label:'Time Tracker', key:'0'},
-                      {label:'Project 1', key:'1'},
-                      {label:'Project 2', key:'2'}],
-      project: {label:'Time Tracker', key:'0'},
+      project: 'Time Tracker',
+      visible: false,
     }
   }
 
@@ -53,21 +61,51 @@ export default class Summary extends Component {
     }
   }
   navigate(rowData) {
-    this.props.navigator.push({
-      title: 'Details',
-      extras: {key: rowData.key},
+    this.props.navigator.pop({
+      title: 'Summary',
     })
+
+  toggleVisible() {
+    var vis = !this.state.visible;
+    this.setState({visible: vis});
   }
+
   render() {
+    var pick = (
+      <Picker
+        style={Platform.OS === 'ios' ? {} :
+          StyleSheet.flatten([style.button, style.height40, {width:  250}])}
+        selectedValue={this.state.project}
+        onValueChange={(proj) => this.setState({project: proj})}>
+        {projects.map((proj) =>
+          (<Picker.Item key={proj.key} label={proj.label} value={proj.label}/>)) }
+      </Picker>
+    )
+    var menu = (
+      <View>
+        <TouchableOpacity onPress={this.toggleVisible.bind(this)}
+          style={{marginRight: 20, alignItems: 'flex-end'}}>
+          <Text>Done</Text>
+        </TouchableOpacity>
+        {pick}
+      </View>
+    )
+
     return(
       <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
        <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Project</Text>
-       <Picker
-         style={StyleSheet.flatten([style.button, style.height40, {width:  250}])}
-         selectedValue={this.state.project}
-         onValueChange={(proj) => this.setState({project: proj})}>
-         {this.state.projects.map((proj) => (<Picker.Item key={proj} label={proj.label} value={proj}/>)) }
-       </Picker>
+       <View>
+         {Platform.OS === 'ios' ?
+         <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
+           <TouchableWithoutFeedback onPress={this.toggleVisible.bind(this)}>
+             <View style={StyleSheet.flatten([style.button, style.height40, {width:  250}])}>
+               <Text>{this.state.project}</Text>
+             </View>
+           </TouchableWithoutFeedback>
+           {this.state.visible ? menu : <View/>}
+         </View> : pick }
+       </View>
+
        <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Team Members</Text>
        <ScrollView>
        <ListView

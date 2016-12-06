@@ -1,7 +1,6 @@
 package com.sltracker;
 
 import com.facebook.react.ReactActivity;
-import com.smixx.reactnativeicons.ReactNativeIcons;
 
 public class MainActivity extends ReactActivity {
 

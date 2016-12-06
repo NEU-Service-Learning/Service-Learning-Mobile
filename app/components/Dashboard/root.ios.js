@@ -27,6 +27,24 @@ export default class Root extends Component {
     };
   }
 
+  componentDidMount = async () => {
+    const value = await storage.getUser();
+    if (value == null){
+      const user = await this.getUser();
+      await storage.saveUser(user);
+    }
+  }
+
+  async getUser() {
+    try{
+      const authKey = await storage.getAuthKey();
+      const user = await api.getUserFromAuthKey(authKey);
+      return user;
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
