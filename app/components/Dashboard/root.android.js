@@ -49,9 +49,9 @@ export default class Root extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-       <Header style={{backgroundColor: '#708090'}}>
+       <Header>
            <Button transparent> </Button>
-           <Title style={StyleSheet.flatten([style.header, style.alignCenter, style.font20])}>Service-Learning</Title>
+           <Title style={StyleSheet.flatten([style.header, style.alignCenter])}>Service-Learning</Title>
            <Button transparent onPress={() => {this.props.navigator.push({ title: 'Settings' })}}>
              <Icon name='cog' size={30} />
            </Button>

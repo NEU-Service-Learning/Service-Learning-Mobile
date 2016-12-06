@@ -141,5 +141,12 @@ module.exports = StyleSheet.create({
     fontSize: 14,
     color: 'white',
     fontWeight: 'bold'
+  },
+  map: {
+    flex: 1,
+    height: 200,
+  },
+  card: {
+    marginTop: 7
   }
 });

@@ -103,7 +103,7 @@ export default class Summary extends Component {
     return(
       <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
       <View style={style.container}>
-       <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Project</Text>
+       <Text style={StyleSheet.flatten([style.subheader, style.textCenter, style.margin7])}>Project</Text>
        <View>
          {Platform.OS === 'ios' ?
          <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
@@ -116,7 +116,7 @@ export default class Summary extends Component {
          </View> : pick }
        </View>
 
-       <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Team Members</Text>
+       <Text style={StyleSheet.flatten([style.subheader, style.textCenter, style.margin7])}>Team Members</Text>
        <ScrollView style={{height: 120}}>
        <ListView
          dataSource={this.state.team}

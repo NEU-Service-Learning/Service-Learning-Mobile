@@ -15,15 +15,6 @@ import MapView from 'react-native-maps';
 
 var style = require('../../styles/styles');
 
-const styles = StyleSheet.create({
-  map: {
-    flex: 1,
-    height: 200
-  },
-  card: {
-    marginTop: 8
-  },
-});
 export default class Details extends Component {
   constructor(props) {
     super(props);
@@ -51,23 +42,23 @@ export default class Details extends Component {
 
   render() {
     return(
-      <View style={style.container}>
-        <Header  style={{backgroundColor: '#708090'}}>
+      <View style={StyleSheet.flatten([style.container])}>
+        <Header>
           <Button transparent  onPress={this.navigate.bind(this)}>
-            <Icon name='arrow-left' size={30}/>
+            <Icon name='arrow-left' size={25}/>
           </Button>
-          <Title style={StyleSheet.flatten([style.header, style.alignCenter, style.font20])}> Service-Learning</Title>
+          <Title style={StyleSheet.flatten([style.header, style.alignCenter])}> Service-Learning</Title>
           <Button transparent onPress={() => {this.props.navigator.push({ title: 'ManualTracking' })}}>
-            <Icon name='pencil' size={30} />
+            <Icon name='pencil' size={25} />
           </Button>
         </Header>
-        <Text style={style.subheader}>Time Tracking</Text>
+        <Text style={StyleSheet.flatten([style.subheader, style.textCenter, {marginTop:10}])}>Time Tracking</Text>
         <ScrollView>
-        <Card style={styles.card}>
+        <Card style={StyleSheet.flatten([style.card])}>
         <CardItem>
-        <Text style={style.subheader}>Location</Text>
+        <Text style={StyleSheet.flatten([style.subheader])}>Location</Text>
             <MapView
-              style={styles.map}
+              style={StyleSheet.flatten([style.map, {marginTop:8}])}
               initialRegion={{
                 latitude: 42.340951,
                 longitude: -71.087566,
@@ -82,18 +73,18 @@ export default class Details extends Component {
             />
         </CardItem>
         <CardItem>
-        <Text style={style.subheader}>Date: {this.props.data.date}</Text>
-        <Text style={style.subheader}>Start Time: {this.props.data.start_time}</Text>
-        <Text style={style.subheader}>Hours: {this.props.data.total_hours}</Text>
+        <Text style={StyleSheet.flatten([style.subheader])}>Date: {this.props.data.date}</Text>
+        <Text style={StyleSheet.flatten([style.subheader])}>Start Time: {this.props.data.start_time}</Text>
+        <Text style={StyleSheet.flatten([style.subheader])}>Hours: {this.props.data.total_hours}</Text>
         </CardItem>
         <CardItem>
-        <Text style={style.subheader}>Category: {this.category(this.props.data.category)}</Text>
+        <Text style={StyleSheet.flatten([style.subheader])}>Category: {this.category(this.props.data.category)}</Text>
         </CardItem>
         <CardItem>
-        <Text style={style.subheader}>Notes: {this.props.data.comments}</Text>
+        <Text style={StyleSheet.flatten([style.subheader])}>Notes: {this.props.data.comments}</Text>
         </CardItem>
         <CardItem>
-        <Text style={style.subheader}>Extra Fields</Text>
+        <Text style={StyleSheet.flatten([style.subheader])}>Extra Fields</Text>
         </CardItem>
         </Card>
         </ScrollView>
