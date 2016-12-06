@@ -14,6 +14,8 @@ import Dashboard from './dashboard';
 import Summary from './summary';
 import DatePicker from '../Tracking/manual';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import api from '../api/index';
+import storage from '../api/storage';
 
 import { Title, Button, Header, Container, Card, CardItem } from 'native-base';
 
@@ -27,23 +29,23 @@ export default class Root extends Component {
     };
   }
 
-  componentDidMount = async () => {
-    const value = await storage.getUser();
-    if (value == null){
-      const user = await this.getUser();
-      await storage.saveUser(user);
-    }
-  }
+ componentDidMount = async () => {
+   const value = await storage.getUser();
+   if (value == null){
+     const user = await this.getUser();
+     await storage.saveUser(user);
+   }
+ }
 
-  async getUser() {
-    try{
-      const authKey = await storage.getAuthKey();
-      const user = await api.getUserFromAuthKey(authKey);
-      return user;
-    } catch(err) {
-      console.log(err)
-    }
-  }
+ async getUser() {
+   try{
+     const authKey = await storage.getAuthKey();
+     const user = await api.getUserFromAuthKey(authKey);
+     return user;
+   } catch(err) {
+     console.log(err)
+   }
+ }
 
   render() {
     return (

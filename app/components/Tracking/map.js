@@ -49,9 +49,6 @@ export default class AutoTrackingMap extends Component {
 
 
   render() {
-    console.log("S");
-    console.log(this.state.currentPosition);
-    console.log(this.props.projects)
     let nearProjects = this.props.projects.filter((project) => {
       return geolib.getDistance(this.state.currentPosition, {latitude: project.latitude,longitude: project.longitude}) < MIN_DISTANCE
     });

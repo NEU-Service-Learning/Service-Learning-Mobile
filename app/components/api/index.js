@@ -35,7 +35,7 @@ module.exports = {
   },
 
   getRecordsByUser: async function(userId) {
-    let response = await fetch(domain + '/record/user' + userId);
+    let response = await fetch(domain + '/record/user/' + userId);
     let responseJson = await response.json();
     return responseJson;
   },

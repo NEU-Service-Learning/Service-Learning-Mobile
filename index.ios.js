@@ -36,20 +36,20 @@ export default class SLTracker extends Component {
     this.state = {loading: true, initialRoute: 'LogIn'}
   }
 
-  componentWillMount = async () =>  {
-    try {
-      const value = await storage.getAuthKey();
-      console.log(value);
-      if (value !== null){
-        this.setState({initialRoute: 'Dashboard'});
-      }
-      this.setState({loading: false});
-    } catch (error) {
-      // Error retrieving data
-      this.setState({loading: false});
-      console.log(error);
-    }
-  }
+ componentWillMount = async () =>  {
+   try {
+     const value = await storage.getAuthKey();
+     console.log(value);
+     if (value !== null) {
+       this.setState({initialRoute: 'Dashboard'});
+     }
+     this.setState({loading: false});
+   } catch (error) {
+     // Error retrieving data
+     this.setState({loading: false});
+     console.log(error);
+   }
+ }
 
   // Renders a particular scene depending on the route title
   renderScene(route, navigator) {

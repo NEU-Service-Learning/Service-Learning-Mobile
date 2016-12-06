@@ -11,6 +11,7 @@ import {
   Alert,
   ActivityIndicator
 } from 'react-native';
+
 import MapView from 'react-native-maps';
 //removes deprecated warnings
 console.disableYellowBox = true;
@@ -21,28 +22,26 @@ import AutoTrackingMap from '../Tracking/map';
 import api from '../api/index';
 
 var style = require('../../styles/styles');
-var img = require('../../assets/img/Logo.png')
+var img = require('../../assets/img/Logo.png');
 
 var user =
 {
-    "pk": 3,
-    "username": "chen.jo@husky.neu.edu",
-    "email": "",
-    "first_name": "Joe",
-    "last_name": "Chen",
-    "role": null,
-    "id": 3,
-    "courses": [
-        "CS1200",
-        "CS4500"
-    ],
-    "projects": [
-        1
-    ],
-    "sections": [
-        "44221",
-        "56323"
-    ]
+  "pk": 25,
+  "username": "2121q3eqwewqe@neu.edu",
+  "email": "",
+  "first_name": "Erik",
+  "last_name": "User",
+  "role": "I",
+  "id": 25,
+  "courses": [
+    "CS4500"
+  ],
+  "projects": [
+    1
+  ],
+  "sections": [
+    "56323"
+  ]
 }
 
 export default class Dashboard extends Component {
@@ -52,26 +51,20 @@ export default class Dashboard extends Component {
        projects: [],
        records: [],
        auto: false,
-       loading: true
+       loading: false
     }
   }
 
-  async componentDidMount() {
-    let records = await api.getRecordsByUser(user.id);
-    console.log(records)
-    let recordPromises = records.map((record) => {
-      return api.getRecord(record.id)
-    });
-    let projectPromises = user.projects.map((project) => {
-      return api.getProject(project);
-    });
-    Promise.all(allPromises).then((data) => {
-      this.setState({loading: false, projects: data})
-    });
-    Promise.all(recordPromises).then((data) => {
-      console.log(data)
-      this.setState({loading: false, records: data})
-    })
+ async componentDidMount() {
+   let records = await api.getRecordsByUser(user.id);
+   this.setState({records: records})
+
+   let projectPromises = user.projects.map((project) => {
+     return api.getProject(project);
+   });
+   Promise.all(projectPromises).then((data) => {
+     this.setState({loading: false, projects: data})
+   });
 }
 
   navigate() {
@@ -116,56 +109,35 @@ export default class Dashboard extends Component {
         </View>
       )
     }
+    var text = null
+    if (this.state.records.length > 0 && this.state.projects.length > 0) {
+      var recentProject = this.state.projects.filter((project) => {
+        return project.id == this.state.records[3].project
+      });
+      text = "You last clocked " + this.state.records[3].total_hours + " hours for " + recentProject[0].name + "."
+    } else {
+      text = "Click Log In button to log your hours."
+    }
     return(
       <ScrollView>
-          <View style={{margin: 16}}>
-             {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> : null}
-             <AutoTrackingMap projects={this.state.projects} onStart={this.startAuto.bind(this)}/>
-
-             <Card style={styles.card}>
-                 <CardItem header>
-                     <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
-                 </CardItem>
-
-                 <CardItem>
-                   <Text>You last clocked 2 hours on 11/30 for Service-Learning</Text>
-                 </CardItem>
-                 <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
-                 <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={this.navigate.bind(this)}>
-                   <Text style={style.buttonText}> Log Hours</Text>
-                   </TouchableHighlight>
-                  </CardItem>
-            </Card>
-            <Card style={styles.card}>
-                <CardItem header>
-                    <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
-                </CardItem>
-                {this.state.projects.map(project => (
-                     <CardItem button key={project.id} onPress={() => this.navigate()}>
-                         <Thumbnail source={img}/>
-                         <Text>{project.name}</Text>
-                     </CardItem>
-                   ))}
-           </Card>
-          </View>
         <View style={{margin: 16}}>
           {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> :
           <Card style={styles.card}>
             <CardItem header>
-              <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>
+              <Text style={StyleSheet.flatten([style.subheader, style.font15])}>
                 Welcome, FakeUser!
               </Text>
             </CardItem>
           </Card>}
 
-          <AutoTrackingMap projects={projects} onStart={this.startAuto.bind(this)}/>
+          <AutoTrackingMap projects={this.state.projects} onStart={this.startAuto.bind(this)}/>
           <Card style={styles.card}>
             <CardItem header>
               <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
             </CardItem>
 
             <CardItem>
-              <Text>You last clocked 2 hours on 11/30 for Service-Learning</Text>
+              <Text>{text}</Text>
             </CardItem>
             <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
             <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={this.navigate.bind(this)}>
@@ -177,7 +149,7 @@ export default class Dashboard extends Component {
               <CardItem header>
                   <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
               </CardItem>
-              {projects.map(project => (
+              {this.state.projects.map(project => (
                    <CardItem button key={project.id} onPress={() => this.navigate()}>
                        <Thumbnail source={img}/>
                        <Text>{project.name}</Text>
