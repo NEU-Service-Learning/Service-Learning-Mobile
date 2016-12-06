@@ -85,7 +85,7 @@ export default class LogInScreen extends Component {
 
   render() {
     return (
-      <View style={[style.container]}>
+      <View style={style.container}>
           <Image style={{alignSelf: 'center', marginTop: 50}}
                 source={require('../../assets/img/Logo.png')}
           />
@@ -116,8 +116,6 @@ export default class LogInScreen extends Component {
           <TouchableHighlight  onPress={() => this.navigateSignUp()}>
             <Text style={{color: 'blue', textDecorationLine: 'underline', margin: 10}}> Forgot Password </Text>
           </TouchableHighlight>
-        </View>
-        <View style={style.container}>
         </View>
       </View>
     );

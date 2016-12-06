@@ -21,7 +21,7 @@ module.exports = StyleSheet.create({
     alignItems: 'center'
   },
   inputContainer: {
-    margin: 30,
+    margin: 20,
     justifyContent : 'center',
   },
   text: {

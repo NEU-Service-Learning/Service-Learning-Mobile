@@ -8,9 +8,9 @@ import {
   Text
 } from 'react-native';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { Title, Button, Header, Card, CardItem, Icon} from 'native-base';
+import { Title, Button, Header, Card, CardItem} from 'native-base';
 import MapView from 'react-native-maps';
 
 var style = require('../../styles/styles');
@@ -33,23 +33,21 @@ export default class Details extends Component {
     }
   }
   navigate() {
-   this.props.navigator.push({
-     title: 'Dashboard',
-     extras: {summary : true}
-   })
+   this.props.navigator.pop({
+     title: 'Summary'
+      })
   }
 
   render() {
     return(
       <View style={style.container}>
         <Header  style={{backgroundColor: '#708090'}}>
-          <Button transparent textStyle={{color: 'black'}} onPress={() => {this.props.navigator.push({ title: 'Dashboard'})}}>
-          <Icon style={{color: 'black'}} name='ios-arrow-back' size={30}/>
-          Back
+          <Button transparent  onPress={this.navigate.bind(this)}>
+            <Icon name='arrow-left' size={30}/>
           </Button>
           <Title style={StyleSheet.flatten([style.header, style.alignCenter, style.font20])}> Service-Learning</Title>
           <Button transparent onPress={() => {this.props.navigator.push({ title: 'ManualTracking' })}}>
-            <FontAwesome name='pencil' size={30} />
+            <Icon name='pencil' size={30} />
           </Button>
         </Header>
         <Text style={style.subheader}>Time Tracking</Text>
@@ -85,7 +83,7 @@ export default class Details extends Component {
         <Text style={style.subheader}>Notes</Text>
         </CardItem>
         <CardItem>
-        <FontAwesome name={this.group} />
+        <Icon name={this.group} />
         <Text style={style.subheader}>Group Logged</Text>
         </CardItem>
         <CardItem>
