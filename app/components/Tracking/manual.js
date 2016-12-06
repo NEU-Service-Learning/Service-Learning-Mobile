@@ -29,8 +29,8 @@ export default class ManualTracking extends Component {
     super(props);
 
     this.state = {
-      project: this.props.project == null ? 'Time Tracker' : this.props.project,
-      date: this.props.start == null ? new Date() : this.props.start.toLocaleDateString(),
+      project: this.props.project == null ? 1 : this.props.project,
+      date: this.props.start == null ? new Date() : this.props.start,
       startTime: this.props.start == null ? new Date() : this.props.start,
       endTime: this.props.end == null ? new Date() : this.props.end,
       category: null,
@@ -40,7 +40,7 @@ export default class ManualTracking extends Component {
   }
 
   trySubmitHours() {
-    if(this.state.category == null) {
+    if(this.state.category == null || this.state.category == "") {
       Alert.alert(
         'Incomplete Record',
         'Please check that you have filled out all the relevant fields.',
@@ -50,9 +50,33 @@ export default class ManualTracking extends Component {
       )
     }
     else {
-      api.createRecord(this.state.project, this.state.date, this.state.startTime,
-        this.state.endTime - this.state.startTime, this.state.category, this.state.notes);
+      var fDate = "" + this.state.date.getFullYear() + "-" + (this.state.date.getMonth() + 1) +
+        "-" + this.state.date.getDate();
+      var fTime = "" + this.state.startTime.getHours() + ":" + this.state.startTime.getMinutes() +
+        ":" + this.state.startTime.getSeconds();
+      var hours = (this.state.endTime.getTime() - this.state.startTime.getTime()) / 3600000;
+      var fHours = hours.toFixed(2);
+      var fCat = this.formatCategory(this.state.category);
+      api.createRecord(this.state.project, fDate, fTime,
+        fHours, fCat, this.state.notes);
       this.props.navigator.push({title: 'Dashboard'});
+    }
+  }
+
+  formatCategory(cat) {
+    switch(this.state.category) {
+      case "Trainings and Orientations":
+        return "TO";
+        break;
+      case "Direct Service":
+        return "DS";
+        break;
+      case "Individual Research & Planning":
+        return "IR";
+        break;
+      case "Team Research & Planning":
+        return "TR";
+        break;
     }
   }
 
@@ -114,19 +138,22 @@ export default class ManualTracking extends Component {
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
     	  <Text>Date</Text>
     	  <AndroidDatePicker
-          preset = {this.props.start == null ? false : true} />
+          preset = {this.props.start == null ? false : true}
+          onStateChange = {(date) => this.setState({date: date})} />
       </View>
 
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
     	  <Text>Start Time</Text>
     	  <AndroidTimePicker
-          autoTime = {this.props.start == null ? null : this.props.start.toLocaleTimeString()}/>
+          autoTime = {this.props.start == null ? null : this.props.start.toLocaleTimeString()}
+          onStateChange = {(time) => this.setState({startTime: time})}/>
       </View>
 
       <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
     	  <Text>End Time</Text>
     	  <AndroidTimePicker
-          autoTime = {this.props.end == null ? null : this.props.end.toLocaleTimeString()}/>
+          autoTime = {this.props.end == null ? null : this.props.end.toLocaleTimeString()}
+          onStateChange = {(time) => this.setState({endTime: time})}/>
       </View>
 
       </View>}
