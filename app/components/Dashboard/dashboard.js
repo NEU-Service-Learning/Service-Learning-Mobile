@@ -50,6 +50,7 @@ export default class Dashboard extends Component {
     this.state = {
        projects: [],
        records: [],
+       userCoordinates: {longitude: null, latitude: null},
        auto: false,
        loading: false
     }
@@ -63,6 +64,7 @@ export default class Dashboard extends Component {
      return api.getProject(project);
    });
    Promise.all(projectPromises).then((data) => {
+     console.log(data);
      this.setState({loading: false, projects: data})
    });
 }
@@ -94,10 +96,16 @@ export default class Dashboard extends Component {
               start: startTime,
               end: endTime,
               project: proj,
+              longitude: this.state.userCoordinates.longitude,
+              latitude: this.state.userCoordinates.latitude
             }});
           this.setState({auto: false});}},
       ]
     )
+  }
+
+  getLocation(coordinates) {
+    this.setState({userCoordinates: coordinates})
   }
 
   render() {
@@ -108,59 +116,60 @@ export default class Dashboard extends Component {
           <Text>Loading Projects</Text>
         </View>
       )
-    }
-    var text = null
-    if (this.state.records.length > 0 && this.state.projects.length > 0) {
-      var recentProject = this.state.projects.filter((project) => {
-        return project.id == this.state.records[0].project
-      });
-      text = "You last clocked " + this.state.records[0].total_hours + " hours for " + recentProject[0].name + "."
     } else {
-      text = "Click Log In button to log your hours."
-    }
-    return(
-      <ScrollView>
-        <View style={{margin: 16}}>
-          {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> :
-          <Card style={styles.card}>
-            <CardItem header>
-              <Text style={StyleSheet.flatten([style.subheader, style.font15])}>
-                Welcome, FakeUser!
-              </Text>
-            </CardItem>
-          </Card>}
-
-          <AutoTrackingMap projects={this.state.projects} onStart={this.startAuto.bind(this)}/>
-          <Card style={styles.card}>
-            <CardItem header>
-              <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
-            </CardItem>
-
-            <CardItem>
-              <Text>{text}</Text>
-            </CardItem>
-            <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
-            <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={this.navigate.bind(this)}>
-              <Text style={style.buttonText}> Log Hours</Text>
-              </TouchableHighlight>
-            </CardItem>
-          </Card>
-          <Card style={styles.card}>
+      var text = null
+      if (this.state.records.length > 0 && this.state.projects.length > 0) {
+        var recentProject = this.state.projects.filter((project) => {
+          return project.id == this.state.records[0].project
+        });
+        text = "You last clocked " + this.state.records[0].total_hours + " hours for " + recentProject[0].name + "."
+      } else {
+        text = "Click Log In button to log your hours."
+      }
+      return(
+        <ScrollView>
+          <View style={{margin: 16}}>
+            {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> :
+            <Card style={styles.card}>
               <CardItem header>
-                  <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
+                <Text style={StyleSheet.flatten([style.subheader, style.font15])}>
+                  Welcome, FakeUser!
+                </Text>
               </CardItem>
-              {this.state.projects.map(project => (
-                   <CardItem button key={project.id} onPress={() => this.navigate()}>
-                       <Thumbnail source={img}/>
-                       <Text>{project.name}</Text>
-                   </CardItem>
-                 ))}
+            </Card>}
 
-          </Card>
-        </View>
-      </ScrollView>
+            <AutoTrackingMap onLocationFound={this.getLocation.bind(this)} projects={this.state.projects} onStart={this.startAuto.bind(this)}/>
+            <Card style={styles.card}>
+              <CardItem header>
+                <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
+              </CardItem>
 
-    );
+              <CardItem>
+                <Text>{text}</Text>
+              </CardItem>
+              <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
+              <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={this.navigate.bind(this)}>
+                <Text style={style.buttonText}> Log Hours</Text>
+                </TouchableHighlight>
+              </CardItem>
+            </Card>
+            <Card style={styles.card}>
+                <CardItem header>
+                    <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
+                </CardItem>
+                {this.state.projects.map(project => (
+                     <CardItem button key={project.id} onPress={() => this.navigate()}>
+                         <Thumbnail source={img}/>
+                         <Text>{project.name}</Text>
+                     </CardItem>
+                   ))}
+
+            </Card>
+          </View>
+        </ScrollView>
+
+      );
+    }
   }
 }
 

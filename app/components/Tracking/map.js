@@ -22,7 +22,7 @@ export default class AutoTrackingMap extends Component {
     super(props);
 
     this.state = {
-      currentPosition: {'latitude': 0, 'longitude': 0}
+      currentPosition: {'latitude': 0, 'longitude': 0},
     }
   }
 
@@ -33,6 +33,7 @@ export default class AutoTrackingMap extends Component {
      (position) => {
        var currentPosition = {'latitude': position.coords.latitude, 'longitude': position.coords.longitude};
        this.setState({currentPosition});
+       this.props.onLocationFound(currentPosition);
      },
      (error) => console.log(JSON.stringify(error)),
      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
@@ -40,6 +41,7 @@ export default class AutoTrackingMap extends Component {
    this.watchID = navigator.geolocation.watchPosition((position) => {
      var currentPosition = {'latitude': position.coords.latitude, 'longitude': position.coords.longitude};
      this.setState({currentPosition});
+     this.props.onLocationFound(currentPosition);
    });
  }
 
@@ -52,6 +54,16 @@ export default class AutoTrackingMap extends Component {
     let nearProjects = this.props.projects.filter((project) => {
       return geolib.getDistance(this.state.currentPosition, {latitude: project.latitude,longitude: project.longitude}) < MIN_DISTANCE
     });
+    let markers = this.props.projects.map((marker) => {
+      return(
+            <MapView.Marker
+              coordinate={{latitude: Number(marker.latitude), longitude: Number(marker.longitude)}}
+              title={marker.name}
+              description={marker.description}
+              key={marker.id}
+            />
+        )
+        });
     let item = null;
     if(nearProjects.length > 0) {
       item = (
@@ -89,14 +101,7 @@ export default class AutoTrackingMap extends Component {
                   title={"Your Position"}
                   pinColor={'blue'}
                 />
-                {this.props.projects.map(marker => (
-                      <MapView.Marker
-                        coordinate={{latitude: Number(marker.latitude), longitude: Number(marker.longitude)}}
-                        title={marker.name}
-                        description={marker.description}
-                        key={marker.id}
-                      />
-                  ))}
+              {markers}
               </MapView>
           </CardItem>
           {item}
