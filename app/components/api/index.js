@@ -49,7 +49,7 @@ module.exports = {
     let responseJson = await response.json();
     return responseJson;
   },
-  createRecord: async function(project, date, startTime, hours, category, notes) {
+  createRecord: async function(project, date, startTime, hours, category, notes, longitude, latitude) {
     let response = await fetch(domain + '/record/', {
       method: 'POST',
       headers: {
@@ -62,8 +62,8 @@ module.exports = {
         date: date,
         start_time: startTime,
         total_hours: hours,
-        longitude: 0,
-        latitude: 0,
+        longitude: longitude,
+        latitude: latitude,
         category: category,
         is_active: true,
         comments: notes,

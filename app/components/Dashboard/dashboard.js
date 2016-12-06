@@ -50,6 +50,7 @@ export default class Dashboard extends Component {
     this.state = {
        projects: [],
        records: [],
+       userCoordinates: {longitude: null, latitude: null},
        auto: false,
        loading: false
     }
@@ -94,10 +95,16 @@ export default class Dashboard extends Component {
               start: startTime,
               end: endTime,
               project: proj,
+              longitude: this.state.userCoordinates.longitude,
+              latitude: this.state.userCoordinates.latitude
             }});
           this.setState({auto: false});}},
       ]
     )
+  }
+
+  getLocation(coordinates) {
+    this.setState({userCoordinates: coordinates})
   }
 
   render() {
@@ -130,7 +137,7 @@ export default class Dashboard extends Component {
             </CardItem>
           </Card>}
 
-          <AutoTrackingMap projects={this.state.projects} onStart={this.startAuto.bind(this)}/>
+          <AutoTrackingMap onLocationFound={this.getLocation.bind(this)} projects={this.state.projects} onStart={this.startAuto.bind(this)}/>
           <Card style={styles.card}>
             <CardItem header>
               <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>

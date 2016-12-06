@@ -58,7 +58,7 @@ export default class ManualTracking extends Component {
       var fHours = hours.toFixed(2);
       var fCat = this.formatCategory(this.state.category);
       api.createRecord(this.state.project, fDate, fTime,
-        fHours, fCat, this.state.notes);
+        fHours, fCat, this.state.notes, this.props.longitude, this.props.latitude);
       this.props.navigator.push({title: 'Dashboard'});
     }
   }

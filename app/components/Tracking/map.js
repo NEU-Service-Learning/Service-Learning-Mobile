@@ -33,6 +33,7 @@ export default class AutoTrackingMap extends Component {
      (position) => {
        var currentPosition = {'latitude': position.coords.latitude, 'longitude': position.coords.longitude};
        this.setState({currentPosition});
+       this.props.onLocationFound(currentPosition);
      },
      (error) => console.log(JSON.stringify(error)),
      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
@@ -40,6 +41,7 @@ export default class AutoTrackingMap extends Component {
    this.watchID = navigator.geolocation.watchPosition((position) => {
      var currentPosition = {'latitude': position.coords.latitude, 'longitude': position.coords.longitude};
      this.setState({currentPosition});
+     this.props.onLocationFound(currentPosition);
    });
  }
 
