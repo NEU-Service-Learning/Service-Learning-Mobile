@@ -56,8 +56,8 @@ export default class Summary extends Component {
     }
   }
   navigate(rowData) {
-    this.props.navigator.pop({
-      title: 'Summary',
+    this.props.navigator.push({
+      title: 'Details',
     })
   }
 
