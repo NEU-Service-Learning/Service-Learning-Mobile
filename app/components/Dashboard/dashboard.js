@@ -72,6 +72,7 @@ export default class Dashboard extends Component {
   navigate() {
     this.props.navigator.push({title: 'ManualTracking'});
   }
+
   startAuto() {
     Alert.alert(
       'Clock In',
@@ -158,7 +159,7 @@ export default class Dashboard extends Component {
                     <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
                 </CardItem>
                 {this.state.projects.map(project => (
-                     <CardItem button key={project.id} onPress={() => this.navigate()}>
+                     <CardItem button key={project.id}}>
                          <Thumbnail source={img}/>
                          <Text>{project.name}</Text>
                      </CardItem>
