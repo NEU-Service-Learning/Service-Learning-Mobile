@@ -37,6 +37,7 @@ export default class AndroidTimePicker extends Component {
       } else if (action === TimePickerAndroid.dismissedAction) {
         // do nothing
       }
+      this.props.onStateChange(newTime);
       this.setState({time: newTime});
     } catch ({code, message}) {
       console.warn(`Error in example '${stateKey}': `, message);

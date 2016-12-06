@@ -40,7 +40,7 @@ module.exports = {
       },
       body: JSON.stringify({
         enrollment: 1,
-        project: project,
+        project: 1,
         date: date,
         start_time: startTime,
         total_hours: hours,

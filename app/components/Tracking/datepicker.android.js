@@ -24,14 +24,15 @@ export default class AndroidDatePicker extends Component {
 
   showPicker = async (stateKey, options) => {
     try {
-      var newState = {};
+      var newDate = null;
       const {action, year, month, day} = await DatePickerAndroid.open(options);
       if (action === DatePickerAndroid.dismissedAction) {
         // do nothing
       } else {
-        var newDate = new Date(year, month, day);
+        newDate = new Date(year, month, day);
         this.setState({date: newDate});
       }
+      this.props.onStateChange(newDate);
     } catch ({code, message}) {
       console.warn(`Error in example '${stateKey}': `, message);
     }
