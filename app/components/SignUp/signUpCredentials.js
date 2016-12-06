@@ -17,7 +17,7 @@ export default class CredentialsScreen extends Component {
   // Passes the list of projects from the classes to the next screen
   navigateInfo() {
     this.props.navigator.push({
-      title: 'InfoScreen',
+      title: 'SelectClass',
       extras: {
         authKey: this.state.key
       }
