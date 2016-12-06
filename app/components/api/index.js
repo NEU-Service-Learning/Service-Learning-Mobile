@@ -126,6 +126,25 @@ module.exports = {
     return responseJson;
   },
 
+  updateUser: async function(id, courses, projects) {
+    var body = JSON.stringify({
+      courses: courses,
+      projects: projects
+    });
+    console.log(body);
+    let response = await fetch(domain + 'users/' + id + '/', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: body
+    });
+    console.log(response + "response");
+    let responseJson = await response.json();
+    return responseJson;
+  },
+
   getUserFromAuthKey: async function(authKey) {
     let response = await fetch(domain + '/me/', {
       headers: {

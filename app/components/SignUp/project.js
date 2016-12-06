@@ -3,6 +3,7 @@ import {StyleSheet, View, Text, ActivityIndicator, TouchableHighlight } from 're
 
 import {SearchTable, SearchRow} from './searchTable';
 import api from '../api/index';
+import storage from '../api/storage'
 
 var style = require('../../styles/styles');
 
@@ -72,6 +73,24 @@ export default class ProjectSelectScreen extends Component {
           );
       }
     }
+
+  updateUser = async function() {
+    try {
+      const authKey = await storage.getAuthKey();
+      const user = await api.getUserFromAuthKey(authKey);
+      this.setState({loading: true});
+      var courses = this.props.classes.map((someClass) => {
+        return someClass.id;
+      });
+      const body = await api.updateUser(user.id, courses, this.state.selectedProjects);
+      console.log(body);
+      this.navigate();
+
+    } catch (e) {
+      console.log(e + "error");
+      this.setState({loading: false, error: true})
+    }
+  }
 
   // For now just goes to Dashboard
   navigate() {
