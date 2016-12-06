@@ -16,13 +16,11 @@ import {
 } from 'react-native';
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
-<<<<<<< HEAD
 import api from '../api/index';
 
-=======
 //removes deprecated warnings
 console.disableYellowBox = true;
->>>>>>> master
+
 var style = require('../../styles/styles');
 
 var dsTeam = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -64,6 +62,7 @@ export default class Summary extends Component {
     this.props.navigator.pop({
       title: 'Summary',
     })
+  }
 
   toggleVisible() {
     var vis = !this.state.visible;
