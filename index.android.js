@@ -47,6 +47,7 @@ export default class SLTracker extends Component {
     } catch (error) {
       // Error retrieving data
       this.setState({loading: false});
+      this.setState({initialRoute: ''});
       console.log(error);
     }
   }
@@ -74,7 +75,7 @@ export default class SLTracker extends Component {
      if(route.title == 'LogIn') {
        return <LogInScreen navigator={navigator} {...route.extras}/>
      }
-     if(route.title == 'EnterInfo') {
+     if(route.title == 'InfoScreen') {
        return <InfoScreen navigator={navigator} {...route.extras}/>
      }
      if(route.title == 'SignUpCredentials') {
