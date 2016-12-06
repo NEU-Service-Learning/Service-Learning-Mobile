@@ -11,7 +11,9 @@ import {
   Alert,
   ActivityIndicator
 } from 'react-native';
-
+import MapView from 'react-native-maps';
+//removes deprecated warnings
+console.disableYellowBox = true;
 
 import { Title, Icon, Header, Thumbnail, Content, Container, Card, CardItem, Button } from 'native-base';
 import AutoTracking from '../Tracking/auto';
@@ -146,6 +148,44 @@ export default class Dashboard extends Component {
                    ))}
            </Card>
           </View>
+        <View style={{margin: 16}}>
+          {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> :
+          <Card style={styles.card}>
+            <CardItem header>
+              <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>
+                Welcome, FakeUser!
+              </Text>
+            </CardItem>
+          </Card>}
+
+          <AutoTrackingMap projects={projects} onStart={this.startAuto.bind(this)}/>
+          <Card style={styles.card}>
+            <CardItem header>
+              <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
+            </CardItem>
+
+            <CardItem>
+              <Text>You last clocked 2 hours on 11/30 for Service-Learning</Text>
+            </CardItem>
+            <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
+            <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={this.navigate.bind(this)}>
+              <Text style={style.buttonText}> Log Hours</Text>
+              </TouchableHighlight>
+            </CardItem>
+          </Card>
+          <Card style={styles.card}>
+              <CardItem header>
+                  <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
+              </CardItem>
+              {projects.map(project => (
+                   <CardItem button key={project.id} onPress={() => this.navigate()}>
+                       <Thumbnail source={img}/>
+                       <Text>{project.name}</Text>
+                   </CardItem>
+                 ))}
+
+          </Card>
+        </View>
       </ScrollView>
 
     );

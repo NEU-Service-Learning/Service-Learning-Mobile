@@ -17,15 +17,33 @@ import Dashboard from './dashboard';
 import Summary from './summary';
 import Settings from './settings';
 
+import storage from '../api/storage'
+import api from '../api/index'
 var style = require('../../styles/styles');
+
 
 export default class Root extends Component {
   constructor(props) {
     super(props)
-    var initial = this.props.summary
-    this.state = {
-      initialPage: (initial) ? 1 : 0
-    };
+  }
+
+  componentDidMount = async () => {
+    const value = await storage.getUser();
+    console.log(value);
+    if (value == null){
+      const user = await this.getUser();
+      await storage.saveUser(user);
+    }
+  }
+
+  async getUser() {
+    try{
+      const authKey = await storage.getAuthKey();
+      const user = await api.getUserFromAuthKey(authKey);
+      return user;
+    } catch(err) {
+      console.log(err)
+    }
   }
 
   render() {
@@ -38,7 +56,7 @@ export default class Root extends Component {
              <Icon name='cog' size={30} />
            </Button>
        </Header>
-             <ScrollableTabView initialPage={this.state.initialPage}>
+             <ScrollableTabView>
                  <Dashboard tabLabel='Dashboard' navigator={this.props.navigator}/>
                  <Summary tabLabel='Summary' navigator={this.props.navigator}/>
              </ScrollableTabView>

@@ -45,4 +45,50 @@ module.exports = {
     let responseJson = await response.json();
     return responseJson;
   },
+
+  getAuthKey: async function(username, password) {
+    let response = await fetch(domain + 'user/login/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      })
+    });
+
+    let responseJson = await response.json();
+    return responseJson;
+  },
+  signUp: async function(username, password1, password2, firstName, lastName) {
+    let response = await fetch(domain + 'user/registration/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        email: username,
+        password1: password1,
+        password2: password2,
+        first_name: firstName,
+        last_name: lastName
+      })
+    });
+
+    let responseJson = await response.json();
+    return responseJson;
+  },
+  getUserFromAuthKey: async function(authKey) {
+    let response = await fetch(domain + '/me/', {
+      headers: {
+        'Authorization': 'Token ' + authKey
+      },
+    });
+    let responseJson = await response.json();
+    return responseJson;
+  }
 }

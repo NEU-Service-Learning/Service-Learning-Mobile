@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, TextInput, Picker, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, TextInput, Picker, Platform, TouchableHighlight } from 'react-native';
 
 var style = require('../../styles/styles');
 
@@ -23,7 +23,7 @@ export default class InfoScreen extends Component {
         <View style={style.inputContainer}>
           <Text style={style.textCenter}>First Name</Text>
           <TextInput
-          style={style.textCenter}
+          style={Platform.OS === 'ios' ? styles.input : style.textCenter}
           onChangeText={(firstName) => this.setState({firstName})}
           value={this.state.username}
           />
@@ -31,7 +31,7 @@ export default class InfoScreen extends Component {
         <View style={style.inputContainer}>
           <Text style={style.textCenter}>Last Name</Text>
           <TextInput
-          style={style.textCenter}
+          style={Platform.OS === 'ios' ? styles.input : style.textCenter}
           onChangeText={(lastName) => this.setState({lastName})}
           value={this.state.username}
           />
@@ -50,7 +50,7 @@ export default class InfoScreen extends Component {
         <View style={style.inputContainer}>
           <Text style={style.textCenter}>Graduation Year</Text>
           <TextInput
-          style={style.textCenter}
+          style={Platform.OS === 'ios' ? styles.input : style.textCenter}
           onChangeText={(gradYear) => this.setState({gradYear})}
           value={this.state.username}
           />
