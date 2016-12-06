@@ -38,7 +38,7 @@ export default class Summary extends Component {
       team: dsTeam.cloneWithRows([
               'Ross Frank', 'Jagroop Hothi', 'Mustafa Camurcu', 'Charles Zheng', 'Joana  Vukatana'
               ]),
-      work: dsTeam.cloneWithRows([
+      work: dsWork.cloneWithRows([
               'Ross Frank', 'Jagroop Hothi', 'Mustafa Camurcu', 'Charles Zheng', 'Joana  Vukatana'
               ]),
       project: 'Time Tracker',
@@ -58,6 +58,7 @@ export default class Summary extends Component {
   navigate(rowData) {
     this.props.navigator.push({
       title: 'Details',
+      extras: {data: rowData},
     })
   }
 
@@ -93,6 +94,7 @@ export default class Summary extends Component {
 
     return(
       <View style={StyleSheet.flatten([style.container, style.alignCenter])}>
+      <View style={style.container}>
        <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Project</Text>
        <View>
          {Platform.OS === 'ios' ?
@@ -107,12 +109,14 @@ export default class Summary extends Component {
        </View>
 
        <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Team Members</Text>
-       <ScrollView>
+       <ScrollView style={{height: 120}}>
        <ListView
          dataSource={this.state.team}
          renderRow={(rowData) => <Text style={style.members}>{rowData}</Text>}>
        </ListView>
        </ScrollView>
+       </View>
+       <View style={style.container}>
        <Progress style={{width:250, margin: 7}} styleAttr="Horizontal" indeterminate={false} progress={.5}/>
        <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Hours Completed: 6</Text>
        <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Class Average: 7.2</Text>
@@ -124,6 +128,7 @@ export default class Summary extends Component {
              <Text style={StyleSheet.flatten([style.buttonText])}>{this.displayData(rowData)}</Text>
            </TouchableHighlight>}
        />
+       </View>
      </View>
    )}}
 

@@ -24,11 +24,9 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
 });
-
 export default class Details extends Component {
   constructor(props) {
     super(props);
-    var group = true ? 'check-square-o' : 'square-o';
     this.state = {
     }
   }
@@ -36,6 +34,19 @@ export default class Details extends Component {
    this.props.navigator.pop({
      title: 'Summary'
       })
+  }
+
+  category(cat) {
+    switch(cat) {
+      case "TO":
+        return "Trainings & Orientations";
+      case "DS":
+        return "Direct Service";
+      case "IR":
+        return "Individual Research & Planning";
+      case "TR":
+        return "Team Research & Planning";
+    }
   }
 
   render() {
@@ -71,20 +82,15 @@ export default class Details extends Component {
             />
         </CardItem>
         <CardItem>
-        <Text style={style.subheader}>Date</Text>
+        <Text style={style.subheader}>Date: {this.props.data.date}</Text>
+        <Text style={style.subheader}>Start Time: {this.props.data.start_time}</Text>
+        <Text style={style.subheader}>Hours: {this.props.data.total_hours}</Text>
         </CardItem>
         <CardItem>
-        <Text style={style.subheader}>FromTime-EndTime</Text>
+        <Text style={style.subheader}>Category: {this.category(this.props.data.category)}</Text>
         </CardItem>
         <CardItem>
-        <Text style={style.subheader}>Category</Text>
-        </CardItem>
-        <CardItem>
-        <Text style={style.subheader}>Notes</Text>
-        </CardItem>
-        <CardItem>
-        <Icon name={this.group} />
-        <Text style={style.subheader}>Group Logged</Text>
+        <Text style={style.subheader}>Notes: {this.props.data.comments}</Text>
         </CardItem>
         <CardItem>
         <Text style={style.subheader}>Extra Fields</Text>
