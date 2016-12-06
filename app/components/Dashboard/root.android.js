@@ -19,14 +19,12 @@ import Settings from './settings';
 
 import storage from '../api/storage'
 import api from '../api/index'
+var style = require('../../styles/styles');
 
 
 export default class Root extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      selectedTab: 'dashboard'
-    };
   }
 
   componentDidMount = async () => {
@@ -51,11 +49,9 @@ export default class Root extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-       <Header>
-           <Button transparent>
-             <Icon name='bars' size={30} />
-           </Button>
-           <Title style={{color: '#008080', fontWeight: 'bold'}}>Service-Learning</Title>
+       <Header style={{backgroundColor: '#708090'}}>
+           <Button transparent> </Button>
+           <Title style={StyleSheet.flatten([style.header, style.alignCenter, style.font20])}>Service-Learning</Title>
            <Button transparent onPress={() => {this.props.navigator.push({ title: 'Settings' })}}>
              <Icon name='cog' size={30} />
            </Button>

@@ -13,7 +13,7 @@ import { Title, Button, Header, Container, Content } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import storage from '../api/storage';
 
-var style = require('../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class Settings extends Component {
   back() {
@@ -33,12 +33,12 @@ export default class Settings extends Component {
       <Button transparent onPress={() => this.back()}>
       <Icon name='arrow-left' size={25} />
       </Button>
-      <Title> Settings </Title>
+      <Title style={StyleSheet.flatten([style.header, style.alignCenter, style.font20])}> Settings </Title>
       </Header>
       <View style={styles.container}>
-        <Button transparent style={styles.button}  onPress={this.logOut.bind(this)}>
-          <Text style={{color: 'black'}}> Sign Out </Text>
-        </Button>
+      <TouchableHighlight style={StyleSheet.flatten([style.button, style.height50])} onPress={this.logOut.bind(this)}>
+        <Text style={style.buttonText}>Sign Out</Text>
+      </TouchableHighlight>
       </View>
       </View>
     )

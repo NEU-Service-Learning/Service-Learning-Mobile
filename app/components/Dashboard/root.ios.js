@@ -14,10 +14,12 @@ import Dashboard from './dashboard';
 import Summary from './summary';
 import DatePicker from '../Tracking/manual';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import api from '../api/index';
+import storage from '../api/storage';
 
 import { Title, Button, Header, Container, Card, CardItem } from 'native-base';
 
-var style = require('../../Styles/styles');
+var style = require('../../styles/styles');
 
 export default class Root extends Component {
   constructor(props) {
@@ -27,35 +29,33 @@ export default class Root extends Component {
     };
   }
 
-  componentDidMount = async () => {
-    const value = await storage.getUser();
-    if (value == null){
-      const user = await this.getUser();
-      await storage.saveUser(user);
-    }
-  }
+ componentDidMount = async () => {
+   const value = await storage.getUser();
+   if (value == null){
+     const user = await this.getUser();
+     await storage.saveUser(user);
+   }
+ }
 
-  async getUser() {
-    try{
-      const authKey = await storage.getAuthKey();
-      const user = await api.getUserFromAuthKey(authKey);
-      return user;
-    } catch(err) {
-      console.log(err)
-    }
-  }
+ async getUser() {
+   try{
+     const authKey = await storage.getAuthKey();
+     const user = await api.getUserFromAuthKey(authKey);
+     return user;
+   } catch(err) {
+     console.log(err)
+   }
+ }
 
   render() {
     return (
       <View style={{flex: 1}}>
       <Header>
-      <Button transparent>
-      <Icon name='bars' size={25} />
-      </Button>
+      <Button transparent> </Button>
       <Button transparent onPress={() => {this.props.navigator.push({ title: 'Settings' })}}>
       <Icon name='cog' size={25} />
       </Button>
-      <Title> Service-Learning </Title>
+      <Title style={StyleSheet.flatten([style.header, style.alignCenter, style.font20])}> Service-Learning </Title>
       </Header>
       <TabBarIOS selectedTab={this.state.selectedTab}>
       <Icon.TabBarItem

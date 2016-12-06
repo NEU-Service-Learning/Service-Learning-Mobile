@@ -7,109 +7,157 @@ import {
   Text,
   ScrollView,
   TouchableHighlight,
-  ListView
+  ListView,
+  Alert,
+  ActivityIndicator
 } from 'react-native';
+
 import MapView from 'react-native-maps';
+//removes deprecated warnings
+console.disableYellowBox = true;
 
 import { Title, Icon, Header, Thumbnail, Content, Container, Card, CardItem, Button } from 'native-base';
+import AutoTracking from '../Tracking/auto';
+import AutoTrackingMap from '../Tracking/map';
+import api from '../api/index';
 
-var style = require('../../Styles/styles');
-var img = require('../../assets/img/Logo.png')
+var style = require('../../styles/styles');
+var img = require('../../assets/img/Logo.png');
 
-var projects = [
-  { "id": 99999,
-    "name": "Service-Learning Time Tracker",
-    "community partner": 99999,
-    "description": "Creating a new system for tracking the hours worked by students doing service learning.",
-    "start date": "2016-09-01 00:00:00",
-    "end date": "2016-12-31 23:59:59.999999",
-    "location": { "latitude": 42.339803, "longitude": -1.089274 }
-  },
-  { "id": 8888,
-    "name": "Wediko",
-    "community partner": 5555,
-    "description": "Child care",
-    "start date": "2016-09-01 00:00:00",
-    "end date": "2016-12-31 23:59:59.999999",
-    "location": { "latitude": 42.339170, "longitude": -71.069139 }
-  },
-]
+var user =
+{
+  "pk": 25,
+  "username": "2121q3eqwewqe@neu.edu",
+  "email": "",
+  "first_name": "Erik",
+  "last_name": "User",
+  "role": "I",
+  "id": 25,
+  "courses": [
+    "CS4500"
+  ],
+  "projects": [
+    1
+  ],
+  "sections": [
+    "56323"
+  ]
+}
 
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
-    var dsProj = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-       projects: dsProj.cloneWithRows([
-                    'Time Tracker', 'Project 1', 'Project 2',
-              ]),
+       projects: [],
+       records: [],
+       auto: false,
+       loading: false
     }
   }
+
+ async componentDidMount() {
+   let records = await api.getRecordsByUser(user.id);
+   this.setState({records: records})
+
+   let projectPromises = user.projects.map((project) => {
+     return api.getProject(project);
+   });
+   Promise.all(projectPromises).then((data) => {
+     this.setState({loading: false, projects: data})
+   });
+}
+
   navigate() {
     this.props.navigator.push({title: 'ManualTracking'});
   }
+  startAuto() {
+    Alert.alert(
+      'Clock In',
+      'You will be logging hours for the project "Service Learning Mobile"',
+      [
+        {text: 'Cancel', onPress: () => console.log('Dismissed')},
+        {text: 'OK', onPress: () => {this.setState({auto: true})}},
+      ]
+    )
+  }
+  stopAuto(startTime, endTime, proj) {
+    var timer = (endTime - startTime) / 60000;
+    Alert.alert(
+      'Clock Out',
+      'Worked ' + timer.toFixed(2) + ' minutes for "Service Learning Mobile". Please input category'
+      + ' and any relevant notes',
+      [
+        {text: 'OK', onPress: () => {
+          this.props.navigator.push({
+            title: 'ManualTracking',
+            extras: {
+              start: startTime,
+              end: endTime,
+              project: proj,
+            }});
+          this.setState({auto: false});}},
+      ]
+    )
+  }
+
   render() {
+    if(this.state.loading) {
+        return(
+        <View style={[style.container, style.alignCenter]}>
+          <ActivityIndicator animating={true} />
+          <Text>Loading Projects</Text>
+        </View>
+      )
+    }
+    var text = null
+    if (this.state.records.length > 0 && this.state.projects.length > 0) {
+      var recentProject = this.state.projects.filter((project) => {
+        return project.id == this.state.records[3].project
+      });
+      text = "You last clocked " + this.state.records[3].total_hours + " hours for " + recentProject[0].name + "."
+    } else {
+      text = "Click Log In button to log your hours."
+    }
     return(
       <ScrollView>
-          <View style={{margin: 16}}>
-              <Card>
-                  <CardItem header>
-                      <Text>Auto Tracking</Text>
-                  </CardItem>
+        <View style={{margin: 16}}>
+          {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> :
+          <Card style={styles.card}>
+            <CardItem header>
+              <Text style={StyleSheet.flatten([style.subheader, style.font15])}>
+                Welcome, FakeUser!
+              </Text>
+            </CardItem>
+          </Card>}
 
-                  <CardItem>
-                      <MapView
-                        style={styles.map}
-                        initialRegion={{
-                          latitude: 42.340951,
-                          longitude: -71.087566,
-                          latitudeDelta: 0.0922,
-                          longitudeDelta: 0.0421,
-                        }}
-                      />
-                      <MapView.Marker
-                        coordinate={{'latitude': 42.341855, 'longitude': -71.086745}}
-                        title={"Sdfdsf"}
-                        description={"sdfdsf"}
-                      />
-                    {projects.map(marker => (
-                          <MapView.Marker
-                            coordinate={marker.location}
-                            title={marker.name}
-                            description={marker.description}
-                          />
-                        ))}
-                  </CardItem>
-                  <CardItem style={{flexDirection:'row'}}>
-                    <Text style={{flex: 2}}>You are near a Service-Learning partner</Text>
-                    <Button style={{flex: 1}}>Start Auto-Tracking</Button>
-                  </CardItem>
-             </Card>
-             <Card style={styles.card}>
-                 <CardItem header>
-                     <Text>Clock Hours</Text>
-                 </CardItem>
+          <AutoTrackingMap projects={this.state.projects} onStart={this.startAuto.bind(this)}/>
+          <Card style={styles.card}>
+            <CardItem header>
+              <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
+            </CardItem>
 
-                 <CardItem>
-                   <Text>You last clocked 2 hours on 11/30 for Service-Learning</Text>
-                 </CardItem>
-                 <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
-                   <Button onPress={this.navigate.bind(this)}>Clock Hours</Button>
-                 </CardItem>
-            </Card>
-            <Card style={styles.card}>
-                <CardItem header>
-                    <Text>Project Details</Text>
-                </CardItem>
-                {projects.map(project => (
-                     <CardItem button onPress={() => this.navigate()}>
-                         <Thumbnail source={img}/>
-                         <Text>{project.name}</Text>
-                     </CardItem>
-                   ))}
+            <CardItem>
+              <Text>{text}</Text>
+            </CardItem>
+            <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
+            <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={this.navigate.bind(this)}>
+              <Text style={style.buttonText}> Log Hours</Text>
+              </TouchableHighlight>
+            </CardItem>
+          </Card>
+          <Card style={styles.card}>
+              <CardItem header>
+                  <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
+              </CardItem>
+              {this.state.projects.map(project => (
+                   <CardItem button key={project.id} onPress={() => this.navigate()}>
+                       <Thumbnail source={img}/>
+                       <Text>{project.name}</Text>
+                   </CardItem>
+                 ))}
 
-           </Card>
-          </View>
+          </Card>
+        </View>
       </ScrollView>
 
     );
