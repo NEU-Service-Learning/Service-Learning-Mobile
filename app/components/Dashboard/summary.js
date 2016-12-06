@@ -38,9 +38,7 @@ export default class Summary extends Component {
       team: dsTeam.cloneWithRows([
               'Ross Frank', 'Jagroop Hothi', 'Mustafa Camurcu', 'Charles Zheng', 'Joana  Vukatana'
               ]),
-      work: dsWork.cloneWithRows([
-                    'Oct 17: 1hr Direct Work','Oct 18: 2hr Group','Oct 19: 3hr Individual',
-              ]),
+      work: '',
       project: 'Time Tracker',
       visible: false,
     }
@@ -49,11 +47,8 @@ export default class Summary extends Component {
   componentDidMount = async () => {
   try {
     const records = await api.getRecordsForUser(25);
-    let recordNames = records.map((record) => {
-      return '' + record.date + ': ' + record.total_hours + 'hrs work';
-    });
 
-    this.setState({work: dsWork.cloneWithRows(recordNames)});
+    this.setState({work: dsWork.cloneWithRows(records)});
   } catch (e) {
     this.setState({loading: false, error: true})
     }
@@ -62,6 +57,10 @@ export default class Summary extends Component {
     this.props.navigator.pop({
       title: 'Summary',
     })
+  }
+
+  displayData(record) {
+    return '' + record.date + ': ' + record.total_hours + 'hrs work';
   }
 
   toggleVisible() {
@@ -120,7 +119,7 @@ export default class Summary extends Component {
          renderRow={(rowData) =>
            <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}
              onPress={()=> this.navigate(rowData)}>
-             <Text style={StyleSheet.flatten([style.buttonText])}>{rowData}</Text>
+             <Text style={StyleSheet.flatten([style.buttonText])}>{this.displayData(rowData)}</Text>
            </TouchableHighlight>}
        />
      </View>
