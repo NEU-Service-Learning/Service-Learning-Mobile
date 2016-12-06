@@ -14,21 +14,23 @@ import {
 } from 'react-native';
 
 import { Title, Icon, Header, Container, Card, CardItem } from 'native-base';
+import api from '../api/index';
 
 var style = require('../../styles/styles');
+
+var dsTeam = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+var dsWork = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 const Progress = (Platform.OS == 'ios') ? ProgressViewIOS : ProgressBarAndroid;
 
 export default class Summary extends Component {
   constructor(props) {
     super(props);
-    var dsTeam = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var dsWork = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       team: dsTeam.cloneWithRows([
               'Ross Frank', 'Jagroop Hothi', 'Mustafa Camurcu', 'Charles Zheng', 'Joana  Vukatana'
               ]),
-       work: dsWork.cloneWithRows([
+      work: dsWork.cloneWithRows([
                     'Oct 17: 1hr Direct Work','Oct 18: 2hr Group','Oct 19: 3hr Individual',
               ]),
       projects: [{label:'Time Tracker', key:'0'},
@@ -37,11 +39,24 @@ export default class Summary extends Component {
       project: {label:'Time Tracker', key:'0'},
     }
   }
-    navigate(rowData) {
-     this.props.navigator.push({
-       title: 'Details',
-       extras: {key: rowData.key},
-     })
+
+  componentDidMount = async () => {
+  try {
+    const records = await api.getRecordsForUser(25);
+    let recordNames = records.map((record) => {
+      return '' + record.date + ': ' + record.total_hours + 'hrs work';
+    });
+
+    this.setState({work: dsWork.cloneWithRows(recordNames)});
+  } catch (e) {
+    this.setState({loading: false, error: true})
+    }
+  }
+  navigate(rowData) {
+    this.props.navigator.push({
+      title: 'Details',
+      extras: {key: rowData.key},
+    })
   }
   render() {
     return(
