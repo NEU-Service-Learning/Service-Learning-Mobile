@@ -159,7 +159,7 @@ export default class Dashboard extends Component {
                     <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>
                 </CardItem>
                 {this.state.projects.map(project => (
-                     <CardItem button key={project.id}}>
+                     <CardItem button key={project.id}>
                          <Thumbnail source={img}/>
                          <Text>{project.name}</Text>
                      </CardItem>
