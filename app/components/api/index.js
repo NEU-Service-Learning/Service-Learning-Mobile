@@ -21,7 +21,6 @@ module.exports = {
     let responseJson = await response.json();
     return responseJson;
   },
-
   getProjectsForUser: async function(userId) {
     let response = await fetch(domain + '/user/' + userId);
     let responseJson = await response.json();
@@ -45,7 +44,37 @@ module.exports = {
     let responseJson = await response.json();
     return responseJson;
   },
+  getRecordsForUser: async function(userId) {
+    let response = await fetch(domain + '/record/user/' + userId);
+    let responseJson = await response.json();
+    return responseJson;
+  },
+  createRecord: async function(project, date, startTime, hours, category, notes) {
+    let response = await fetch(domain + '/record/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        enrollment: 1,
+        project: project,
+        date: date,
+        start_time: startTime,
+        total_hours: hours,
+        longitude: 0,
+        latitude: 0,
+        category: category,
+        is_active: true,
+        comments: notes,
+        extraFields: null
+      })
+    })
 
+    let responseJson = await response.json();
+    console.log(JSON.stringify(responseJson));
+    return responseJson;
+  },
   getAuthKey: async function(username, password) {
     let response = await fetch(domain + 'user/login/', {
       method: 'POST',

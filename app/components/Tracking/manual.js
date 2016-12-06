@@ -15,6 +15,7 @@ import {
 import { Title, Header, Button } from 'native-base';
 import Checkbox from 'react-native-checkbox';
 
+import api from '../api/index'
 import Dropmenu from './dropmenu';
 import AndroidDatePicker from './datepicker.android';
 import AndroidTimePicker from './timepicker.android';
@@ -49,6 +50,8 @@ export default class ManualTracking extends Component {
       )
     }
     else {
+      api.createRecord(this.state.project, this.state.date, this.state.startTime,
+        this.state.endTime - this.state.startTime, this.state.category, this.state.notes);
       this.props.navigator.push({title: 'Dashboard'});
     }
   }
