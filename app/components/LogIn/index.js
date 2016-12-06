@@ -62,15 +62,15 @@ export default class LogInScreen extends Component {
         console.log(e + "error");
         this.setState({loading: false, error: true})
       }
+    }
   }
-  };
 
   // Used to move to the next screen
   // Passes the list of projects from the classes to the next screen
   navigateSignUp() {
     this.props.navigator.push({
       title: 'SignUpCredentials'
-    })
+    });
   }
 
   loginPopUp(errorMessage) {
