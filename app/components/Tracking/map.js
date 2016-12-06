@@ -49,10 +49,8 @@ export default class AutoTrackingMap extends Component {
 
 
   render() {
-    console.log("S");
-    console.log(this.state.currentPosition);
     let nearProjects = this.props.projects.filter((project) => {
-      return geolib.getDistance(this.state.currentPosition, project.location) < MIN_DISTANCE
+      return geolib.getDistance(this.state.currentPosition, {latitude: project.latitude,longitude: project.longitude}) < MIN_DISTANCE
     });
     let item = null;
     if(nearProjects.length > 0) {
@@ -93,7 +91,7 @@ export default class AutoTrackingMap extends Component {
                 />
                 {this.props.projects.map(marker => (
                       <MapView.Marker
-                        coordinate={marker.location}
+                        coordinate={{latitude: Number(marker.latitude), longitude: Number(marker.longitude)}}
                         title={marker.name}
                         description={marker.description}
                         key={marker.id}

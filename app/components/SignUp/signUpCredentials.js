@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, AsyncStorage, TextInput, Image, Platform, Alert, TouchableHighlight } from 'react-native';
 
-import api from '../api/index'
-import storage from '../api/storage'
+import api from '../api/index';
+import storage from '../api/storage';
 
 var style = require('../../styles/styles');
 
