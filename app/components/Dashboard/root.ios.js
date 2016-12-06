@@ -14,8 +14,8 @@ import Dashboard from './dashboard';
 import Summary from './summary';
 import DatePicker from '../Tracking/manual';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import api from '../api/index';
 import storage from '../api/storage';
+import api from '../api/index';
 
 import { Title, Button, Header, Container, Card, CardItem } from 'native-base';
 
