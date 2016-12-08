@@ -15,6 +15,7 @@ import storage from '../api/storage';
 
 var style = require('../../styles/styles');
 
+//TODO: implement more settings than just signing out
 export default class Settings extends Component {
   back() {
     this.props.navigator.pop();

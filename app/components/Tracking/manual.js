@@ -23,6 +23,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 var style = require('../../styles/styles');
 
+//TODO: allow students to log hours for multiple projects at once
 export default class ManualTracking extends Component {
 
 	constructor(props){
@@ -36,6 +37,7 @@ export default class ManualTracking extends Component {
       category: null,
     	notes: "",
     	group_log: false,
+      //TODO: make group logging of hours possible (this.state.group_log is currently unused)
     }
   }
 

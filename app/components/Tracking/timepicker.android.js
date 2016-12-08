@@ -6,15 +6,9 @@ import {
   View,
   Text,
   ScrollView,
-  Navigator,
-  TouchableHighlight,
   TouchableWithoutFeedback,
-  TouchableOpacity,
-  DatePickerIOS,
   TimePickerAndroid,
 } from 'react-native';
-
-import { Title, Icon, Header, Container, Card, CardItem, Button } from 'native-base';
 
 export default class AndroidTimePicker extends Component {
 
@@ -64,16 +58,6 @@ export default class AndroidTimePicker extends Component {
 }
 
 var styles = StyleSheet.create({
-  datePicker: {
-    borderTopWidth: 1,
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    left: 0,
-    height: 100,
-    borderColor: '#CCC',
-    backgroundColor: '#FFF',
-  },
   input: {
     height: 30,
     justifyContent: 'center',

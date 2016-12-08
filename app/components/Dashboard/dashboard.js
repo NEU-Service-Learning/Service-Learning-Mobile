@@ -24,6 +24,7 @@ import api from '../api/index';
 var style = require('../../styles/styles');
 var img = require('../../assets/img/Logo.png');
 
+//TODO don't hard-code a user, instead let user be the current signed in user
 var user =
 {
   "pk": 25,
@@ -73,22 +74,27 @@ export default class Dashboard extends Component {
     this.props.navigator.push({title: 'ManualTracking'});
   }
 
+  // Alert to begin auto-tracking
   startAuto() {
     Alert.alert(
       'Clock In',
       'You will be logging hours for the project "Service Learning Mobile"',
+      //TODO: display the name of the actual nearest project, rather than static text
       [
         {text: 'Cancel', onPress: () => console.log('Dismissed')},
         {text: 'OK', onPress: () => {this.setState({auto: true})}},
       ]
     )
   }
+
+  // Called to stop auto-tracking
   stopAuto(startTime, endTime, proj) {
     var timer = (endTime - startTime) / 60000;
     Alert.alert(
       'Clock Out',
       'Worked ' + timer.toFixed(2) + ' minutes for "Service Learning Mobile". Please input category'
       + ' and any relevant notes',
+      //TODO: display name of actual project worked for, rather than static text
       [
         {text: 'OK', onPress: () => {
           this.props.navigator.push({
@@ -125,35 +131,43 @@ export default class Dashboard extends Component {
         });
         text = "You last clocked " + this.state.records[0].total_hours + " hours for " + recentProject[0].name + "."
       } else {
-        text = "Click Log In button to log your hours."
+        text = "Click Log Hours button to log your hours."
       }
       return(
         <ScrollView>
           <View style={StyleSheet.flatten([style.margin16])}>
+
+            // Show stopwatch if currently in auto-tracking mode. Otherwise show welcome message
             {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> :
             <Card style={styles.card}>
               <CardItem header>
                 <Text style={StyleSheet.flatten([style.subheader])}>
-                  Welcome, FakeUser!
+                  Welcome, FakeUser! //TODO: get actual name of current user
                 </Text>
               </CardItem>
             </Card>}
 
-            <AutoTrackingMap onLocationFound={this.getLocation.bind(this)} projects={this.state.projects} onStart={this.startAuto.bind(this)}/>
+            // Show current location and nearby projects on a map view
+            <AutoTrackingMap onLocationFound={this.getLocation.bind(this)}
+              projects={this.state.projects} onStart={this.startAuto.bind(this)}/>
+
+            // Card for manual tracking
             <Card style={styles.card}>
               <CardItem header>
                 <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
               </CardItem>
-
               <CardItem>
                 <Text>{text}</Text>
               </CardItem>
               <CardItem style={{flexDirection:'row', justifyContent: 'flex-end'}}>
-              <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])} onPress={this.navigate.bind(this)}>
+              <TouchableHighlight style={StyleSheet.flatten([style.button, style.height40])}
+                onPress={this.navigate.bind(this)}>
                 <Text style={style.buttonText}> Log Hours</Text>
                 </TouchableHighlight>
               </CardItem>
             </Card>
+
+            // Shows list of projects of this user
             <Card style={styles.card}>
                 <CardItem header>
                     <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>

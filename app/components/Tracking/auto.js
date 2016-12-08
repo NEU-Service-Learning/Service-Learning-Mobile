@@ -24,12 +24,12 @@ export default class AutoTracking extends Component {
       isRunning: false,
       startTime: new Date(),
       endTime: null,
-      timer: null,
+      timer: null, // represents endTime - startTime, and is the time that is displayed
     }
   }
 
   componentDidMount() {
-    this.handleStartStop();
+    this.handleStartStop(); // starts the stopwatch as soon as this component becomes visible
   }
 
   handleStartStop() {
@@ -63,6 +63,8 @@ export default class AutoTracking extends Component {
           <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Time Worked</Text>
 
           <View style={styles.container}>
+            //TODO: format the time such that it shows HH:MM:SS instead of MM:SS:ss
+            // aka get rid of milliseconds ticking down 
             <Text style={styles.timer}>{ TimeFormatter(this.state.timer) }</Text>
           </View>
 

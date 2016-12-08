@@ -16,9 +16,13 @@ import {
 
 const Pick = (Platform.OS === 'ios' ? PickerIOS : Picker);
 
+//TODO: pull actual projects from the current logged in user's list of projects
 var projects = [{label:'Time Tracker', key:0},
                 {label:'Project 1', key:1},
                 {label:'Project 2', key:2}]
+
+//TODO: blank category is there to ensure no default value on android
+//(there is likely a better way to do this)
 const categories = [{label:"", key:"0"},
                     {label:"Trainings & Orientations", key:"1"},
                     {label:"Direct Service", key:"2"},
@@ -36,6 +40,7 @@ export default class Dropmenu extends Component {
       visibility: 'hidden',
       category: '',
       preset: this.props.time == null && this.props.project == null ? false : true,
+      // preset indicates whether or not this menu was reached via auto or manual tracking
     }
   }
 
@@ -59,7 +64,7 @@ export default class Dropmenu extends Component {
   // The text to be displayed
   output(mode) {
     if (mode == "date") {
-      return (this.state.date.getMonth() + 1) + "/" + this.state.date.getDate() + "/" + this.state.date.getFullYear()
+      return this.state.date.toLocaleDateString();
     }
     else if (mode == "time") {
       return this.state.date.toLocaleTimeString();

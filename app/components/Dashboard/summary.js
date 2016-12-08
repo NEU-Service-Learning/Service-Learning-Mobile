@@ -51,6 +51,7 @@ export default class Summary extends Component {
 
   componentDidMount = async () => {
   try {
+    //TODO: don't hard-code specific records, hours, enrollments, etc, pull from logged in user
     const records = await api.getRecordsForUser(25);
     const hours = await api.getHoursForProjectForUser(25,1);
     const enrollment = await api.getEnrollmentsForCRN(56323);
@@ -105,6 +106,8 @@ export default class Summary extends Component {
       <View style={style.container}>
        <Text style={StyleSheet.flatten([style.subheader, style.textCenter, style.margin7])}>Project</Text>
        <View>
+         // If on iOS, the picker element is only shown on touch. If on android, it is shown
+         // always. This is a consequence of the two platforms' different native picker displays
          {Platform.OS === 'ios' ?
          <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
            <TouchableWithoutFeedback onPress={this.toggleVisible.bind(this)}>
@@ -128,6 +131,9 @@ export default class Summary extends Component {
        <Progress style={{width:250, margin: 7}} styleAttr="Horizontal" indeterminate={false} progress={this.state.hoursComp/this.state.courseHours}/>
        <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Hours Completed: {this.state.hoursComp}</Text>
        <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Class Average: {this.state.courseAvg}</Text>
+
+       //TODO: any records beyond the first 3 will be hidden by the TabBarIOS component in iOS -
+       // fix so that it isn't underneath the tabbar 
        <ListView
          dataSource={this.state.work}
          renderRow={(rowData) =>
