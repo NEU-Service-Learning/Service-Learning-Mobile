@@ -115,6 +115,12 @@ export default class Dashboard extends Component {
     this.setState({userCoordinates: coordinates})
   }
 
+/**
+Show stopwatch if currently in auto-tracking mode. Otherwise show welcome message
+Show current location and nearby projects on a map view
+ TODO: get actual name of current user
+**/
+
   render() {
     if(this.state.loading) {
         return(
@@ -137,21 +143,20 @@ export default class Dashboard extends Component {
         <ScrollView>
           <View style={StyleSheet.flatten([style.margin16])}>
 
-            // Show stopwatch if currently in auto-tracking mode. Otherwise show welcome message
             {this.state.auto ? <AutoTracking onStop={this.stopAuto.bind(this)}/> :
             <Card style={styles.card}>
               <CardItem header>
                 <Text style={StyleSheet.flatten([style.subheader])}>
-                  Welcome, FakeUser! //TODO: get actual name of current user
+                  Welcome, FakeUser!
                 </Text>
               </CardItem>
             </Card>}
 
-            // Show current location and nearby projects on a map view
+
             <AutoTrackingMap onLocationFound={this.getLocation.bind(this)}
               projects={this.state.projects} onStart={this.startAuto.bind(this)}/>
 
-            // Card for manual tracking
+
             <Card style={styles.card}>
               <CardItem header>
                 <Text style={StyleSheet.flatten([style.subheader])}>Log Hours</Text>
@@ -167,7 +172,7 @@ export default class Dashboard extends Component {
               </CardItem>
             </Card>
 
-            // Shows list of projects of this user
+            
             <Card style={styles.card}>
                 <CardItem header>
                     <Text style={StyleSheet.flatten([style.subheader])}>Project Details</Text>

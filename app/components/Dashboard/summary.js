@@ -80,6 +80,13 @@ export default class Summary extends Component {
     this.setState({visible: vis});
   }
 
+/**
+If on iOS, the picker element is only shown on touch. If on android, it is shown
+always. This is a consequence of the two platforms' different native picker displays
+
+//TODO: any records beyond the first 3 will be hidden by the TabBarIOS component in iOS -
+fix so that it isn't underneath the tabbar 
+**/
   render() {
     var pick = (
       <Picker
@@ -106,8 +113,7 @@ export default class Summary extends Component {
       <View style={style.container}>
        <Text style={StyleSheet.flatten([style.subheader, style.textCenter, style.margin7])}>Project</Text>
        <View>
-         // If on iOS, the picker element is only shown on touch. If on android, it is shown
-         // always. This is a consequence of the two platforms' different native picker displays
+
          {Platform.OS === 'ios' ?
          <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
            <TouchableWithoutFeedback onPress={this.toggleVisible.bind(this)}>
@@ -132,8 +138,6 @@ export default class Summary extends Component {
        <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Hours Completed: {this.state.hoursComp}</Text>
        <Text style={StyleSheet.flatten([style.header, style.font15, style.margin7])}>Class Average: {this.state.courseAvg}</Text>
 
-       //TODO: any records beyond the first 3 will be hidden by the TabBarIOS component in iOS -
-       // fix so that it isn't underneath the tabbar 
        <ListView
          dataSource={this.state.work}
          renderRow={(rowData) =>

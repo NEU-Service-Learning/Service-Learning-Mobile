@@ -36,6 +36,11 @@ export default class SLTracker extends Component {
     this.state = {loading: true, initialRoute: 'LogIn'}
   }
 
+  /**
+  Sees if the user has a stored auth key
+  If so, goes straight to the dashboard,
+  Otherwise shows the log in page
+  **/
  componentWillMount = async () =>  {
    try {
      const value = await storage.getAuthKey();

@@ -47,7 +47,6 @@ export default class SLTracker extends Component {
     } catch (error) {
       // Error retrieving data
       this.setState({loading: false});
-      this.setState({initialRoute: ''});
       console.log(error);
     }
   }

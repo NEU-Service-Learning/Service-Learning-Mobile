@@ -56,6 +56,10 @@ export default class AutoTracking extends Component {
     //TODO: change the above project parameter to reflect that actual project
   }
 
+/**
+ TODO: format the time such that it shows HH:MM:SS instead of MM:SS:ss
+// aka get rid of milliseconds ticking down
+**/
   render() {
     return(
       <Card style = {styles.card}>
@@ -63,8 +67,7 @@ export default class AutoTracking extends Component {
           <Text style={StyleSheet.flatten([style.subheader, style.font15, style.margin7])}>Time Worked</Text>
 
           <View style={styles.container}>
-            //TODO: format the time such that it shows HH:MM:SS instead of MM:SS:ss
-            // aka get rid of milliseconds ticking down 
+
             <Text style={styles.timer}>{ TimeFormatter(this.state.timer) }</Text>
           </View>
 
