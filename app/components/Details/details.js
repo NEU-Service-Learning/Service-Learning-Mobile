@@ -18,15 +18,19 @@ var style = require('../../styles/styles');
 export default class Details extends Component {
   constructor(props) {
     super(props);
+    //no state needed
     this.state = {
     }
   }
+
+  //navigates back to the summary screen
   navigate() {
    this.props.navigator.pop({
      title: 'Summary'
       })
   }
 
+  //convert category codes to categories
   category(cat) {
     switch(cat) {
       case "TO":
@@ -40,6 +44,33 @@ export default class Details extends Component {
     }
   }
 
+//renders the detail screen
+/*
+  Structure:
+    View: Main View for the page
+      Header
+        Button: Back Button
+          Icon: Arrow for Back Button
+        Title: title of the App
+        Button: Edit Button
+          Icon: Pencil for edit button
+      Text: Name of Project
+      ScrollView: Creates a scrolling window for all of the cards of data
+        Card: List of Cards to Display
+          CardItem: Card Item for Location
+            Text: Location text
+            MapView: Map(needs to be updated with accurate location and pin)
+          CardItem: Hours (needs formatting to better time, maybge change how backend stores the time)
+            Text: Date
+            Text: Start time (end time to be added)
+            Text: Hours Completed
+          CardItem: Category
+            Text: runs the function to get full display of Category (probably should be moved to backend to make uniform and in case categories change)
+          CardItem: Notes
+            Text: Just a text field to display the notes
+          CardItem: Extras Field
+            Text: just a text field currentlly needs to be exxtended for extra functionality
+*/
   render() {
     return(
       <View style={StyleSheet.flatten([style.container])}>

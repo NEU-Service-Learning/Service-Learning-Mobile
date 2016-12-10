@@ -26,7 +26,10 @@ var style = require('../../styles/styles');
 var dsTeam = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 var dsWork = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
+//Gets the correct progress bar for iOS or Android
 const Progress = (Platform.OS == 'ios') ? ProgressViewIOS : ProgressBarAndroid;
+
+//Hard coded projects list for dropdown
 const projects = [{label:'Time Tracker', key:0},
                       {label:'Project 1', key:1},
                       {label:'Project 2', key:2}];
@@ -38,6 +41,7 @@ export default class Summary extends Component {
       team: dsTeam.cloneWithRows([
               'Ross Frank', 'Jagroop Hothi', 'Mustafa Camurcu', 'Charles Zheng', 'Joana  Vukatana'
               ]),
+      //Hardcoded to this just to create the list, it will disapear
       work: dsWork.cloneWithRows([
               'Ross Frank', 'Jagroop Hothi', 'Mustafa Camurcu', 'Charles Zheng', 'Joana  Vukatana'
               ]),
@@ -49,6 +53,8 @@ export default class Summary extends Component {
     }
   }
 
+  //api calls
+  // TODO: Most api calls are hard coded
   componentDidMount = async () => {
   try {
     //TODO: don't hard-code specific records, hours, enrollments, etc, pull from logged in user
@@ -64,6 +70,7 @@ export default class Summary extends Component {
     }
   }
 
+  //go to details page with data
   navigate(rowData) {
     this.props.navigator.push({
       title: 'Details',
@@ -71,6 +78,7 @@ export default class Summary extends Component {
     })
   }
 
+  //display for the record
   displayData(record) {
     return '' + record.date + ': ' + record.total_hours + 'hrs work';
   }
@@ -84,9 +92,15 @@ export default class Summary extends Component {
 If on iOS, the picker element is only shown on touch. If on android, it is shown
 always. This is a consequence of the two platforms' different native picker displays
 
-//TODO: any records beyond the first 3 will be hidden by the TabBarIOS component in iOS -
-fix so that it isn't underneath the tabbar 
+TODO: any records beyond the first 3 will be hidden by the TabBarIOS component in iOS -
+fix so that it isn't underneath the tabbar
 **/
+
+/*
+  Progress bar shows individual progress vs  required hours
+  Group members are hard coded
+  Records needs to show more user friendly information
+*/
   render() {
     var pick = (
       <Picker
@@ -113,7 +127,6 @@ fix so that it isn't underneath the tabbar
       <View style={style.container}>
        <Text style={StyleSheet.flatten([style.subheader, style.textCenter, style.margin7])}>Project</Text>
        <View>
-
          {Platform.OS === 'ios' ?
          <View style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20}}>
            <TouchableWithoutFeedback onPress={this.toggleVisible.bind(this)}>
